@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="The article gives insight into the most important commands">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Important linux commands">
+<meta property="og:url" content="http://hustakin.github.io/2017/08/31/important-linux-commands/index.html">
+<meta property="og:site_name" content="Frankie Fan">
+<meta property="og:description" content="The article gives insight into the most important commands">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://hustakin.github.io/2017/08/31/important-linux-commands/less-generate.png">
+<meta property="og:updated_time" content="2020-02-04T03:44:51.858Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Important linux commands">
+<meta name="twitter:description" content="The article gives insight into the most important commands">
+<meta name="twitter:image" content="http://hustakin.github.io/2017/08/31/important-linux-commands/less-generate.png">
+  <link rel="canonical" href="http://hustakin.github.io/2017/08/31/important-linux-commands/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Important linux commands | Frankie Fan</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146443611-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146443611-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Frankie Fan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">17</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hustakin.github.io/2017/08/31/important-linux-commands/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie Fan">
+      <meta itemprop="description" content="Live for die and let it go.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frankie Fan">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Important linux commands
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-31 17:13:26" itemprop="dateCreated datePublished" datetime="2017-08-31T17:13:26+10:00">2017-08-31</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-04 13:44:51" itemprop="dateModified" datetime="2020-02-04T13:44:51+10:00">2020-02-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><p>The article gives insight into the most important commands</p>
+<a id="more"></a>
+
+<h3 id="System-basic-commands"><a href="#System-basic-commands" class="headerlink" title="System basic commands"></a>System basic commands</h3><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inspect the host name</td>
+<td><code>hostname</code></td>
+</tr>
+<tr>
+<td>Inspect the host name and version</td>
+<td><code>uname -a</code></td>
+</tr>
+<tr>
+<td>Inspect the Linux information</td>
+<td><code>lsb_release -a</code></td>
+</tr>
+<tr>
+<td>Inspect the CPU information</td>
+<td><code>cat /proc/cpuinfo</code></td>
+</tr>
+<tr>
+<td>Inspect the memory</td>
+<td><code>free -m</code></td>
+</tr>
+<tr>
+<td>Inspect the user</td>
+<td>1. <code>w</code><br>2. <code>who</code> <br>3. <code>whoami</code> <br>4. <code>tty</code></td>
+</tr>
+<tr>
+<td>Inspect the hard drive</td>
+<td>1. <code>df -h</code> <br>2. <code>df -aTh</code> <br>3. <code>du -h --max-depth=1 .</code></td>
+</tr>
+<tr>
+<td>Inspect the ports</td>
+<td>1. <code>netstat -ano &#124; findstr 7001</code> <br>2. <code>sudo netstat -tunlp</code> <br>3. <code>netstat -aonp &#124; grep 5050</code></td>
+</tr>
+<tr>
+<td>Inspect the firewall</td>
+<td>sudo iptables -L -n</td>
+</tr>
+<tr>
+<td>Inspect the dns to host and port status</td>
+<td><code>nmap -Pn -p 27018 google.com.au</code></td>
+</tr>
+<tr>
+<td>Inspect the path env for current user</td>
+<td><code>echo $PATH</code></td>
+</tr>
+<tr>
+<td>Inspect the process by pid</td>
+<td><code>tasklist &#124; findstr 23416</code></td>
+</tr>
+<tr>
+<td>Inspect the process by name</td>
+<td><code>ps -ef &#124; grep nginx</code></td>
+</tr>
+<tr>
+<td>Kill the process by pid</td>
+<td><code>taskkill -f -pid 9788</code></td>
+</tr>
+<tr>
+<td>Curl and save to txt</td>
+<td><code>curl 130.220.209.90:9000 --trace-ascii dump.txt</code></td>
+</tr>
+<tr>
+<td>Get a root shell</td>
+<td>1. <code>sudo -s</code> <br>2. <code>sudo bash -c su -</code></td>
+</tr>
+<tr>
+<td>Clean Linux temp files</td>
+<td><code>sudo rm -rf /var/log/*</code></td>
+</tr>
+<tr>
+<td>Clean Linux temp files cursor and processes</td>
+<td>1. <code>sudo lsof &#124; grep delete</code> <br>2. <code>sudo kill *</code></td>
+</tr>
+<tr>
+<td>MacOS kill process using specific port</td>
+<td>1. <code>lsof -i tcp:8443</code> <br>2. <code>kill 86166</code></td>
+</tr>
+</tbody></table>
+<h3 id="File-commands"><a href="#File-commands" class="headerlink" title="File commands"></a>File commands</h3><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Find a file with the given name under current path</td>
+<td><code>find . -name "*"</code></td>
+</tr>
+<tr>
+<td>Find a archive file containing the given xml file</td>
+<td><code>find . -name "*.jar" &#124; xargs grep "*.xml"</code></td>
+</tr>
+<tr>
+<td>Find a file containing the given content under current path</td>
+<td>1. <code>grep -s -r "*" ./</code> <br>2. <code>find . -name "*.xml" &#124; xargs grep "*"</code></td>
+</tr>
+<tr>
+<td>Find a file containing the given content under current path and only print the file name to the output file</td>
+<td><code>find . -name "*.*" &#124; xargs grep -ri "APXMTMRR" -l > grep_APXMTMRR.log</code></td>
+</tr>
+<tr>
+<td>Find the top size files</td>
+<td>1. <code>du -a . &#124; sort -n -r &#124; head -n 10</code> <br>2. <code>find . -type f -size +20000k -exec ls -lh {} \; &#124; awk '{ print $9 ": " $5 }'</code></td>
+</tr>
+<tr>
+<td>List the folders’ size in current folder</td>
+<td><code>du -h --max-depth=1 .</code></td>
+</tr>
+<tr>
+<td>List the latest changed files under current folder</td>
+<td><code>ls -lrth</code></td>
+</tr>
+<tr>
+<td>Find the files under specific folder and append the timestamp</td>
+<td><code>find /var -maxdepth 2 -type d -exec stat -c "%n %y" {} \;</code></td>
+</tr>
+<tr>
+<td>Paste text with # in the VIM and keep the format</td>
+<td><code>:set paste</code></td>
+</tr>
+<tr>
+<td>Zip folder to a file</td>
+<td><code>sudo tar -zvcf /data/bak.tar.gz /data/db</code></td>
+</tr>
+<tr>
+<td>Unzip file to a folder</td>
+<td><code>sudo tar -zvxf /data/bak.tar.gz</code></td>
+</tr>
+<tr>
+<td>Copy file to remote by scp</td>
+<td><code>scp agriculture-platform/rebuild.sh ec2-user@130.220.209.90:/home/ec2-user/agriculture-platform/ rebuild.sh</code></td>
+</tr>
+<tr>
+<td>Copy Folder to remote by scp</td>
+<td><code>scp -r agriculture-platform ec2-user@130.220.209.90:/home/ec2-user</code></td>
+</tr>
+<tr>
+<td>Copy file from remote to local by scp</td>
+<td>1. <code>scp -i sshkey googlecloud@test.com:/home/googlecloud/test/keystore.p12 .</code> <br>2. <code>scp -i "~/sshkey.pem" -r ec2-user@test.com:/mnt/data data-test</code></td>
+</tr>
+<tr>
+<td>Clean the content in a file</td>
+<td><code>sed -i "d" Dockerfile</code></td>
+</tr>
+</tbody></table>
+<h3 id="Software-commands"><a href="#Software-commands" class="headerlink" title="Software commands"></a>Software commands</h3><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Install software by yum</td>
+<td>1. <code>sudo yum -y install docker</code> <br>2. <code>sudo yum install java-1.8.0-openjdk.x86_64</code></td>
+</tr>
+<tr>
+<td>Uninstall software by yum</td>
+<td><code>sudo yum -y remove docker</code></td>
+</tr>
+<tr>
+<td>List installed software by yum</td>
+<td>1. <code>yum list installed &#124; grep docker</code> <br>2. <code>yum -y list docker*</code></td>
+</tr>
+<tr>
+<td>Search software by yum</td>
+<td><code>yum search java &#124; grep 'java-'</code></td>
+</tr>
+<tr>
+<td>Install software by apt-get</td>
+<td>1. <code>apt-get update</code> <br>2. <code>apt-get install vim</code></td>
+</tr>
+<tr>
+<td>List installed software by RPM</td>
+<td><code>rpm -qa &#124; grep docker</code></td>
+</tr>
+</tbody></table>
+<h3 id="Service-commands"><a href="#Service-commands" class="headerlink" title="Service commands"></a>Service commands</h3><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Restart vsftpd</td>
+<td><code>systemctl restart vsftpd</code></td>
+</tr>
+<tr>
+<td>Restart nginx</td>
+<td><code>/usr/nginx/sbin/nginx -s reload</code></td>
+</tr>
+<tr>
+<td>Check nginx configuration</td>
+<td><code>/usr/nginx/sbin/nginx -t</code></td>
+</tr>
+</tbody></table>
+<h3 id="JVM-commands"><a href="#JVM-commands" class="headerlink" title="JVM commands"></a>JVM commands</h3><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inspect JVM default heap flag</td>
+<td><code>java -XX:+PrintFlagsFinal -version &#124; grep HeapSize</code></td>
+</tr>
+<tr>
+<td>Inspect the java process arguments</td>
+<td><code>jinfo -flags 1</code></td>
+</tr>
+<tr>
+<td>Inspect the java process GC information</td>
+<td><code>jmap -heap 1</code></td>
+</tr>
+<tr>
+<td>List java process</td>
+<td><code>jps</code></td>
+</tr>
+<tr>
+<td>List the basic class memory information by pid</td>
+<td><code>jmap -histo 1 &#124; head</code></td>
+</tr>
+<tr>
+<td>List the class loaders memory information by pid</td>
+<td><code>jmap -clstats 1</code></td>
+</tr>
+<tr>
+<td>Dump the java process heap information by pid</td>
+<td><code>jcmd 1 GC.heap_dump heap_dump.hprof</code></td>
+</tr>
+</tbody></table>
+<h3 id="Scenarios"><a href="#Scenarios" class="headerlink" title="Scenarios"></a>Scenarios</h3><h4 id="Maven-and-SpringBoot-commands"><a href="#Maven-and-SpringBoot-commands" class="headerlink" title="Maven and SpringBoot commands"></a>Maven and SpringBoot commands</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Generate project</span></span><br><span class="line">mvn archetype:generate \</span><br><span class="line"> -DgroupId=com.alibaba.test \</span><br><span class="line"> -DartifactId=tutorial1 \</span><br><span class="line"> -Dversion=1.0-SNAPSHOT \</span><br><span class="line"> -Dpackage=com.alibaba.test.tutorial1 \</span><br><span class="line"> -DarchetypeArtifactId=archetype-test-quickstart \</span><br><span class="line"> -DarchetypeGroupId=com.alibaba.test.sample \</span><br><span class="line"> -DarchetypeVersion=1.0 \</span><br><span class="line"> -DinteractiveMode=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Build project without testing</span></span><br><span class="line">mvn clean package -Dmaven.test.skip=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Run SpringBoot with specific profile</span></span><br><span class="line">java -Dspring.profiles.active=dev -Xms256m -Xmx1024m -jar calculate-1.0.jar</span><br><span class="line">mvn spring-boot:run -Drun.profiles=dev</span><br><span class="line">mvn spring-boot:run -Drun.jvmArguments=<span class="string">"-Dspring.profiles.active=dev"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Run in debug mode</span></span><br><span class="line">java -agentlib:jdwp=transport=dt_socket,server=y,address=5050,<span class="built_in">suspend</span>=y -jar calculate-1.0.jar</span><br><span class="line">mvn spring-boot:run -Drun.jvmArguments=<span class="string">"-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005��</span></span><br><span class="line"><span class="string">mvn spring-boot:run -Drun.jvmArguments="</span>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,<span class="built_in">suspend</span>=n,address=5005 -Dspring.profiles.active=dev<span class="string">"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#Create SpringBoot project using start.spring.io</span></span><br><span class="line"><span class="string">curl https://start.spring.io/starter.zip -d dependencies=web,data-jpa,devtools,h2 -d groupId=au.com.frankie -d artifactId=example -d name=example -d description="</span>Spring Boot Example Application<span class="string">" -d baseDir=example -o myapp.zip && unzip myapp.zip && rm -f myapp.zip</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="SSH-from-server1-to-server2-without-password"><a href="#SSH-from-server1-to-server2-without-password" class="headerlink" title="SSH from server1 to server2 without password"></a>SSH from server1 to server2 without password</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Generate private/public key in server1, and copy the public key</span></span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line">sudo cat ~/.ssh/id_rsa.pub</span><br><span class="line"></span><br><span class="line"><span class="comment">#Append the public key to authorized keys in server2</span></span><br><span class="line">vi ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment">#SSH from server1 to server2:</span></span><br><span class="line">ssh ec2-user@130.220.209.90</span><br><span class="line"></span><br><span class="line"><span class="comment">#Allow or deny IPs: (block the ssh request or not)</span></span><br><span class="line">sudo vi /etc/hosts.deny</span><br><span class="line"><span class="comment">#(remove the client IP)</span></span><br><span class="line">sudo systemctl restart sshd.service</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Change-Timezone-Ubuntu"><a href="#Change-Timezone-Ubuntu" class="headerlink" title="Change Timezone(Ubuntu)"></a>Change Timezone(Ubuntu)</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">date -R</span><br><span class="line">sudo timedatectl <span class="built_in">set</span>-timezone Australia/Brisbane</span><br><span class="line">timedatectl</span><br><span class="line">sudo timedatectl <span class="built_in">set</span>-local-rtc 1</span><br><span class="line">sudo timedatectl <span class="built_in">set</span>-local-rtc 0</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Modify-the-fstab-system-file-to-automatically-mount-a-volume-after-rebooting"><a href="#Modify-the-fstab-system-file-to-automatically-mount-a-volume-after-rebooting" class="headerlink" title="Modify the fstab system file to automatically mount a volume after rebooting"></a>Modify the fstab system file to automatically mount a volume after rebooting</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/fstab</span><br><span class="line"><span class="comment"># modify the content as bellow</span></span><br><span class="line">/dev/vdb        /mnt/data       auto    defaults,nofail,comment=cloudconfig     0       2</span><br><span class="line"><span class="comment">#reboot the instance</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Establish-the-tunnel-from-local-port-to-online-website-by-ngrok-the-header-setting-is-because-of-angular-app-Invalid-Host-Header-issue"><a href="#Establish-the-tunnel-from-local-port-to-online-website-by-ngrok-the-header-setting-is-because-of-angular-app-Invalid-Host-Header-issue" class="headerlink" title="Establish the tunnel from local port to online website by ngrok (the header setting is because of angular app Invalid Host Header issue)"></a>Establish the tunnel from local port to online website by ngrok (the header setting is because of angular app Invalid Host Header issue)</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ngrok http 4200 -host-header=<span class="string">"localhost:4200"</span></span><br><span class="line">ngrok http --host-header=rewrite 4200</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Pandoc-usage"><a href="#Pandoc-usage" class="headerlink" title="Pandoc usage"></a>Pandoc usage</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pandoc -s README.md -o README.docx -M title:architecture  <span class="comment">#(markdown -> docx)</span></span><br><span class="line">pandoc --pdf-engine=xelatex README.md -o README.pdf  <span class="comment">#(markdown -> pdf)</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Recover-rm-rf-files"><a href="#Recover-rm-rf-files" class="headerlink" title="Recover rm -rf files"></a>Recover rm -rf files</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Install extundelete</span></span><br><span class="line">sudo yum search extundelete</span><br><span class="line">sudo yum install extundelete.*</span><br><span class="line"></span><br><span class="line"><span class="comment">#Find filesystem and type(support ext3/ext4) to recover</span></span><br><span class="line">df -T</span><br><span class="line"></span><br><span class="line"><span class="comment">#Find nodes and node to recover:</span></span><br><span class="line">sudo extundelete --inode 2 /dev/vda1</span><br><span class="line">sudo extundelete --inode 393217 /dev/vda1</span><br><span class="line"></span><br><span class="line"><span class="comment">#Recover:</span></span><br><span class="line">sudo extundelete --restore-inode 542480 /dev/vda1</span><br><span class="line"></span><br><span class="line"><span class="comment">#Recover all deleted after time</span></span><br><span class="line">sudo yum search extundelete</span><br><span class="line">sudo yum install extundelete.*</span><br><span class="line">df -T</span><br><span class="line">sudo umount /dev/vdc</span><br><span class="line">date -d <span class="string">"2018-06-02 23:00:00"</span> +%s</span><br><span class="line">sudo extundelete /dev/vdc --after 1527980400 --restore-all</span><br><span class="line">sudo cp -R /data .</span><br><span class="line">sudo mount /dev/vdc /data -t auto</span><br><span class="line">sudo cp -R ./data/* /data/</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="HTTPS-certificate"><a href="#HTTPS-certificate" class="headerlink" title="HTTPS certificate"></a>HTTPS certificate</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Generate key</span></span><br><span class="line">keytool -genkey -<span class="built_in">alias</span> tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650</span><br><span class="line"></span><br><span class="line"><span class="comment">#Install certbot and certbot-auto</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/certbot/certbot</span><br><span class="line"><span class="built_in">cd</span> certbot</span><br><span class="line">./certbot-auto</span><br><span class="line">./certbot-auto --<span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Generate certificates and a private key</span></span><br><span class="line"><span class="comment">#Remember to stop springboot process first</span></span><br><span class="line">sudo ./certbot-auto certonly -a standalone -d test.com -d www.test.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#Convert PEM files to PKCS12 files</span></span><br><span class="line">sudo -s</span><br><span class="line"><span class="built_in">cd</span> /etc/letsencrypt/live/test.com</span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> fullchain.pem -inkey privkey.pem -out keystore.p12 -name tomcat -CAfile chain.pem -caname root</span><br><span class="line"><span class="comment">#copy keystore.p12 file to ~/agriculture-platform folder, exit su, then start springboot process</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Update HTTPS key(test.com)</span></span><br><span class="line"><span class="built_in">cd</span> ~/certbot</span><br><span class="line">docker stop agriculture</span><br><span class="line">sudo ./certbot-auto certonly -a standalone -d test.com</span><br><span class="line">sudo -s</span><br><span class="line"><span class="built_in">cd</span> /etc/letsencrypt/live/test.com</span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> fullchain.pem -inkey privkey.pem -out keystore.p12 -name tomcat -CAfile chain.pem -caname root</span><br><span class="line">cp keystore.p12 /home/ec2-user/agriculture-platform/</span><br><span class="line"> <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">cd</span> ~/agriculture-platform/</span><br><span class="line">vi Dockerfile <span class="comment">#modify the date to recopy the key</span></span><br><span class="line">. rebuild.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#Generate generic HTTPS key(*.test.com)</span></span><br><span class="line">./certbot-auto certonly  -d *.test.com --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory</span><br><span class="line">./certbot-auto certonly -d *.cloud.lava.xin --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory</span><br><span class="line"><span class="comment">#create txt record in dns</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Generate p12 by crt and key</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -name alpha -<span class="keyword">in</span> alpha_v2.crt -inkey alpha.key -out alpha.p12</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="AWS-volume"><a href="#AWS-volume" class="headerlink" title="AWS volume"></a>AWS volume</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Extend volume</span></span><br><span class="line">lsblk <span class="comment">#Check if the volume need to extent in Linux</span></span><br><span class="line">df -h</span><br><span class="line">sudo growpart /dev/xvda 1 <span class="comment">#xvda1 in lsblk result means change the partition 1 here</span></span><br><span class="line">lsblk</span><br><span class="line">sudo resize2fs /dev/xvda1</span><br><span class="line">df -h</span><br><span class="line"></span><br><span class="line"><span class="comment">#Mount/Unmount volume</span></span><br><span class="line">lsblk</span><br><span class="line">df -h</span><br><span class="line">sudo mount /dev/xvdf1 /data</span><br><span class="line">sudo umount /dev/xvdf1</span><br><span class="line">df -h</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="NectarCloud-volume"><a href="#NectarCloud-volume" class="headerlink" title="NectarCloud volume"></a>NectarCloud volume</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ttach and mount volume(/dev/vdc)</span></span><br><span class="line">sudo fdisk -l</span><br><span class="line">sudo mkfs.ext4 /dev/vdc</span><br><span class="line">sudo mount /dev/vdc /data -t auto</span><br><span class="line">sudo mount /dev/vdd /var/lib/docker -t auto</span><br><span class="line">sudo chmod -R 777 /data</span><br><span class="line"></span><br><span class="line">sudo umount /dev/vdd</span><br><span class="line"></span><br><span class="line"><span class="comment">#Increase the volume size(/dev/vdc)</span></span><br><span class="line">sudo umount /dev/vdc</span><br><span class="line">sudo e2fsck -f /dev/vdb</span><br><span class="line">sudo resize2fs /dev/vdc</span><br><span class="line">sudo mount /dev/vdc /data -t auto</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="MongoDB-operation"><a href="#MongoDB-operation" class="headerlink" title="MongoDB operation"></a>MongoDB operation</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Authentication</span></span><br><span class="line">mongo --port 27017 -u <span class="string">"database"</span> -p <span class="string">"password"</span> --authenticationDatabase <span class="string">"admin"</span></span><br><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'database'</span>,<span class="string">'password'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Clear plan cache</span></span><br><span class="line">db.StandardCases.getPlanCache().clear()</span><br><span class="line"></span><br><span class="line"><span class="comment">#Inspect database/collection size</span></span><br><span class="line">db.stats()</span><br><span class="line">db.BackupDatas.stat()</span><br><span class="line"></span><br><span class="line"><span class="comment">#Check aggregation plan</span></span><br><span class="line">db.StandardCases.aggregate([</span><br><span class="line">    { <span class="variable">$match</span>: { datasetId: <span class="string">"5a6fddf188fba650b83b94c9"</span>, validated: <span class="literal">true</span>, <span class="string">"timestamp.minuteStr"</span>: { <span class="variable">$lte</span>: <span class="string">"2018-09-09 00:00"</span>, <span class="variable">$gte</span>: <span class="string">"2017-12-31 00:00"</span> } } },</span><br><span class="line">    { <span class="variable">$project</span>: { date: <span class="string">"<span class="variable">$timestamp</span>.minuteStr"</span>, toStat: 1 } },</span><br><span class="line">    { <span class="variable">$group</span>: { _id: <span class="string">"<span class="variable">$date</span>"</span>, toStat: { <span class="variable">$push</span>: <span class="string">"<span class="variable">$toStat</span>"</span> } } },</span><br><span class="line">    { <span class="variable">$sort</span>: { _id: 1 } }</span><br><span class="line">], {cursor: {}, allowDiskUse: <span class="literal">true</span>, explain: <span class="literal">true</span>})</span><br><span class="line"></span><br><span class="line"><span class="comment">#Check aggregation execution plan</span></span><br><span class="line">db.StandardCases.explain(<span class="string">"executionStats"</span>).aggregate([</span><br><span class="line">    { <span class="variable">$match</span>: { datasetId: <span class="string">"5a6fddf188fba650b83b94c9"</span>, validated: <span class="literal">true</span>, <span class="string">"timestamp.minuteStr"</span>: { <span class="variable">$lte</span>: <span class="string">"2018-09-09 00:00"</span>, <span class="variable">$gte</span>: <span class="string">"2017-12-31 00:00"</span> }, <span class="string">"filter.Tunnels_to_survey~Plants_to_survey~Variety"</span>: { <span class="variable">$in</span>: [ <span class="string">"Eureka"</span> ] } } },</span><br><span class="line">    { <span class="variable">$project</span>: { date: <span class="string">"<span class="variable">$timestamp</span>.minuteStr"</span>, toStat: 1 } },</span><br><span class="line">    { <span class="variable">$group</span>: { _id: <span class="string">"<span class="variable">$date</span>"</span>, toStat: { <span class="variable">$push</span>: <span class="string">"<span class="variable">$toStat</span>"</span> } } },</span><br><span class="line">    { <span class="variable">$sort</span>: { _id: 1 } }</span><br><span class="line">])</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Crontab-service"><a href="#Crontab-service" class="headerlink" title="Crontab service"></a>Crontab service</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Start/stop service</span></span><br><span class="line">sudo /sbin/service crond start</span><br><span class="line">sudo /sbin/service crond stop</span><br><span class="line">sudo /sbin/service crond restart</span><br><span class="line">sudo /sbin/service crond reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#Current services</span></span><br><span class="line">crontab -l</span><br><span class="line"></span><br><span class="line"><span class="comment">#Edit services</span></span><br><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line"><span class="comment">#Delete services</span></span><br><span class="line">crontab -r</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Less-commands"><a href="#Less-commands" class="headerlink" title="Less commands"></a>Less commands</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#less generate min.css</span></span><br><span class="line">lessc --clean-css AdminLTE.less ../../dist/css/AdminLTE.min.css</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/2017/08/31/important-linux-commands/less-generate.png" alt="Less generate"></p>
+<h4 id="Git-commands"><a href="#Git-commands" class="headerlink" title="Git commands"></a>Git commands</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Git clone</span></span><br><span class="line">git <span class="built_in">clone</span> https://hustakin@github.com/hustakin/***.git</span><br><span class="line"></span><br><span class="line"><span class="comment">#Configure new git remote url and push</span></span><br><span class="line">git remote add origin https://hustakin@github.com/hustakin/***.git</span><br><span class="line">git push --<span class="built_in">set</span>-upstream origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">#Modify git remote url</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://hustakin@github.com/hustakin/***.git</span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment">#Find the size of git repository</span></span><br><span class="line">git count-objects -v</span><br><span class="line"></span><br><span class="line"><span class="comment">#Prune all of the reflog references from this point back (unless you��re explicitly only operating on one branch) and repack the repository</span></span><br><span class="line">git -c gc.auto=1 -c gc.autodetach=<span class="literal">false</span> -c gc.autopacklimit=1 -c gc.garbageexpire=now -c gc.reflogexpireunreachable=now gc --prune=all</span><br><span class="line"></span><br><span class="line"><span class="comment">#Push all your changes back to the Bitbucket repository</span></span><br><span class="line">git push --all --force && git push --tags --force</span><br><span class="line"></span><br><span class="line"><span class="comment">#Force push the local to remote</span></span><br><span class="line">git push -u origin master -f</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="MongoDB-commands"><a href="#MongoDB-commands" class="headerlink" title="MongoDB commands"></a>MongoDB commands</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Find by id in mongoldb compass</span></span><br><span class="line">{<span class="string">"_id"</span>:{<span class="string">"<span class="variable">$oid</span>"</span>:<span class="string">"5973048f0b30d6ed2104ad9d"</span>}}</span><br><span class="line"></span><br><span class="line"><span class="comment">#start/shutdown commands:</span></span><br><span class="line">mongod -f /etc/mongodb.conf</span><br><span class="line">mongod --shutdown -f /etc/mongodb.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#MongoDB on mac</span></span><br><span class="line"><span class="comment">#The databases are stored in the /usr/local/var/mongodb/ or /usr/local/opt/mongodb/ directory</span></span><br><span class="line"><span class="comment">#The mongod.conf file is here: /usr/local/etc/mongod.conf</span></span><br><span class="line"><span class="comment">#The mongo logs can be found at /usr/local/var/log/mongodb/</span></span><br><span class="line"><span class="comment">#The mongo binaries are here: /usr/local/Cellar/mongodb/[version]/bin</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-tools"><a href="#Install-tools" class="headerlink" title="Install tools"></a>Install tools</h3><h4 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.strategylions.com.au/mirror/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz</span><br><span class="line">tar xvf apache-maven-3.5.4-bin.tar.gz</span><br><span class="line">sudo mv apache-maven-3.5.4 /usr/<span class="built_in">local</span>/apache-maven</span><br><span class="line"><span class="comment"># Add the env variables to your ~/.bashrc file</span></span><br><span class="line">    <span class="built_in">export</span> M2_HOME=/usr/<span class="built_in">local</span>/apache-maven</span><br><span class="line">    <span class="built_in">export</span> M2=<span class="variable">$M2_HOME</span>/bin</span><br><span class="line">    <span class="built_in">export</span> PATH=<span class="variable">$M2</span>:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">mvn -version</span><br><span class="line">rm -rf apache-maven-3.5.4-bin.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Ping-and-telnet"><a href="#Ping-and-telnet" class="headerlink" title="Ping and telnet"></a>Ping and telnet</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">yes | apt-get install iputils-ping</span><br><span class="line">yes | apt-get install telnet</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Grunt"><a href="#Grunt" class="headerlink" title="Grunt"></a>Grunt</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Install plugin to grunt and update the package.json dependency</span></span><br><span class="line">npm install grunt --save-dev     (<span class="keyword">for</span> testing framework, like grunt..)</span><br><span class="line">npm install grunt --save     (<span class="keyword">for</span> production purpose.)</span><br></pre></td></tr></tbody></table></figure></body></html>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/08/29/important-docker-commands/" rel="next" title="Important Docker commands">
+                  <i class="fa fa-chevron-left"></i> Important Docker commands
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/09/01/continuous-integration-with-jenkins-and-docker/" rel="prev" title="Continuous Integration with Jenkins and Docker">
+                  Continuous Integration with Jenkins and Docker <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="Frankie Fan">
+  <p class="site-author-name" itemprop="name">Frankie Fan</p>
+  <div class="site-description motion-element" itemprop="description">Live for die and let it go.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/hustakin" title="GitHub &rarr; https://github.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:hustakin@gmail.com" title="E-Mail &rarr; mailto:hustakin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.linkedin.com/in/hustakin/" title="LinkedIn &rarr; https://www.linkedin.com/in/hustakin/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://twitter.com/hustakin" title="Twitter &rarr; https://twitter.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.facebook.com/hustakin" title="FB Page &rarr; https://www.facebook.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#System-basic-commands"><span class="nav-number">1.</span> <span class="nav-text">System basic commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-commands"><span class="nav-number">2.</span> <span class="nav-text">File commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-commands"><span class="nav-number">3.</span> <span class="nav-text">Software commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-commands"><span class="nav-number">4.</span> <span class="nav-text">Service commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-commands"><span class="nav-number">5.</span> <span class="nav-text">JVM commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scenarios"><span class="nav-number">6.</span> <span class="nav-text">Scenarios</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven-and-SpringBoot-commands"><span class="nav-number">6.1.</span> <span class="nav-text">Maven and SpringBoot commands</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH-from-server1-to-server2-without-password"><span class="nav-number">6.2.</span> <span class="nav-text">SSH from server1 to server2 without password</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Change-Timezone-Ubuntu"><span class="nav-number">6.3.</span> <span class="nav-text">Change Timezone(Ubuntu)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Modify-the-fstab-system-file-to-automatically-mount-a-volume-after-rebooting"><span class="nav-number">6.4.</span> <span class="nav-text">Modify the fstab system file to automatically mount a volume after rebooting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Establish-the-tunnel-from-local-port-to-online-website-by-ngrok-the-header-setting-is-because-of-angular-app-Invalid-Host-Header-issue"><span class="nav-number">6.5.</span> <span class="nav-text">Establish the tunnel from local port to online website by ngrok (the header setting is because of angular app Invalid Host Header issue)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pandoc-usage"><span class="nav-number">6.6.</span> <span class="nav-text">Pandoc usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recover-rm-rf-files"><span class="nav-number">6.7.</span> <span class="nav-text">Recover rm -rf files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS-certificate"><span class="nav-number">6.8.</span> <span class="nav-text">HTTPS certificate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AWS-volume"><span class="nav-number">6.9.</span> <span class="nav-text">AWS volume</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NectarCloud-volume"><span class="nav-number">6.10.</span> <span class="nav-text">NectarCloud volume</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB-operation"><span class="nav-number">6.11.</span> <span class="nav-text">MongoDB operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crontab-service"><span class="nav-number">6.12.</span> <span class="nav-text">Crontab service</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Less-commands"><span class="nav-number">6.13.</span> <span class="nav-text">Less commands</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-commands"><span class="nav-number">6.14.</span> <span class="nav-text">Git commands</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB-commands"><span class="nav-number">6.15.</span> <span class="nav-text">MongoDB commands</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-tools"><span class="nav-number">7.</span> <span class="nav-text">Install tools</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven"><span class="nav-number">7.1.</span> <span class="nav-text">Maven</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ping-and-telnet"><span class="nav-number">7.2.</span> <span class="nav-text">Ping and telnet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grunt"><span class="nav-number">7.3.</span> <span class="nav-text">Grunt</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frankie Fan</span>
+</div>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon"><i class="fa fa-user"></i></span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="GeoServer provides a RESTful interface through which clients can retrieve information about an instance and make configuration changes. Using the REST interface’s simple HTTP calls, clients can config">
+<meta name="keywords" content="GeoServer,GIS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Developing based on GeoServer restful api">
+<meta property="og:url" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/index.html">
+<meta property="og:site_name" content="Frankie Fan">
+<meta property="og:description" content="GeoServer provides a RESTful interface through which clients can retrieve information about an instance and make configuration changes. Using the REST interface’s simple HTTP calls, clients can config">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/rest-properties-file.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/rest-properties.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/geoserver-users.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/rest-401.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/authentication-filters.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/new-auth-filter.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/ready-configure-filter-chains.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/configure-filter-chain.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/rest-auth.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-workspaces.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-layers.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-list-raster-datastores.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-list-styles.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-list-styles-layer.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-layers.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-raster-store.png">
+<meta property="og:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/response-get-style.png">
+<meta property="og:updated_time" content="2019-09-24T02:48:28.835Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Developing based on GeoServer restful api">
+<meta name="twitter:description" content="GeoServer provides a RESTful interface through which clients can retrieve information about an instance and make configuration changes. Using the REST interface’s simple HTTP calls, clients can config">
+<meta name="twitter:image" content="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/rest-properties-file.png">
+  <link rel="canonical" href="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Developing based on GeoServer restful api | Frankie Fan</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146443611-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146443611-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Frankie Fan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">17</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hustakin.github.io/2019/09/12/developing-based-on-geoserver-restful-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie Fan">
+      <meta itemprop="description" content="Live for die and let it go.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frankie Fan">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Developing based on GeoServer restful api
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-09-12 13:09:19" itemprop="dateCreated datePublished" datetime="2019-09-12T13:09:19+10:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-24 12:48:28" itemprop="dateModified" datetime="2019-09-24T12:48:28+10:00">2019-09-24</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Best-Practice/" itemprop="url" rel="index"><span itemprop="name">Best Practice</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><p>GeoServer provides a RESTful interface through which clients can retrieve information about an instance and make configuration changes. Using the REST interface’s simple HTTP calls, clients can configure GeoServer without needing to use the Web administration interface.</p>
+<p>REST is an acronym for “REpresentational State Transfer”. REST adopts a fixed set of operations on named resources, where the representation of each resource is the same for retrieving and setting information. In other words, you can retrieve (read) data in an XML format and also send data back to the server in similar XML format in order to set (write) changes to the system.</p>
+<p>Operations on resources are implemented with the standard primitives of HTTP: GET to read; and PUT, POST, and DELETE to write changes. Each resource is represented as a URL, such as <a href="http://GEOSERVER_HOME/rest/workspaces/topp" target="_blank" rel="noopener">http://GEOSERVER_HOME/rest/workspaces/topp</a>.</p>
+<a id="more"></a>
+
+
+<h2 id="Steps-to-configure-authentication"><a href="#Steps-to-configure-authentication" class="headerlink" title="Steps to configure authentication"></a>Steps to configure authentication</h2><p>We want to developing based on GeoServer restful api, the first thing would be configuring GeoServer to accept authentication information passed by HTTP header attribute(s).</p>
+<h3 id="Rest-properties-file"><a href="#Rest-properties-file" class="headerlink" title="Rest properties file"></a>Rest properties file</h3><p>The REST process has its own security configuration that needs to be setup in addition to the web interface user. These are different configurations and are setup in different spots. The REST configuration does use that same users you have configured in the web interface it just doesn’t use the access rules that you would have set up.</p>
+<p>To know about the permissions you need to view a file in the directory [Geoserver_data}/security called rest.properties.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/rest-properties-file.png" alt="Restful file"></p>
+<h3 id="Rest-properties"><a href="#Rest-properties" class="headerlink" title="Rest properties"></a>Rest properties</h3><p>From the properties file content, we can see all the rest api will need admin user authentication.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/rest-properties.png" alt="Restful properties"></p>
+<h3 id="Users-groups-and-roles"><a href="#Users-groups-and-roles" class="headerlink" title="Users, groups and roles"></a>Users, groups and roles</h3><p>From the GeoServer web ui, we can define users, groups and roles.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/geoserver-users.png" alt="Users and roles"></p>
+<h3 id="Rest-test"><a href="#Rest-test" class="headerlink" title="Rest test"></a>Rest test</h3><p>If we try to test any GeoServer rest api without any configuration, we will meet a 401 error because of no authentication.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/rest-401.png" alt="Restful test 401"></p>
+<h3 id="Authentication-filters"><a href="#Authentication-filters" class="headerlink" title="Authentication filters"></a>Authentication filters</h3><p>Click the Authentication link located under the Security section of the navigation sidebar. Scroll down to the Authentication Filters panel and click the Add new link.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/authentication-filters.png" alt="Restful file"></p>
+<h3 id="Add-authentication-filter"><a href="#Add-authentication-filter" class="headerlink" title="Add authentication filter"></a>Add authentication filter</h3><p>Click the HTTP Header link and set “Name” to anything you’d like, Set Request header attribute to to a random token other than “user” or “admin”. It’s a obscure header attribute name which is a shared secret between the proxy and GeoServer. Set Role source to “User group service” and name of the user group service to “default”.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/new-auth-filter.png" alt="Restful file"></p>
+<h3 id="Authentication-filter-chains"><a href="#Authentication-filter-chains" class="headerlink" title="Authentication filter chains"></a>Authentication filter chains</h3><p>Go back to the Authentication link and scroll down to the Filter Chains panel. Notice the rest filter chain here and click into it.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/ready-configure-filter-chains.png" alt="Restful file"></p>
+<h3 id="Configure-rest-filter-chain"><a href="#Configure-rest-filter-chain" class="headerlink" title="Configure rest filter chain"></a>Configure rest filter chain</h3><p>Scroll down to the Chain filters panel. Drag the newly added authentication filter to the selected part and position it before all other filters.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/configure-filter-chain.png" alt="Restful file"></p>
+<h3 id="Rest-test-successful"><a href="#Rest-test-successful" class="headerlink" title="Rest test successful"></a>Rest test successful</h3><p>Try the rest api again with specified header which is the Request header attribute we just set and with the value of “admin”.<br><img src="/2019/09/12/developing-based-on-geoserver-restful-api/rest-auth.png" alt="Restful file"></p>
+<h2 id="Restful-APIs"><a href="#Restful-APIs" class="headerlink" title="Restful APIs"></a>Restful APIs</h2><p>The full restful api list can be found <a href="https://docs.geoserver.org/latest/en/user/rest/index.html" target="_blank" rel="noopener">here</a></p>
+<table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List workspaces</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-workspaces.png" alt="Response"></td>
+</tr>
+<tr>
+<td>List layers in a workspace</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/layers</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-layers.png" alt="Response"></td>
+</tr>
+<tr>
+<td>List coverage stores which describe the raster data source</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/coveragestores</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-list-raster-datastores.png" alt="Response"></td>
+</tr>
+<tr>
+<td>List styles in a workspace</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/styles</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-list-styles.png" alt="Response"></td>
+</tr>
+<tr>
+<td>List styles under a layer</td>
+<td><code>http://localhost:9999/geoserver/rest/layers/<layerName>/styles</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-list-styles-layer.png" alt="Response"></td>
+</tr>
+<tr>
+<td>Retrieve a layer</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/layers/<layerName></code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-layers.png" alt="Response"></td>
+</tr>
+<tr>
+<td>Get a coverage store</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/coveragestores/<storeName></code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-raster-store.png" alt="Response"></td>
+</tr>
+<tr>
+<td>Get a sld style in a workspace</td>
+<td><code>http://localhost:9999/geoserver/rest/workspaces/<workspaceName>/styles/<styleName>.sld</code></td>
+<td><img src="/2019/09/12/developing-based-on-geoserver-restful-api/response-get-style.png" alt="Response"></td>
+</tr>
+</tbody></table>
+</body></html>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/GeoServer/" rel="tag"><i class="fa fa-tag"></i> GeoServer</a>
+            
+              <a href="/tags/GIS/" rel="tag"><i class="fa fa-tag"></i> GIS</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/09/serve-raster-tiles-in-geoserver/" rel="next" title="Serve raster tiles in GeoServer">
+                  <i class="fa fa-chevron-left"></i> Serve raster tiles in GeoServer
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/24/a-detail-list-for-updating-address-when-moving/" rel="prev" title="A detailed list for updating address when moving">
+                  A detailed list for updating address when moving <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="Frankie Fan">
+  <p class="site-author-name" itemprop="name">Frankie Fan</p>
+  <div class="site-description motion-element" itemprop="description">Live for die and let it go.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/hustakin" title="GitHub &rarr; https://github.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:hustakin@gmail.com" title="E-Mail &rarr; mailto:hustakin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.linkedin.com/in/hustakin/" title="LinkedIn &rarr; https://www.linkedin.com/in/hustakin/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://twitter.com/hustakin" title="Twitter &rarr; https://twitter.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.facebook.com/hustakin" title="FB Page &rarr; https://www.facebook.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps-to-configure-authentication"><span class="nav-number">1.</span> <span class="nav-text">Steps to configure authentication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rest-properties-file"><span class="nav-number">1.1.</span> <span class="nav-text">Rest properties file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rest-properties"><span class="nav-number">1.2.</span> <span class="nav-text">Rest properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Users-groups-and-roles"><span class="nav-number">1.3.</span> <span class="nav-text">Users, groups and roles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rest-test"><span class="nav-number">1.4.</span> <span class="nav-text">Rest test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication-filters"><span class="nav-number">1.5.</span> <span class="nav-text">Authentication filters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-authentication-filter"><span class="nav-number">1.6.</span> <span class="nav-text">Add authentication filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication-filter-chains"><span class="nav-number">1.7.</span> <span class="nav-text">Authentication filter chains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-rest-filter-chain"><span class="nav-number">1.8.</span> <span class="nav-text">Configure rest filter chain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rest-test-successful"><span class="nav-number">1.9.</span> <span class="nav-text">Rest test successful</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-APIs"><span class="nav-number">2.</span> <span class="nav-text">Restful APIs</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frankie Fan</span>
+</div>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon"><i class="fa fa-user"></i></span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

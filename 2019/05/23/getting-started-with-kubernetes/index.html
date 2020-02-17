@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy">
+<meta name="keywords" content="Kubernetes,Traefik">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting started with Kubernetes">
+<meta property="og:url" content="http://hustakin.github.io/2019/05/23/getting-started-with-kubernetes/index.html">
+<meta property="og:site_name" content="Frankie Fan">
+<meta property="og:description" content="Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://hustakin.github.io/2019/05/23/getting-started-with-kubernetes/kubernetes.png">
+<meta property="og:updated_time" content="2019-11-05T06:08:49.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting started with Kubernetes">
+<meta name="twitter:description" content="Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy">
+<meta name="twitter:image" content="http://hustakin.github.io/2019/05/23/getting-started-with-kubernetes/kubernetes.png">
+  <link rel="canonical" href="http://hustakin.github.io/2019/05/23/getting-started-with-kubernetes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Getting started with Kubernetes | Frankie Fan</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146443611-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146443611-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Frankie Fan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">17</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hustakin.github.io/2019/05/23/getting-started-with-kubernetes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie Fan">
+      <meta itemprop="description" content="Live for die and let it go.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frankie Fan">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Getting started with Kubernetes
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-23 16:59:38" itemprop="dateCreated datePublished" datetime="2019-05-23T16:59:38+10:00">2019-05-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-05 16:08:49" itemprop="dateModified" datetime="2019-11-05T16:08:49+10:00">2019-11-05</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><p>Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices from the community.</p>
+<p><img src="/2019/05/23/getting-started-with-kubernetes/kubernetes.png" alt="Kubernetes"></p>
+<a id="more"></a>
+
+
+<h2 id="Install-on-linux-cluster"><a href="#Install-on-linux-cluster" class="headerlink" title="Install on linux cluster"></a>Install on linux cluster</h2><h3 id="Compile-kubernetes"><a href="#Compile-kubernetes" class="headerlink" title="Compile kubernetes"></a>Compile kubernetes</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/kubernetes/kubernetes.git</span><br><span class="line"><span class="built_in">cd</span> kubernetes</span><br><span class="line">make release</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-master-node"><a href="#Install-master-node" class="headerlink" title="Install master node"></a>Install master node</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Add repos</span></span><br><span class="line">cat <<EOF > /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">exclude=kube*</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment">#Set SELinux in permissive mode (effectively disabling it)</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line"><span class="comment">#Install</span></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br><span class="line"></span><br><span class="line">cat <<EOF >  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br><span class="line"></span><br><span class="line"><span class="comment">#Install network plugin</span></span><br><span class="line">sudo kubeadm init --pod-network-cidr=192.168.0.0/16</span><br><span class="line">kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yamlrm </span><br><span class="line">kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment">#Copy kubernetes config to user folder</span></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-slave-node"><a href="#Install-slave-node" class="headerlink" title="Install slave node"></a>Install slave node</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Run on master node to get the join commands</span></span><br><span class="line">sudo kubeadm token create --<span class="built_in">print</span>-join-command</span><br><span class="line"></span><br><span class="line"><span class="comment">#Copy the join commands and run on slave node</span></span><br><span class="line">kubeadm join <master-ip>:6443 --token 2kjo2d.8qno0vzvbgabp1e8 --discovery-token-ca-cert-hash sha256:2f1ebea7d7369a2d18b58f2926573e193e13ef7525649df1740ddb87963e1315</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-metrics-server"><a href="#Install-metrics-server" class="headerlink" title="Install metrics server"></a>Install metrics server</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/kodekloudhub/kubernetes-metrics-server.git</span><br><span class="line">kubectl create -f kubernetes-metrics-server/</span><br><span class="line">kubectl top nodes</span><br><span class="line">kubectl top pods</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-prometheus"><a href="#Install-prometheus" class="headerlink" title="Install prometheus"></a>Install prometheus</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml</span><br><span class="line"><span class="comment">#Maybe you should download the manifests-all.yaml and customize it yourself. For example, you would add Grafana configuration in it.</span></span><br><span class="line"><span class="comment">#Create Traefik ingress yaml and apply</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-helm"><a href="#Install-helm" class="headerlink" title="Install helm"></a>Install helm</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Download helm tar.gz file from https://github.com/helm/helm/releases</span></span><br><span class="line">tar -zxvf helm-v2.14.1-linux-amd64.tar.gz</span><br><span class="line">sudo cp linux-amd64/helm /usr/<span class="built_in">local</span>/bin</span><br><span class="line">helm init</span><br><span class="line">helm version</span><br><span class="line">kubectl get pod -n kube-system -l app=helm</span><br><span class="line">kubectl create -f rbac.yml</span><br><span class="line">kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="string">'{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Traefik"><a href="#Traefik" class="headerlink" title="Traefik"></a>Traefik</h2><h3 id="Create-Traefik-toml"><a href="#Create-Traefik-toml" class="headerlink" title="Create Traefik toml"></a>Create Traefik toml</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">defaultEntryPoints</span> = [<span class="string">"http"</span>,<span class="string">"https"</span>]</span><br><span class="line"><span class="comment"># Enable inner-cluster https navigation</span></span><br><span class="line"><span class="attr">insecureSkipVerify</span> = <span class="literal">true</span></span><br><span class="line"><span class="section">[entryPoints]</span></span><br><span class="line"><span class="section">  [entryPoints.http]</span></span><br><span class="line">  address = ":80"</span><br><span class="line"><span class="section">    [entryPoints.http.redirect]</span></span><br><span class="line">    entryPoint = "https"</span><br><span class="line"><span class="section">  [entryPoints.https]</span></span><br><span class="line">  address = ":443"</span><br><span class="line"><span class="section">    [entryPoints.https.tls]</span></span><br><span class="line"><span class="section">      [[entryPoints.https.tls.certificates]]</span></span><br><span class="line">      certFile = "/etc/kubernetes/ssl/cert.pem"</span><br><span class="line">      keyFile = "/etc/kubernetes/ssl/privkey.pem"</span><br><span class="line"><span class="section">[metrics]</span></span><br><span class="line"><span class="section">  [metrics.prometheus]</span></span><br><span class="line">    entryPoint = "traefik"</span><br><span class="line">    buckets = [0.1, 0.3, 1.2, 5.0]</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-Traefik-yaml"><a href="#Create-Traefik-yaml" class="headerlink" title="Create Traefik yaml"></a>Create Traefik yaml</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    k8s-app:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      k8s-app:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        k8s-app:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      serviceAccountName:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">      terminationGracePeriodSeconds:</span> <span class="number">60</span></span><br><span class="line"><span class="attr">      tolerations:</span></span><br><span class="line"><span class="attr">        - operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      nodeSelector:</span></span><br><span class="line"><span class="attr">        node:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">ssl</span></span><br><span class="line"><span class="attr">          secret:</span></span><br><span class="line"><span class="attr">            secretName:</span> <span class="string">traefik-cert</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">          configMap:</span></span><br><span class="line"><span class="attr">            name:</span> <span class="string">traefik-conf</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">        - image:</span> <span class="string">traefik</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">          volumeMounts:</span></span><br><span class="line"><span class="attr">            - mountPath:</span> <span class="string">"/etc/kubernetes/ssl"</span></span><br><span class="line"><span class="attr">              name:</span> <span class="string">"ssl"</span></span><br><span class="line"><span class="attr">            - mountPath:</span> <span class="string">"/home/ec2-user/kube/traefik"</span></span><br><span class="line"><span class="attr">              name:</span> <span class="string">"config"</span></span><br><span class="line"><span class="attr">          ports:</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">              containerPort:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">              hostPort:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">              containerPort:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">              hostPort:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">admin</span></span><br><span class="line"><span class="attr">              containerPort:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">          args:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="bullet">--api</span></span><br><span class="line"><span class="bullet">            -</span> <span class="bullet">--kubernetes</span></span><br><span class="line"><span class="bullet">            -</span> <span class="bullet">--logLevel=INFO</span></span><br><span class="line"><span class="bullet">            -</span> <span class="bullet">--configfile=/home/ec2-user/kube/traefik/traefik.toml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-service</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    k8s-app:</span> <span class="string">traefik-ingress-lb</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">    - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">web</span></span><br><span class="line"><span class="attr">    - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">    - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">admin</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-Traefik-rbac"><a href="#Create-Traefik-rbac" class="headerlink" title="Create Traefik rbac"></a>Create Traefik rbac</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line"><span class="attr">  - apiGroups:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">""</span></span><br><span class="line"><span class="attr">    resources:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">services</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">endpoints</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">secrets</span></span><br><span class="line"><span class="attr">    verbs:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">get</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">list</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">watch</span></span><br><span class="line"><span class="attr">  - apiGroups:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">extensions</span></span><br><span class="line"><span class="attr">    resources:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ingresses</span></span><br><span class="line"><span class="attr">    verbs:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">get</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">list</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">watch</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRoleBinding</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line"><span class="attr">  apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line"><span class="attr">  kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line"><span class="attr">  - kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">traefik-ingress-controller</span></span><br><span class="line"><span class="attr">    namespace:</span> <span class="string">kube-system</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-Traefik-web-ui-ingress"><a href="#Create-Traefik-web-ui-ingress" class="headerlink" title="Create Traefik web-ui ingress"></a>Create Traefik web-ui ingress</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">traefik-web-ui</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  annotations:</span></span><br><span class="line">    <span class="string">kubernetes.io/ingress.class:</span> <span class="string">traefik</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  rules:</span></span><br><span class="line"><span class="attr">    - host:</span> <span class="string">[domain]</span></span><br><span class="line"><span class="attr">      http:</span></span><br><span class="line"><span class="attr">        paths:</span></span><br><span class="line"><span class="attr">          - backend:</span></span><br><span class="line"><span class="attr">              serviceName:</span> <span class="string">traefik-ingress-service</span></span><br><span class="line"><span class="attr">              servicePort:</span> <span class="number">8080</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-Traefik-HTTPS-cert"><a href="#Create-Traefik-HTTPS-cert" class="headerlink" title="Create Traefik HTTPS cert"></a>Create Traefik HTTPS cert</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line"><span class="built_in">cd</span> /etc/letsencrypt/live/[domain]</span><br><span class="line"><span class="comment">#Update https cert keys and go to domain management console to modify the txt record</span></span><br><span class="line">kubectl create secret generic traefik-cert --from-file=privkey.pem --from-file=cert.pem -n kube-system</span><br><span class="line">cp cert.pem privkey.pem /etc/kubernetes/ssl/</span><br><span class="line"><span class="comment">#exit and go to the traefik k8s scripts folder</span></span><br><span class="line">kubectl create configmap traefik-conf --from-file=traefik.toml -n kube-system</span><br><span class="line">kubectl get cm -n kube-system</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Renew-Traefik-HTTPS-cert"><a href="#Renew-Traefik-HTTPS-cert" class="headerlink" title="Renew Traefik HTTPS cert"></a>Renew Traefik HTTPS cert</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete secret traefik-cert -n kube-system</span><br><span class="line">kubectl delete configmap traefik-conf -n kube-system</span><br><span class="line">kubectl delete -f traefik.yml</span><br><span class="line"><span class="comment">#Re-run the above "Create Traefik HTTPS cert" steps</span></span><br><span class="line">kubectl create -f traefik.yml</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Update-Traefik-toml"><a href="#Update-Traefik-toml" class="headerlink" title="Update Traefik.toml"></a>Update Traefik.toml</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Firstly modify the traefik.toml</span></span><br><span class="line">kubectl delete configmap traefik-conf -n kube-system</span><br><span class="line">kubectl create configmap traefik-conf --from-file=traefik.toml -n kube-system</span><br><span class="line">kubectl delete -f traefik.yml</span><br><span class="line">kubectl create -f traefik.yml</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Kubernetes-Dashboard-for-local"><a href="#Kubernetes-Dashboard-for-local" class="headerlink" title="Kubernetes Dashboard for local"></a>Kubernetes Dashboard for local</h2><h3 id="Create-service-account"><a href="#Create-service-account" class="headerlink" title="Create service account"></a>Create service account</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#admin-user.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">admin-user</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-role-binding"><a href="#Create-role-binding" class="headerlink" title="Create role binding"></a>Create role binding</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#admin-user-role-binding.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRoleBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">admin-user</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line"><span class="attr">  apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line"><span class="attr">  kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">cluster-admin</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line"><span class="attr">- kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">admin-user</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Apply-yaml"><a href="#Apply-yaml" class="headerlink" title="Apply yaml"></a>Apply yaml</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Apply service account</span></span><br><span class="line">kubectl create -f admin-user.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment">#Apply role binding</span></span><br><span class="line">kubectl create -f admin-user-role-binding.yaml</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Retrieve-login-token"><a href="#Retrieve-login-token" class="headerlink" title="Retrieve login token"></a>Retrieve login token</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk <span class="string">'{print $1}'</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-dashboard"><a href="#Install-dashboard" class="headerlink" title="Install dashboard"></a>Install dashboard</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment">#Create proxy to allow only localhost navigating</span></span><br><span class="line">kubectl proxy</span><br><span class="line">kubectl proxy --address=<span class="string">'0.0.0.0'</span> --accept-hosts=<span class="string">'^*$'</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Kubernetes-Dashboard-for-public"><a href="#Kubernetes-Dashboard-for-public" class="headerlink" title="Kubernetes Dashboard for public"></a>Kubernetes Dashboard for public</h2><h3 id="Create-certificates"><a href="#Create-certificates" class="headerlink" title="Create certificates"></a>Create certificates</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="variable">$HOME</span>/certs</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/certs</span><br><span class="line">openssl genrsa -out dashboard.key 2048</span><br><span class="line">openssl rsa -<span class="keyword">in</span> dashboard.key -out dashboard.key</span><br><span class="line">openssl req -sha256 -new -key dashboard.key -out dashboard.csr -subj <span class="string">'/CN=localhost'</span></span><br><span class="line">openssl x509 -req -sha256 -days 365 -<span class="keyword">in</span> dashboard.csr -signkey dashboard.key -out dashboard.crt</span><br><span class="line">kubectl -n kube-system create secret generic kubernetes-dashboard-certs --from-file=<span class="variable">$HOME</span>/certs</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Install-dashboard-1"><a href="#Install-dashboard-1" class="headerlink" title="Install dashboard"></a>Install dashboard</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment">#Wait and check if the replica set is fulfilled</span></span><br><span class="line">kubectl -n kube-system get rs</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-PSP"><a href="#Create-PSP" class="headerlink" title="Create PSP"></a>Create PSP</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system create -f - <<EOF</span><br><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">kind: PodSecurityPolicy</span><br><span class="line">metadata:</span><br><span class="line">  name: dashboard</span><br><span class="line">spec:</span><br><span class="line">  privileged: <span class="literal">false</span></span><br><span class="line">  seLinux:</span><br><span class="line">    rule: RunAsAny</span><br><span class="line">  supplementalGroups:</span><br><span class="line">    rule: RunAsAny</span><br><span class="line">  runAsUser:</span><br><span class="line">    rule: RunAsAny</span><br><span class="line">  fsGroup:</span><br><span class="line">    rule: RunAsAny</span><br><span class="line">  volumes:</span><br><span class="line">  - <span class="string">'*'</span></span><br><span class="line">EOF</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-role"><a href="#Create-role" class="headerlink" title="Create role"></a>Create role</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system create role psp:dashboard --verb=use --resource=podsecuritypolicy --resource-name=dashboard</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Bind-role-and-account"><a href="#Bind-role-and-account" class="headerlink" title="Bind role and account"></a>Bind role and account</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system create rolebinding kubernetes-dashboard-policy --role=psp:dashboard --serviceaccount=kube-system:kubernetes-dashboard</span><br><span class="line">kubectl --as=system:serviceaccount:kube-system:kubernetes-dashboard -n kube-system auth can-i use podsecuritypolicy/dashboard</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Expose-service-on-NodePort"><a href="#Expose-service-on-NodePort" class="headerlink" title="Expose service on NodePort"></a>Expose service on NodePort</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Edit the kubernetes-dashboard service and change the following options:</span></span><br><span class="line"><span class="comment">#   spec.type from ClusterIP to NodePort</span></span><br><span class="line">*   spec.ports[0].nodePort from 32641 to whatever port you want it to be exposed on</span><br><span class="line">kubectl -n kube-system edit service kubernetes-dashboard</span><br><span class="line">kubectl -n kube-system get services</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Navigate-the-dashboard-publicly"><a href="#Navigate-the-dashboard-publicly" class="headerlink" title="Navigate the dashboard publicly"></a>Navigate the dashboard publicly</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Configure the dns in the domain provider console</span></span><br><span class="line">https://[domain]:30104/</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Expose-Traefik-ingress"><a href="#Expose-Traefik-ingress" class="headerlink" title="Expose Traefik ingress"></a>Expose Traefik ingress</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">dashboard-ingress</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  rules:</span></span><br><span class="line"><span class="attr">    - host:</span> <span class="string">[domain]</span></span><br><span class="line"><span class="attr">      http:</span></span><br><span class="line"><span class="attr">        paths:</span></span><br><span class="line"><span class="attr">          - path:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">            backend:</span></span><br><span class="line"><span class="attr">              serviceName:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line"><span class="attr">              servicePort:</span> <span class="number">443</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Scenarios"><a href="#Scenarios" class="headerlink" title="Scenarios"></a>Scenarios</h2><h3 id="Run-a-busybox-container"><a href="#Run-a-busybox-container" class="headerlink" title="Run a busybox container"></a>Run a busybox container</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run -i --tty --image busybox <span class="built_in">test</span> --restart=Never --rm /bin/sh</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="User-docker-hub-secret-in-pods"><a href="#User-docker-hub-secret-in-pods" class="headerlink" title="User docker hub secret in pods"></a>User docker hub secret in pods</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#docker login and get the file: ~/.docker/config.json</span></span><br><span class="line">docker login</span><br><span class="line">kubectl create secret generic docker-hub --from-file=.dockerconfigjson=~/.docker/config.json --<span class="built_in">type</span>=kubernetes.io/dockerconfigjson --namespace=<span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Create a Pod that uses the Secret like bellow</span></span><br><span class="line">kind: Deployment</span><br><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">metadata:</span><br><span class="line">  name: <span class="built_in">test</span>-server</span><br><span class="line">  namespace: <span class="built_in">test</span></span><br><span class="line">spec:</span><br><span class="line">  replicas: 2</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: <span class="built_in">test</span>-server</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: <span class="built_in">test</span>-server</span><br><span class="line">          image: demo/<span class="built_in">test</span>-server</span><br><span class="line">      imagePullSecrets:</span><br><span class="line">        - name: docker-hub</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Default-storage-class"><a href="#Default-storage-class" class="headerlink" title="Default storage class"></a>Default storage class</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">standard</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">kubernetes.io/aws-ebs</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">gp2</span></span><br><span class="line"><span class="attr">reclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line"><span class="attr">mountOptions:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">debug</span></span><br><span class="line"><span class="attr">volumeBindingMode:</span> <span class="string">Immediate</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Create-MongoDB-with-two-DB-auth-settings"><a href="#Create-MongoDB-with-two-DB-auth-settings" class="headerlink" title="Create MongoDB with two DB auth settings"></a>Create MongoDB with two DB auth settings</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">dev-mongodb</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">dev-mongodb</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      hostname:</span> <span class="string">mongodb</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">dev-mongodb</span></span><br><span class="line"><span class="attr">          image:</span> <span class="string">hustakin/mongo-auth2:latest</span></span><br><span class="line"><span class="attr">          env:</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_ADMIN_USER</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">admin</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_ADMIN_PASS</span></span><br><span class="line"><span class="attr">              value:</span> <span class="number">111</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP1_DATABASE</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">db1</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP1_USER</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">user1</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP1_PASS</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">pass1</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP2_DATABASE</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">db2</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP2_USER</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">user2</span></span><br><span class="line"><span class="attr">            - name:</span> <span class="string">MONGODB_APP2_PASS</span></span><br><span class="line"><span class="attr">              value:</span> <span class="string">pass2</span></span><br><span class="line"><span class="attr">          ports:</span></span><br><span class="line"><span class="attr">            - containerPort:</span> <span class="number">27017</span></span><br><span class="line"><span class="attr">              protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">              name:</span> <span class="string">db</span></span><br><span class="line"><span class="attr">          volumeMounts:</span></span><br><span class="line"><span class="attr">            - mountPath:</span> <span class="string">/data/db</span></span><br><span class="line"><span class="attr">              name:</span> <span class="string">dev-mongo-persistent-storage</span></span><br><span class="line"><span class="attr">          livenessProbe:</span></span><br><span class="line"><span class="attr">            exec:</span></span><br><span class="line"><span class="attr">              command:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">mongo</span></span><br><span class="line"><span class="bullet">                -</span> <span class="bullet">--eval</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">"db.adminCommand('ping')"</span></span><br><span class="line"><span class="attr">            failureThreshold:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">            periodSeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">            successThreshold:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">            timeoutSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">          readinessProbe:</span></span><br><span class="line"><span class="attr">            exec:</span></span><br><span class="line"><span class="attr">              command:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">mongo</span></span><br><span class="line"><span class="bullet">                -</span> <span class="bullet">--eval</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">"db.adminCommand('ping')"</span></span><br><span class="line"><span class="attr">            failureThreshold:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">            periodSeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">            successThreshold:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">            timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      imagePullSecrets:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">docker-hub</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">dev-mongo-persistent-storage</span></span><br><span class="line"><span class="attr">          persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">            claimName:</span> <span class="string">dev-local-data-pvc</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">mongodb</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mongodb</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">test</span></span><br><span class="line"><span class="attr">  annotations:</span></span><br><span class="line">    <span class="string">traefik.ingress.kubernetes.io/affinity:</span> <span class="string">"true"</span></span><br><span class="line">    <span class="string">traefik.ingress.kubernetes.io/session-cookie-name:</span> <span class="string">"sticky"</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">ClusterIP</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">    - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">27017</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">db</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">dev-mongodb</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">dev-local-data-pv</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  capacity:</span></span><br><span class="line"><span class="attr">    storage:</span> <span class="number">50</span><span class="string">Gi</span></span><br><span class="line"><span class="attr">  accessModes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ReadWriteOnce</span></span><br><span class="line"><span class="attr">  persistentVolumeReclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line"><span class="attr">  storageClassName:</span> <span class="string">local-storage</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    path:</span> <span class="string">/mnt/data</span></span><br><span class="line"><span class="attr">  nodeAffinity:</span></span><br><span class="line"><span class="attr">    required:</span></span><br><span class="line"><span class="attr">      nodeSelectorTerms:</span></span><br><span class="line"><span class="attr">        - matchExpressions:</span></span><br><span class="line"><span class="attr">            - key:</span> <span class="string">node</span></span><br><span class="line"><span class="attr">              operator:</span> <span class="string">In</span></span><br><span class="line"><span class="attr">              values:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">db</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">dev-local-data-pvc</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  accessModes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ReadWriteOnce</span></span><br><span class="line"><span class="attr">  storageClassName:</span> <span class="string">local-storage</span></span><br><span class="line"><span class="attr">  resources:</span></span><br><span class="line"><span class="attr">    requests:</span></span><br><span class="line"><span class="attr">      storage:</span> <span class="number">50</span><span class="string">Gi</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Useful-commands"><a href="#Useful-commands" class="headerlink" title="Useful commands"></a>Useful commands</h2><table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create or update</td>
+<td>1. <code>kubectl create -f pod.yml</code> <br>2. <code>kubectl apply -f pod.yml</code></td>
+</tr>
+<tr>
+<td>Sort top pods in all namespace</td>
+<td><code>kubectl top pod -A &#124; sort -rnk 4</code></td>
+</tr>
+<tr>
+<td>Add a label to the specific node</td>
+<td><code>kubectl label nodes [node-name] [label]=[value]</code></td>
+</tr>
+<tr>
+<td>List remaining resources in a namespace</td>
+<td><code>kubectl api-resources --verbs=list --namespaced -o name &#124; xargs -n 1 kubectl get --show-kind --ignore-not-found -n monitoring</code></td>
+</tr>
+<tr>
+<td>Delete namespace forcely</td>
+<td><code>kubectl delete ns heptio-sonobuoy --grace-period=0 --force</code></td>
+</tr>
+<tr>
+<td>Copy the file in a pod to local</td>
+<td><code>kubectl cp [pod-name]:/heap_dump.hprof heap_dump.hprof -n test</code></td>
+</tr>
+<tr>
+<td>Check the k8s logs</td>
+<td><code>journalctl -f -u kubelet</code></td>
+</tr>
+<tr>
+<td>Delete all evicted pods from all namespaces</td>
+<td><code>kubectl get pods --all-namespaces &#124; grep Evicted &#124; awk '{print $2 " --namespace=" $1}' &#124; xargs kubectl delete pod</code></td>
+</tr>
+<tr>
+<td>Delete all containers in ImagePullBackOff state from all namespaces</td>
+<td><code>kubectl get pods --all-namespaces &#124; grep 'ImagePullBackOff' &#124; awk '{print $2 " --namespace=" $1}' &#124; xargs kubectl delete pod</code></td>
+</tr>
+<tr>
+<td>Delete all containers in ImagePullBackOff or ErrImagePull or Evicted state from all namespaces</td>
+<td><code>kubectl get pods --all-namespaces &#124; grep -E 'ImagePullBackOff&#124;ErrImagePull&#124;Evicted' &#124; awk '{print $2 " --namespace=" $1}' &#124; xargs kubectl delete pod</code></td>
+</tr>
+</tbody></table>
+</body></html>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Kubernetes/" rel="tag"><i class="fa fa-tag"></i> Kubernetes</a>
+            
+              <a href="/tags/Traefik/" rel="tag"><i class="fa fa-tag"></i> Traefik</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/06/amazon-ec2-101/" rel="next" title="Amazon EC2 101">
+                  <i class="fa fa-chevron-left"></i> Amazon EC2 101
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/05/23/setup-jenkins-pipeline-in-kubernetes/" rel="prev" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes">
+                  Setup Jenkins Pipeline and Blue Ocean in Kubernetes <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="Frankie Fan">
+  <p class="site-author-name" itemprop="name">Frankie Fan</p>
+  <div class="site-description motion-element" itemprop="description">Live for die and let it go.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/hustakin" title="GitHub &rarr; https://github.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:hustakin@gmail.com" title="E-Mail &rarr; mailto:hustakin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.linkedin.com/in/hustakin/" title="LinkedIn &rarr; https://www.linkedin.com/in/hustakin/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://twitter.com/hustakin" title="Twitter &rarr; https://twitter.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.facebook.com/hustakin" title="FB Page &rarr; https://www.facebook.com/hustakin" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-on-linux-cluster"><span class="nav-number">1.</span> <span class="nav-text">Install on linux cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-kubernetes"><span class="nav-number">1.1.</span> <span class="nav-text">Compile kubernetes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-master-node"><span class="nav-number">1.2.</span> <span class="nav-text">Install master node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-slave-node"><span class="nav-number">1.3.</span> <span class="nav-text">Install slave node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-metrics-server"><span class="nav-number">1.4.</span> <span class="nav-text">Install metrics server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-prometheus"><span class="nav-number">1.5.</span> <span class="nav-text">Install prometheus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-helm"><span class="nav-number">1.6.</span> <span class="nav-text">Install helm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Traefik"><span class="nav-number">2.</span> <span class="nav-text">Traefik</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Traefik-toml"><span class="nav-number">2.1.</span> <span class="nav-text">Create Traefik toml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Traefik-yaml"><span class="nav-number">2.2.</span> <span class="nav-text">Create Traefik yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Traefik-rbac"><span class="nav-number">2.3.</span> <span class="nav-text">Create Traefik rbac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Traefik-web-ui-ingress"><span class="nav-number">2.4.</span> <span class="nav-text">Create Traefik web-ui ingress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Traefik-HTTPS-cert"><span class="nav-number">2.5.</span> <span class="nav-text">Create Traefik HTTPS cert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renew-Traefik-HTTPS-cert"><span class="nav-number">2.6.</span> <span class="nav-text">Renew Traefik HTTPS cert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-Traefik-toml"><span class="nav-number">2.7.</span> <span class="nav-text">Update Traefik.toml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernetes-Dashboard-for-local"><span class="nav-number">3.</span> <span class="nav-text">Kubernetes Dashboard for local</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-service-account"><span class="nav-number">3.1.</span> <span class="nav-text">Create service account</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-role-binding"><span class="nav-number">3.2.</span> <span class="nav-text">Create role binding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apply-yaml"><span class="nav-number">3.3.</span> <span class="nav-text">Apply yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrieve-login-token"><span class="nav-number">3.4.</span> <span class="nav-text">Retrieve login token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-dashboard"><span class="nav-number">3.5.</span> <span class="nav-text">Install dashboard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernetes-Dashboard-for-public"><span class="nav-number">4.</span> <span class="nav-text">Kubernetes Dashboard for public</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-certificates"><span class="nav-number">4.1.</span> <span class="nav-text">Create certificates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-dashboard-1"><span class="nav-number">4.2.</span> <span class="nav-text">Install dashboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-PSP"><span class="nav-number">4.3.</span> <span class="nav-text">Create PSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-role"><span class="nav-number">4.4.</span> <span class="nav-text">Create role</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bind-role-and-account"><span class="nav-number">4.5.</span> <span class="nav-text">Bind role and account</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expose-service-on-NodePort"><span class="nav-number">4.6.</span> <span class="nav-text">Expose service on NodePort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigate-the-dashboard-publicly"><span class="nav-number">4.7.</span> <span class="nav-text">Navigate the dashboard publicly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expose-Traefik-ingress"><span class="nav-number">4.8.</span> <span class="nav-text">Expose Traefik ingress</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scenarios"><span class="nav-number">5.</span> <span class="nav-text">Scenarios</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-a-busybox-container"><span class="nav-number">5.1.</span> <span class="nav-text">Run a busybox container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-docker-hub-secret-in-pods"><span class="nav-number">5.2.</span> <span class="nav-text">User docker hub secret in pods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-storage-class"><span class="nav-number">5.3.</span> <span class="nav-text">Default storage class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-MongoDB-with-two-DB-auth-settings"><span class="nav-number">5.4.</span> <span class="nav-text">Create MongoDB with two DB auth settings</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Useful-commands"><span class="nav-number">6.</span> <span class="nav-text">Useful commands</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frankie Fan</span>
+</div>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon"><i class="fa fa-user"></i></span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
