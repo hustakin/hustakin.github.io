@@ -1,0 +1,842 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/keycloak-traefik-k8s/">
+      
+      
+        <meta name="author" content="Frankie Fan">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Play around with Keycloak in k8s</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-146443611-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#single-sign-on" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Frankie Fan's Memos
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Play around with Keycloak in k8s
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Frankie Fan's Memos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      DevOps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
+      Important linux commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+      Important Docker commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+      Getting started with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+      Amazon EC2 101
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practice
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practice
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+      Adding beautiful badges into the markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+      Setup Jenkins Pipeline and Blue Ocean in Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+      Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+      Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Play around with Keycloak in k8s
+      </label>
+    
+    <a href="./" title="Play around with Keycloak in k8s" class="md-nav__link md-nav__link--active">
+      Play around with Keycloak in k8s
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#single-sign-on" title="Single Sign-On" class="md-nav__link">
+    Single Sign-On
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keycloak" title="Keycloak" class="md-nav__link">
+    Keycloak
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keycloak-gatekeeper" title="Keycloak Gatekeeper" class="md-nav__link">
+    Keycloak Gatekeeper
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stakater-proxy-injector" title="Stakater Proxy Injector" class="md-nav__link">
+    Stakater Proxy Injector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-kubernetes-cluster-with-traefik" title="Steps in Kubernetes cluster with Traefik" class="md-nav__link">
+    Steps in Kubernetes cluster with Traefik
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keycloak-chart" title="Keycloak chart" class="md-nav__link">
+    Keycloak chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traefik-ingress" title="Traefik ingress" class="md-nav__link">
+    Traefik ingress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+      Developing based on GeoServer restful api
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+      Serve raster tiles in GeoServer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+      Build Ceph and Kubernetes based distributed file storage system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tools 101
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tools 101
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+      Hexo get started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+      Getting started on mitmproxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Life Experience
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Life Experience
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+      How to rent a house in Australia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+      International money transfer from CommonWealth bank to China
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+      A detailed list for updating address when moving
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#single-sign-on" title="Single Sign-On" class="md-nav__link">
+    Single Sign-On
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keycloak" title="Keycloak" class="md-nav__link">
+    Keycloak
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keycloak-gatekeeper" title="Keycloak Gatekeeper" class="md-nav__link">
+    Keycloak Gatekeeper
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stakater-proxy-injector" title="Stakater Proxy Injector" class="md-nav__link">
+    Stakater Proxy Injector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-in-kubernetes-cluster-with-traefik" title="Steps in Kubernetes cluster with Traefik" class="md-nav__link">
+    Steps in Kubernetes cluster with Traefik
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keycloak-chart" title="Keycloak chart" class="md-nav__link">
+    Keycloak chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traefik-ingress" title="Traefik ingress" class="md-nav__link">
+    Traefik ingress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Play around with Keycloak in k8s</h1>
+                
+                <p>A DevOps team may be accessing multiple applications and tools in a single product environment in support of their DevOps processes such as CI/CD server, Centralized log, Kubernetes dashboard, Monitoring software, Artifact repositories, Admin tools, etc. All of these tools will require authentication mechanisms for security purposes, and for a user to maintain and remember their authentication credentials on so many softwares can quickly become cumbersome. And in the event of lost credentials, it can be a tedious process for both user and admins to recover the required credentials.</p>
+<p><img alt="Keycloak" src="/imgs/keycloak-map.png" />
+<!-- more --></p>
+<p>Instead of having individual authentication on various tools, a more effective strategy is to use single sign-on for all tools, i.e. a centralized authentication mechanism that can allow or reject access to a set of tools based on a single set of credentials per user. Additionally some tools may not have authentication built into them at all, and may be reliant on an external authentication server in any case. An external authentication server with single sign-on capability can therefore prove to be the way to go in such a situation.</p>
+<h2 id="single-sign-on">Single Sign-On</h2>
+<p>Single Sign-On (SSO) allows users to log in using a single set of credentials, e.g. username and password, so they can easily access a set of applications. SSO. SSO saves time and energy for users because they do not have to repeatedly log into multiple applications. This provides a smooth user experience, and makes it less likely to have access problems because of lost or forgotten credentials, locked out accounts, etc.</p>
+<h2 id="keycloak">Keycloak</h2>
+<p>Keycloak is an Open Source Identity and Access Management solution. It provides an easy way to add authentication including Single Sign-on to applications and services with minimum effort. Keycloak handles persistence and user authentication all out of the box.</p>
+<p>Instead of having to login to individual applications, users authenticate with Keycloak rather than individual applications. This means that the individual applications don't have to implement their own login forms, authentication, and storage of users and sessions. Once logged-in to Keycloak, users don't have to login again to access a different application. And similarly once logged-out from Keycloak, users don't have to log out of individual applications. Enabling login with social networks is also easy. The configuration for these can be added via Keycloak's admin console. No code or changes are required to individual application</p>
+<p>Keycloak supports OpenID Connect and SAML protocols. OpenID Connect (OIDC) is an extension of the OAuth 2 authentication protocol. While OAuth 2.0 is a framework for building authorization protocols, and OIDC is the full implementation of a authentication and authorization protocol. SAML 2.0 is similar to OIDC but a lot older and consequently more mature. It has its roots in SOAP and works by exchanging XML documents between the authentication server and the application, so it tends to be a bit more verbose than OIDC. In most cases OIDC is recommended by Keycloak.</p>
+<h2 id="keycloak-gatekeeper">Keycloak Gatekeeper</h2>
+<p>Keycloak Gatekeeper is an adapter which integrates with the Keycloak authentication service. We deploy it on a per-application instance basis. So usually this will be a sidecar container deployed with the application container on the kubernetes pod. We configure the kubernetes service of the application so that it points to the gatekeeper rather than the application itself, so that the gatekeeper can act as a proxy for incoming requests. The gatekeeper then verifies from the Keycloak server if an active authenticated session exists or not. If not, it redirects the client to the Keycloak login page. If the session exists, it allows the incoming request to pass through to the application container.
+<img alt="Keycloak gatekeeper" src="/imgs/keycloak-gatekeeper.png" /></p>
+<p>Using the Keycloak Gatekeeper allows us to have zero authentication configuration within the application itself. The session verification, redirection to Keycloak in case of an invalid session, and pass through to the application in case of a valid session, are all handled by the gatekeeper.</p>
+<h2 id="stakater-proxy-injector">Stakater Proxy Injector</h2>
+<p>Deploying a sidecar container for Keycloak Gatekeeper with all our applications can be a hassle. So we want to automatically inject a keycloak gatekeeper container in a pod, for any deployment that requires to connect to keycloak, instead of manually adding a sidecar container with each deployment. This Proxy Injector controller will continuously watch deployments in specific or all namespaces, and automatically add a sidecar container for keycloak gatekeeper. Configuration for the keycloak gatekeeper is done through annotations of the respective deployment or with ConfigMap of the ProxyInjector.</p>
+<h2 id="steps-in-kubernetes-cluster-with-traefik">Steps in Kubernetes cluster with Traefik</h2>
+<h3 id="keycloak-chart">Keycloak chart</h3>
+<p>Install Keycloak chart by <a href="https://github.com/codecentric/helm-charts/tree/master/charts/keycloak">helm</a>
+<div class="codehilite"><pre><span></span>helm repo add codecentric https://codecentric.github.io/helm-charts
+helm install --name keycloak codecentric/keycloak
+<span class="c1"># helm list</span>
+<span class="c1"># helm delete &lt;name&gt; (delete the chart)</span>
+</pre></div>
+<img alt="Chart install result" src="/imgs/helm-result.png" /></p>
+<p>Remember the username and password from the result.</p>
+<h3 id="traefik-ingress">Traefik ingress</h3>
+<p>Create the keycloak ingress yaml to expose the keycloak web, and specify the sub-domain for it
+<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keycloak-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jx</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">rules</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;sub-domain&gt;</span>
+      <span class="nt">http</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+            <span class="nt">backend</span><span class="p">:</span>
+              <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keycloak-http</span>
+              <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+</pre></div>
+Open the exposed url
+<img alt="Keycloak launch" src="/imgs/keycloak-launch.png" /></p>
+<p>Enter the administration console and use the previous username and password to login.</p>
+<p>Create a user and specify the username and reset the password to set the user password to the new one you specified.
+<img alt="Keycloak create user" src="/imgs/keycloak-create-user.png" /></p>
+<p>Create a client which is the application you want to inject authentication in front of.
+<img alt="Keycloak create client" src="/imgs/keycloak-create-client.png" /></p>
+<p>Modify the access type to the confidential and save.
+<img alt="Keycloak modify access type" src="/imgs/keycloak-modify-access-type.png" /></p>
+<p>Create a client scope.
+<img alt="Keycloak create client scope" src="/imgs/keycloak-create-client-scopes.png" /></p>
+<p>Click the Mappers and create a mapper with the Audience type.
+<img alt="Keycloak create mapper" src="/imgs/keycloak-create-mapper.png" /></p>
+<p>Enter the new client and click the Client Scopes, move the available new scope to selected.
+<img alt="Keycloak apply client scope" src="/imgs/keycloak-apply-client-scope.png" /></p>
+<p>You can add a realm other than Master Realm at any time.
+<img alt="Keycloak add realm" src="/imgs/keycloak-create-realm.png" /></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduce Rollbar and Slack for realtime exception alerts
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Developing based on GeoServer restful api
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Frankie Fan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

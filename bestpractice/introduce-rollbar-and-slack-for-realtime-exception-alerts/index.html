@@ -1,0 +1,1007 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/">
+      
+      
+        <meta name="author" content="Frankie Fan">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Introduce Rollbar and Slack for realtime exception alerts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-146443611-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#connect-rollbar-with-github" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Frankie Fan's Memos
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Introduce Rollbar and Slack for realtime exception alerts
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Frankie Fan's Memos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      DevOps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
+      Important linux commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+      Important Docker commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+      Getting started with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+      Amazon EC2 101
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practice
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practice
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+      Adding beautiful badges into the markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+      Setup Jenkins Pipeline and Blue Ocean in Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+      Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Introduce Rollbar and Slack for realtime exception alerts
+      </label>
+    
+    <a href="./" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link md-nav__link--active">
+      Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connect-rollbar-with-github" title="Connect Rollbar with Github" class="md-nav__link">
+    Connect Rollbar with Github
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-project" title="Create a project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-a-notifier" title="Integrate a notifier" class="md-nav__link">
+    Integrate a notifier
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-the-data" title="Wait the data" class="md-nav__link">
+    Wait the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-source-control" title="Integrate source control" class="md-nav__link">
+    Integrate source control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-integration" title="Project integration" class="md-nav__link">
+    Project integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logback-configuration" title="Logback configuration" class="md-nav__link">
+    Logback configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-integration-with-rollbar" title="Test integration with Rollbar" class="md-nav__link">
+    Test integration with Rollbar
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-dashboard-status" title="Check dashboard status" class="md-nav__link">
+    Check dashboard status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-rollbar-notification-with-slack" title="Integrate Rollbar notification with Slack" class="md-nav__link">
+    Integrate Rollbar notification with Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-rollbar-app-in-slack" title="Add Rollbar app in Slack" class="md-nav__link">
+    Add Rollbar app in Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-slack-integration" title="Enable Slack integration" class="md-nav__link">
+    Enable Slack integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slack-channel-selection" title="Slack channel selection" class="md-nav__link">
+    Slack channel selection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-slack-app-rules" title="Configure Slack app rules" class="md-nav__link">
+    Configure Slack app rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-integration-with-slack" title="Test integration with Slack" class="md-nav__link">
+    Test integration with Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slack-channel-settings" title="Slack channel settings" class="md-nav__link">
+    Slack channel settings
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+      Play around with Keycloak in k8s
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+      Developing based on GeoServer restful api
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+      Serve raster tiles in GeoServer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+      Build Ceph and Kubernetes based distributed file storage system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tools 101
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tools 101
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+      Hexo get started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+      Getting started on mitmproxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Life Experience
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Life Experience
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+      How to rent a house in Australia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+      International money transfer from CommonWealth bank to China
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+      A detailed list for updating address when moving
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connect-rollbar-with-github" title="Connect Rollbar with Github" class="md-nav__link">
+    Connect Rollbar with Github
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-project" title="Create a project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-a-notifier" title="Integrate a notifier" class="md-nav__link">
+    Integrate a notifier
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-the-data" title="Wait the data" class="md-nav__link">
+    Wait the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-source-control" title="Integrate source control" class="md-nav__link">
+    Integrate source control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-integration" title="Project integration" class="md-nav__link">
+    Project integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logback-configuration" title="Logback configuration" class="md-nav__link">
+    Logback configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-integration-with-rollbar" title="Test integration with Rollbar" class="md-nav__link">
+    Test integration with Rollbar
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-dashboard-status" title="Check dashboard status" class="md-nav__link">
+    Check dashboard status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-rollbar-notification-with-slack" title="Integrate Rollbar notification with Slack" class="md-nav__link">
+    Integrate Rollbar notification with Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-rollbar-app-in-slack" title="Add Rollbar app in Slack" class="md-nav__link">
+    Add Rollbar app in Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-slack-integration" title="Enable Slack integration" class="md-nav__link">
+    Enable Slack integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slack-channel-selection" title="Slack channel selection" class="md-nav__link">
+    Slack channel selection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-slack-app-rules" title="Configure Slack app rules" class="md-nav__link">
+    Configure Slack app rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-integration-with-slack" title="Test integration with Slack" class="md-nav__link">
+    Test integration with Slack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slack-channel-settings" title="Slack channel settings" class="md-nav__link">
+    Slack channel settings
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Introduce Rollbar and Slack for realtime exception alerts</h1>
+                
+                <p>Quickly responding to new, reactivated, and otherwise important exceptions is a critical part of adopting continuous delivery and other DevOps best practices.</p>
+<p><a href="https://rollbar.com">Rollbar</a> provides code version-specific dashboards and a live feed for proactively monitoring for exceptions during a deploy, but for those exceptions that happen when you aren't actively watching Rollbar, our <a href="https://slack.com">Slack</a> integration is the most popular way to get real-time alerts.
+<!-- more --></p>
+<h3 id="connect-rollbar-with-github">Connect Rollbar with Github</h3>
+<p>Log in Rollbar with the "Log in with GitHub" button, and enables the GitHub integration settings for all your projects. Get started by going to your account settings. Navigate to the "Connected Accounts" and Connect with GitHub.
+<img alt="Connect Rollbar with Github" src="/imgs/connect-github.png" /></p>
+<h3 id="create-a-project">Create a project</h3>
+<p>Click the "create new project" on the top dropdown list in Rollbar.
+<img alt="Create a project" src="/imgs/create-proj.png" /></p>
+<p>Create the project from a Github repo directly or specify the new project information to create.
+<img alt="Create a project" src="/imgs/create-project.png" /></p>
+<h3 id="integrate-a-notifier">Integrate a notifier</h3>
+<p>Select the platform your project is based on. Here I use Java and continue.
+<img alt="Integrate a notifier" src="/imgs/integrate-a-notifier.png" /></p>
+<h3 id="wait-the-data">Wait the data</h3>
+<p>Now we can see the tutorial for your platform and the status for it is waiting.
+<img alt="Wait the data" src="/imgs/waiting-for-data.png" /></p>
+<h3 id="integrate-source-control">Integrate source control</h3>
+<p>Click the 3rd step to connect source control and select Github, then input the information for your project.
+<img alt="Integrate source control" src="/imgs/integrate-source-control.png" /></p>
+<h3 id="project-integration">Project integration</h3>
+<p>Follow the tutorial on the 1st step page. Add the Rollbar related maven dependencies into your project. Here I add logback dependency into it as well because I'll use logback to send exceptions to Rollbar.
+<div class="codehilite"><pre><span></span><span class="c">&lt;!-- Rollbar --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.rollbar<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>[1.0,)<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>rollbar-java<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.rollbar<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>rollbar-logback<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.3.1<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div></p>
+<h3 id="logback-configuration">Logback configuration</h3>
+<p>Here is the configuration of logback file. Please fill in the access token of your Rollbar into the appender and specify your environment name. Use filter in the appender is because we want to log the exception stack into both the file and Rollbar.
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;configuration</span> <span class="na">scan=</span><span class="s">&quot;true&quot;</span> <span class="na">scanPeriod=</span><span class="s">&quot;60 seconds&quot;</span> <span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;contextName&gt;</span>logback<span class="nt">&lt;/contextName&gt;</span>
+
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">&quot;ROLLBAR&quot;</span> <span class="na">class=</span><span class="s">&quot;com.rollbar.logback.RollbarAppender&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;accessToken&gt;</span>ec6e37c277c940dcb5d4bcf879fa425c<span class="nt">&lt;/accessToken&gt;</span>
+        <span class="nt">&lt;environment&gt;</span>Dev<span class="nt">&lt;/environment&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;level&gt;</span>warn<span class="nt">&lt;/level&gt;</span>
+        <span class="nt">&lt;/filter&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">&quot;console&quot;</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;encoder&gt;</span>
+            <span class="nt">&lt;pattern&gt;</span>%date %level [%thread] %-5level %logger{36} [%file:%line] - %msg%n<span class="nt">&lt;/pattern&gt;</span>
+        <span class="nt">&lt;/encoder&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">&quot;file&quot;</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;rollingPolicy</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;fileNamePattern&gt;</span>logs/agriculture.%d{yyyy-MM-dd}.log<span class="nt">&lt;/fileNamePattern&gt;</span>
+            <span class="nt">&lt;maxHistory&gt;</span>1<span class="nt">&lt;/maxHistory&gt;</span>
+            <span class="nt">&lt;totalSizeCap&gt;</span>1GB<span class="nt">&lt;/totalSizeCap&gt;</span>
+        <span class="nt">&lt;/rollingPolicy&gt;</span>
+        <span class="nt">&lt;encoder&gt;</span>
+            <span class="nt">&lt;pattern&gt;</span>%date %level [%thread] %-5level %logger{36} [%file:%line] - %msg%n<span class="nt">&lt;/pattern&gt;</span>
+        <span class="nt">&lt;/encoder&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;root</span> <span class="na">level=</span><span class="s">&quot;info&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">&quot;console&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">&quot;file&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">&quot;ROLLBAR&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/root&gt;</span>
+
+    <span class="nt">&lt;shutdownHook</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.hook.DelayingShutdownHook&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</pre></div></p>
+<p>The access token can be copied from the the settings of the Rollbar project.
+<img alt="Get token" src="/imgs/get-token.png" /></p>
+<h3 id="test-integration-with-rollbar">Test integration with Rollbar</h3>
+<p>Write a unit test and run to see the integration status.
+<div class="codehilite"><pre><span></span><span class="n">org</span><span class="o">.</span><span class="na">slf4j</span><span class="o">.</span><span class="na">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;This is a test for Rollbar.&quot;</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;error&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div></p>
+<h3 id="check-dashboard-status">Check dashboard status</h3>
+<p>Wait on the Integrate a Notifier step page or click the Dashboard link on the top bar. You will see the new error coming after the unit test is executed. Until now we've integrated exceptions alert into the Rollbar, the next step will be integrated Rollbar with Slack.
+<img alt="Dashboard status" src="/imgs/dashboard-status.png" /></p>
+<h3 id="integrate-rollbar-notification-with-slack">Integrate Rollbar notification with Slack</h3>
+<p>Go to the Settings of the Rollbar project and click the Notifications menuitem. Find the Slack app in the available channels
+<img alt="Integration notification" src="/imgs/integration-notification.png" /></p>
+<h3 id="add-rollbar-app-in-slack">Add Rollbar app in Slack</h3>
+<p>Go to your Slack workspace and add Rollbar app.
+<img alt="Add Rollbar app in Slack" src="/imgs/add-rollbar-in-slack.png" />
+<img alt="Add Rollbar app in Slack" src="/imgs/slack-rollbar-settings.png" /></p>
+<h3 id="enable-slack-integration">Enable Slack integration</h3>
+<p>Click the Slack app in the available channels and select your access token and enable the Slack integration.
+<img alt="Enable Slack integration" src="/imgs/enable-slack-notification.png" /></p>
+<h3 id="slack-channel-selection">Slack channel selection</h3>
+<p>Select the channel you will notify exceptions in your Slack workspace. The dropdown here will list all the channels in your Slack workspace.
+<img alt="Slack channel selection" src="/imgs/select-channel.png" /></p>
+<h3 id="configure-slack-app-rules">Configure Slack app rules</h3>
+<p>You can configure the rules of the Slack notifications as your need. For example, I add the every occurrence rule here in order to notify every error to the Slack.
+<img alt="Configure Slack app rules" src="/imgs/configure-slack-rule.png" />
+<img alt="Create a rule" src="/imgs/create-rule.png" /></p>
+<h3 id="test-integration-with-slack">Test integration with Slack</h3>
+<p>Run the unit test again to see the integration status with Slack. Go into the channel you configured in Rollbar and you will see the coming error notification.
+<img alt="Test integration with Slack" src="/imgs/test-slack-integration.png" /></p>
+<h3 id="slack-channel-settings">Slack channel settings</h3>
+<p>Remember to join the channel in order to get notified. Then configure the notification preferences to include mobile. You can install the Slack app in your mobile and login your workspace. Run the unit test again and you will see notifications on your mobile as soon as exceptions happen.
+<img alt="Slack channel settings" src="/imgs/mobile-notification.jpg" /></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Continuous Integration with Jenkins and Docker
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Play around with Keycloak in k8s
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Frankie Fan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

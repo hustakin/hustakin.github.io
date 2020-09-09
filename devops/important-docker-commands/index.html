@@ -1,0 +1,1232 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://hustakin.github.io/devops/important-docker-commands/">
+      
+      
+        <meta name="author" content="Frankie Fan">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Important Docker commands</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-146443611-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#install" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Frankie Fan's Memos
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Important Docker commands
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Frankie Fan's Memos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      DevOps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../important-linux-commands/" title="Important linux commands" class="md-nav__link">
+      Important linux commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Important Docker commands
+      </label>
+    
+    <a href="./" title="Important Docker commands" class="md-nav__link md-nav__link--active">
+      Important Docker commands
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" title="Install" class="md-nav__link">
+    Install
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-docker" title="Install Docker" class="md-nav__link">
+    Install Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-docker-machine" title="Install Docker-machine" class="md-nav__link">
+    Install Docker-machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-docker-compose" title="Install Docker-compose" class="md-nav__link">
+    Install Docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-fig" title="Install Fig" class="md-nav__link">
+    Install Fig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-shipyard" title="Install Shipyard" class="md-nav__link">
+    Install Shipyard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-rancher" title="Install Rancher" class="md-nav__link">
+    Install Rancher
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-containers" title="Docker containers" class="md-nav__link">
+    Docker containers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsenter" title="nsenter" class="md-nav__link">
+    nsenter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vsftpd" title="VSFTPD" class="md-nav__link">
+    VSFTPD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" title="MySQL" class="md-nav__link">
+    MySQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb" title="MongoDB" class="md-nav__link">
+    MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#springboot" title="SpringBoot" class="md-nav__link">
+    SpringBoot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" title="Nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio" title="RStudio" class="md-nav__link">
+    RStudio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins" title="Jenkins" class="md-nav__link">
+    Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wordpress" title="Wordpress" class="md-nav__link">
+    Wordpress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-commands" title="Docker commands" class="md-nav__link">
+    Docker commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-commands" title="Basic commands" class="md-nav__link">
+    Basic commands
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+      Getting started with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+      Amazon EC2 101
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practice
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practice
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+      Adding beautiful badges into the markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+      Setup Jenkins Pipeline and Blue Ocean in Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+      Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+      Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+      Play around with Keycloak in k8s
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+      Developing based on GeoServer restful api
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+      Serve raster tiles in GeoServer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+      Build Ceph and Kubernetes based distributed file storage system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tools 101
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tools 101
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+      Hexo get started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+      Getting started on mitmproxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Life Experience
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Life Experience
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+      How to rent a house in Australia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+      International money transfer from CommonWealth bank to China
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+      A detailed list for updating address when moving
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" title="Install" class="md-nav__link">
+    Install
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-docker" title="Install Docker" class="md-nav__link">
+    Install Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-docker-machine" title="Install Docker-machine" class="md-nav__link">
+    Install Docker-machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-docker-compose" title="Install Docker-compose" class="md-nav__link">
+    Install Docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-fig" title="Install Fig" class="md-nav__link">
+    Install Fig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-shipyard" title="Install Shipyard" class="md-nav__link">
+    Install Shipyard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-rancher" title="Install Rancher" class="md-nav__link">
+    Install Rancher
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-containers" title="Docker containers" class="md-nav__link">
+    Docker containers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsenter" title="nsenter" class="md-nav__link">
+    nsenter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vsftpd" title="VSFTPD" class="md-nav__link">
+    VSFTPD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" title="MySQL" class="md-nav__link">
+    MySQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb" title="MongoDB" class="md-nav__link">
+    MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#springboot" title="SpringBoot" class="md-nav__link">
+    SpringBoot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" title="Nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio" title="RStudio" class="md-nav__link">
+    RStudio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins" title="Jenkins" class="md-nav__link">
+    Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wordpress" title="Wordpress" class="md-nav__link">
+    Wordpress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-commands" title="Docker commands" class="md-nav__link">
+    Docker commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-commands" title="Basic commands" class="md-nav__link">
+    Basic commands
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Important Docker commands</h1>
+                
+                <p>Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers. The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is.
+Containerization is increasingly popular because containers are:</p>
+<ul>
+<li>Flexible: Even the most complex applications can be containerized.</li>
+<li>Lightweight: Containers leverage and share the host kernel.</li>
+<li>Interchangeable: You can deploy updates and upgrades on-the-fly.</li>
+<li>Portable: You can build locally, deploy to the cloud, and run anywhere.</li>
+<li>Scalable: You can increase and automatically distribute container replicas.</li>
+<li>Stackable: You can stack services vertically and on-the-fly.</li>
+</ul>
+<p><img alt="Docker" src="/imgs/docker.png" />
+<!-- more --></p>
+<h2 id="install">Install</h2>
+<h3 id="install-docker">Install Docker</h3>
+<div class="codehilite"><pre><span></span>sudo curl -sSL https://get.docker.com/ <span class="p">|</span> sh
+
+<span class="c1">#Docker user group setting (If not set, then docker build or docker-compose down commands would meet error like cannot connect to docker daemon)</span>
+<span class="c1">#Create the docker group</span>
+sudo groupadd docker
+<span class="c1">#Add your user to the docker group</span>
+sudo usermod -aG docker <span class="nv">$USER</span>
+<span class="c1">#Logout and login to the server again</span>
+
+<span class="c1">#BaseDeviceUUID configured in: /var/lib/docker/devicemapper/metadata/deviceset-metadata</span>
+</pre></div>
+
+<h3 id="install-docker-machine">Install Docker-machine</h3>
+<div class="codehilite"><pre><span></span>curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machine-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt;/tmp/docker-machine <span class="o">&amp;&amp;</span>
+chmod +x /tmp/docker-machine <span class="o">&amp;&amp;</span>
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+</pre></div>
+
+<h3 id="install-docker-compose">Install Docker-compose</h3>
+<div class="codehilite"><pre><span></span>sudo curl -L https://github.com/docker/compose/releases/download/1.20.0/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+<span class="c1">#Uninstall docker-compose</span>
+sudo rm /usr/local/bin/docker-compose
+
+<span class="c1">#Start docker-compose app (read the docker-compose.yml in current folder)</span>
+docker-compose up
+
+<span class="c1">#Start docker-compose app in background mode (read the docker-compose.yml in current folder)</span>
+docker-compose up -d
+
+<span class="c1">#Remove docker-compose containers</span>
+docker-compose rm -v
+</pre></div>
+
+<h3 id="install-fig">Install Fig</h3>
+<div class="codehilite"><pre><span></span>curl -L https://github.com/docker/fig/releases/download/1.18.0/fig-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt; /usr/local/bin/fig<span class="p">;</span> chmod +x /usr/local/bin/fig
+sudo pip install -U fig
+</pre></div>
+
+<h3 id="install-shipyard">Install Shipyard</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Master node</span>
+curl -sSL https://shipyard-project.com/deploy <span class="p">|</span> <span class="nv">PORT</span><span class="o">=</span><span class="m">8888</span> bash -s
+
+<span class="c1">#Slave node</span>
+curl -sSL https://shipyard-project.com/deploy <span class="p">|</span> <span class="nv">ACTION</span><span class="o">=</span>node <span class="nv">DISCOVERY</span><span class="o">=</span>etcd://http://&lt;master&gt;/:4001 bash -s
+</pre></div>
+
+<h3 id="install-rancher">Install Rancher</h3>
+<div class="codehilite"><pre><span></span>sudo docker run -d --restart<span class="o">=</span>unless-stopped -p <span class="m">8888</span>:8080 rancher/server
+sudo docker run -d --restart<span class="o">=</span>always -p <span class="m">8888</span>:8080 rancher/server
+</pre></div>
+
+<h2 id="docker-containers">Docker containers</h2>
+<h3 id="nsenter">nsenter</h3>
+<div class="codehilite"><pre><span></span>docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+
+<span class="c1">#First, figure out the PID of the container you want to enter</span>
+<span class="nv">PID</span><span class="o">=</span><span class="k">$(</span>docker inspect --format <span class="o">{{</span>.State.Pid<span class="o">}}</span> &lt;container_name_or_ID&gt;<span class="k">)</span>
+<span class="c1">#Then enter the container</span>
+nsenter --target <span class="nv">$PID</span> --mount --uts --ipc --net --pid
+</pre></div>
+
+<h3 id="vsftpd">VSFTPD</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Run vsftpd ftp container</span>
+sudo docker run -d -v /upload:/home/vsftpd <span class="se">\</span>
+-p <span class="m">20</span>:20 -p <span class="m">21</span>:21 -p <span class="m">40000</span>-40080:40000-40080 <span class="se">\</span>
+-e <span class="nv">FTP_USER</span><span class="o">=</span>user -e <span class="nv">FTP_PASS</span><span class="o">=</span>password <span class="se">\</span>
+-e <span class="nv">PASV_ADDRESS</span><span class="o">=</span><span class="m">120</span>.220.209.94 -e <span class="nv">PASV_MIN_PORT</span><span class="o">=</span><span class="m">40000</span> -e <span class="nv">PASV_MAX_PORT</span><span class="o">=</span><span class="m">40080</span> <span class="se">\</span>
+--name vsftpd --restart<span class="o">=</span>always fauria/vsftpd
+
+<span class="c1">#Run vsftpd sftp container(only has write permission in /share folder, and need to login in port 2022)</span>
+sudo docker run --name sftp -v /upload/terminal:/home/terminal/share -p <span class="m">2022</span>:22 -d atmoz/sftp user:password:1001
+
+<span class="c1">#Modify the user folder permissions</span>
+sudo chmod <span class="m">777</span> /upload/terminal/
+</pre></div>
+
+<h3 id="mysql">MySQL</h3>
+<div class="codehilite"><pre><span></span>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>admin -d mysql:5.7
+</pre></div>
+
+<h3 id="mongodb">MongoDB</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Run mongodb container:</span>
+sudo docker run -p <span class="m">27017</span>:27017 -v /data/db:/data/db -h mongodb --name mongodb -d mongo
+
+<span class="c1">#Connect to mongodb</span>
+sudo docker run -it --link mongodb:mongodb --rm mongo sh -c <span class="s1">&#39;exec mongo &quot;mongodb:27017/test&quot;&#39;</span>
+
+<span class="c1">#Dump db</span>
+docker run -i --rm --link reliable_mongo_<span class="si">${</span><span class="nv">RELIABLE_ENV_CONFIG</span><span class="si">}</span>:mongo -v /tmp/mongodump:/tmp mongo bash -c <span class="s1">&#39;mongodump -v --host $MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT --db &#39;</span><span class="nv">$1</span><span class="s1">&#39; --out=/tmp &amp;&amp; chmod 777 /tmp/*&#39;</span>
+</pre></div>
+
+<h3 id="springboot">SpringBoot</h3>
+<div class="codehilite"><pre><span></span>sudo docker run -it --link mongodb:mongodb -p <span class="m">8001</span>:8001 --name springboot-demo test/springboot-demo sh
+</pre></div>
+
+<h3 id="nginx">Nginx</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Run nginx container:</span>
+docker container run <span class="se">\</span>
+-d <span class="se">\</span>
+-p <span class="m">80</span>:80 <span class="se">\</span>
+--name nginx <span class="se">\</span>
+nginx
+
+<span class="c1">#Run nginx container with folder mapping:</span>
+docker container run <span class="se">\</span>
+-d <span class="se">\</span>
+-p <span class="m">80</span>:80 <span class="se">\</span>
+--name nginx <span class="se">\</span>
+--volume /nginx:/usr/share/nginx/html <span class="se">\</span>
+nginx
+
+<span class="c1">#Run nginx container with folder mapping and conf</span>
+docker container run <span class="se">\</span>
+  --name nginx <span class="se">\</span>
+  --volume /nginx:/usr/share/nginx/html <span class="se">\</span>
+  --volume /nginx/conf:/etc/nginx <span class="se">\</span>
+  -p <span class="m">80</span>:80 <span class="se">\</span>
+  -d <span class="se">\</span>
+  nginx
+
+<span class="c1">#nginx.conf default content</span>
+server <span class="o">{</span>
+  listen <span class="m">80</span><span class="p">;</span>
+  sendfile on<span class="p">;</span>
+  default_type application/octet-stream<span class="p">;</span>
+  gzip on<span class="p">;</span>
+  gzip_http_version <span class="m">1</span>.1<span class="p">;</span>
+  gzip_disable      <span class="s2">&quot;MSIE [1-6]\.&quot;</span><span class="p">;</span>
+  gzip_min_length   <span class="m">256</span><span class="p">;</span>
+  gzip_vary         on<span class="p">;</span>
+  gzip_proxied      expired no-cache no-store private auth<span class="p">;</span>
+  gzip_types        text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript<span class="p">;</span>
+  gzip_comp_level   <span class="m">9</span><span class="p">;</span>
+  root /usr/share/nginx/html<span class="p">;</span>
+  location / <span class="o">{</span>
+    try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ /index.html <span class="o">=</span><span class="m">404</span><span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3 id="rstudio">RStudio</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Dockerfile</span>
+FROM rocker/rstudio
+RUN R -e <span class="s1">&#39;install.packages(&quot;lubridate”)&#39;</span>
+
+<span class="c1">#Run docker container</span>
+docker build -t myrstudio .
+docker run --name rstudio -d -p <span class="m">8787</span>:8787 myrstudio
+
+<span class="c1">#Navigate the RStudio container</span>
+http://localhost:8787
+</pre></div>
+
+<h3 id="jenkins">Jenkins</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Run jenkins</span>
+sudo docker run --name jenkins -p <span class="m">8088</span>:8080 -p <span class="m">50000</span>:50000 -v /var/jenkins_home -d jenkins
+
+<span class="c1">#Backup jenkins data</span>
+sudo docker cp jenkins:/var/jenkins_home jenkins_home
+sudo tar -czf jenkins_home.tar jenkins_home/
+
+<span class="c1">#Restore jenkins data</span>
+sudo tar -xzf jenkins_home.tar
+sudo chmod -R <span class="m">777</span> jenkins_home
+sudo docker cp jenkins_home jenkins:/var
+sudo docker restart jenkins
+</pre></div>
+
+<h3 id="wordpress">Wordpress</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#Install mysql</span>
+sudo docker run --name mysql -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">431197</span> -d mysql
+
+<span class="c1">#Install wordpress</span>
+sudo docker run --name demo_wordpress --link mysql:mysql -p <span class="m">8080</span>:80 -d wordpress
+
+<span class="c1">#Browse wordpress homepage: http://[domain]:8080</span>
+</pre></div>
+
+<h2 id="docker-commands">Docker commands</h2>
+<table>
+<thead>
+<tr>
+<th>Scenarios</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker service</td>
+<td>1. <code>sudo service docker start</code> <br/>2. <code>sudo service docker restart</code> <br/>3. <code>sudo systemctl enable docker</code></td>
+</tr>
+<tr>
+<td>Docker service automatic start</td>
+<td><code>sudo systemctl enable docker</code></td>
+</tr>
+<tr>
+<td>Login DockerHub</td>
+<td><code>sudo docker login</code></td>
+</tr>
+<tr>
+<td>Check nginx configuration</td>
+<td><code>/usr/nginx/sbin/nginx -t</code></td>
+</tr>
+<tr>
+<td>Listen on 2375 for docker rest api</td>
+<td><code>sudo dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &amp;</code></td>
+</tr>
+<tr>
+<td>Inspect the container changes</td>
+<td><code>docker diff jenkins</code></td>
+</tr>
+<tr>
+<td>Commit the docker image from container</td>
+<td><code>docker commit -m "finish the CI configuration for servers in jenkins" jenkins test/demo</code></td>
+</tr>
+<tr>
+<td>Push the docker image to DockerHub</td>
+<td><code>docker push test/demo</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="basic-commands">Basic commands</h2>
+<div class="codehilite"><pre><span></span>sudo docker info
+sudo docker ps -a
+sudo docker run --name deamon -d ubuntu:latest /bin/sh -c <span class="s2">&quot;while true; do echo hello world; sleep 1; done&quot;</span>
+sudo docker logs -ft deamon
+sudo  docker logs --tail<span class="o">=</span><span class="m">100</span> deamon
+sudo docker top deamon
+sudo docker <span class="nb">exec</span> -d deamon touch /etc/test_file
+sudo docker start deamon
+sudo docker inspect deamon
+sudo docker inspect --format<span class="o">=</span><span class="s1">&#39;{{ .NetworkSettings.IPAddress}}&#39;</span> develop
+sudo docker rm d7cb3aad80d0
+sudo docker build --no-cache -t<span class="o">=</span><span class="s2">&quot;hustakin/develop&quot;</span> .
+sudo docker run -d -p <span class="m">8080</span>:80 --name develop hustakin/develop nginx -g <span class="s2">&quot;daemon off;&quot;</span>
+sudo docker run -d -P --name develop hustakin/develop nginx -g <span class="s2">&quot;daemon off;&quot;</span>
+sudo docker <span class="nb">history</span> hustakin/develop
+sudo docker port develop <span class="m">80</span>
+docker <span class="nb">kill</span> <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+sudo docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+sudo docker run -t -i --name develop develop /bin/bash
+sudo docker stats deamon
+sudo docker system df
+sudo docker <span class="nb">history</span> jenkins
+docker system prune
+docker system df -v
+docker rmi <span class="k">$(</span>docker images -q<span class="k">)</span>
+docker volume rm <span class="k">$(</span>docker volume ls -qf <span class="nv">dangling</span><span class="o">=</span><span class="nb">true</span><span class="k">)</span>
+journalctl -r -u docker   <span class="o">(</span>logs of docker engine<span class="o">)</span>
+journalctl -u docker.service   <span class="o">(</span>logs of docker engine<span class="o">)</span>
+systemctl status docker.service<span class="o">(</span>logs of starting docker engine<span class="o">)</span>
+journalctl -xe <span class="o">(</span>detailed logs of starting docker engine<span class="o">)</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../important-linux-commands/" title="Important linux commands" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Important linux commands
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting started with Kubernetes
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Frankie Fan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

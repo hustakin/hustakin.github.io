@@ -1,0 +1,2250 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/serve-raster-tiles-in-geoserver/">
+      
+      
+        <meta name="author" content="Frankie Fan">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Serve raster tiles in GeoServer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-146443611-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#steps-to-handle-raster-data" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Frankie Fan's Memos
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Serve raster tiles in GeoServer
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Frankie Fan's Memos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      DevOps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
+      Important linux commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+      Important Docker commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+      Getting started with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+      Amazon EC2 101
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practice
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practice
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+      Adding beautiful badges into the markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+      Setup Jenkins Pipeline and Blue Ocean in Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+      Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+      Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+      Play around with Keycloak in k8s
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+      Developing based on GeoServer restful api
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Serve raster tiles in GeoServer
+      </label>
+    
+    <a href="./" title="Serve raster tiles in GeoServer" class="md-nav__link md-nav__link--active">
+      Serve raster tiles in GeoServer
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-handle-raster-data" title="Steps to handle raster data" class="md-nav__link">
+    Steps to handle raster data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download" title="Download" class="md-nav__link">
+    Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login" title="Login" class="md-nav__link">
+    Login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-raster-workspace" title="Create a raster workspace" class="md-nav__link">
+    Create a raster workspace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-a-store-datasource" title="Select a store datasource" class="md-nav__link">
+    Select a store datasource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-raster-store" title="Create a raster store" class="md-nav__link">
+    Create a raster store
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-layer" title="Create a layer" class="md-nav__link">
+    Create a layer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-review" title="Publish review" class="md-nav__link">
+    Publish review
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-preview" title="Layer preview" class="md-nav__link">
+    Layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-preview-result" title="Layer preview result" class="md-nav__link">
+    Layer preview result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compressed-raster-layer-with-only-grey-band" title="Compressed raster layer with only grey band" class="md-nav__link">
+    Compressed raster layer with only grey band
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-geotiff-file-failed-being-processed-for-unknown-reason" title="The geotiff file failed being processed for unknown reason" class="md-nav__link">
+    The geotiff file failed being processed for unknown reason
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-stack-trace" title="Exception stack trace" class="md-nav__link">
+    Exception stack trace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis-layer-preview" title="QGIS layer preview" class="md-nav__link">
+    QGIS layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis-geotiff-layer-export" title="QGIS geotiff layer export" class="md-nav__link">
+    QGIS geotiff layer export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geoserver-layer-preview" title="GeoServer layer preview" class="md-nav__link">
+    GeoServer layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cause-analysis" title="Cause analysis" class="md-nav__link">
+    Cause analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-style-in-geoserver" title="Define style in GeoServer" class="md-nav__link">
+    Define style in GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-style-in-qgis" title="Create style in QGIS" class="md-nav__link">
+    Create style in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-style-in-qgis" title="Export style in QGIS" class="md-nav__link">
+    Export style in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-the-qml-content" title="Copy the .qml content" class="md-nav__link">
+    Copy the .qml content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-the-style-template-in-geoserver" title="Generate the style template in GeoServer" class="md-nav__link">
+    Generate the style template in GeoServer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specify-the-style-content" title="Specify the style content" class="md-nav__link">
+    Specify the style content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-sld-in-qgis" title="Generate .sld in QGIS" class="md-nav__link">
+    Generate .sld in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-layer-basic-info" title="Edit layer basic info" class="md-nav__link">
+    Edit layer basic info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-wms-settings" title="Edit WMS Settings" class="md-nav__link">
+    Edit WMS Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer" title="Preview layer" class="md-nav__link">
+    Preview layer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer-when-editing-style" title="Preview layer when editing style" class="md-nav__link">
+    Preview layer when editing style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-additional-styles" title="Add additional styles" class="md-nav__link">
+    Add additional styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer-with-additional-styles" title="Preview layer with additional styles" class="md-nav__link">
+    Preview layer with additional styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-cors-for-geoserver" title="Enable CORS for GeoServer" class="md-nav__link">
+    Enable CORS for GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-repository" title="Clone repository" class="md-nav__link">
+    Clone repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-webxml" title="Create web.xml" class="md-nav__link">
+    Create web.xml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-cors" title="Enable CORS" class="md-nav__link">
+    Enable CORS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-hub-modification" title="Docker hub modification" class="md-nav__link">
+    Docker hub modification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-push" title="Build and push" class="md-nav__link">
+    Build and push
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tomcat-error-log" title="Tomcat error log" class="md-nav__link">
+    Tomcat error log
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-http" title="Client http" class="md-nav__link">
+    Client http
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#renderer-the-raster-layer-in-the-web" title="Renderer the raster layer in the web" class="md-nav__link">
+    Renderer the raster layer in the web
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-layer-using-wms" title="Leaflet layer using WMS" class="md-nav__link">
+    Leaflet layer using WMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-layer-using-wmts" title="Leaflet layer using WMTS" class="md-nav__link">
+    Leaflet layer using WMTS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openlayers-layer-using-wmts" title="OpenLayers layer using WMTS" class="md-nav__link">
+    OpenLayers layer using WMTS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footnotes" title="Footnotes" class="md-nav__link">
+    Footnotes
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+      Build Ceph and Kubernetes based distributed file storage system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tools 101
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tools 101
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+      Hexo get started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+      Getting started on mitmproxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Life Experience
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Life Experience
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+      How to rent a house in Australia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+      International money transfer from CommonWealth bank to China
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+      A detailed list for updating address when moving
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-handle-raster-data" title="Steps to handle raster data" class="md-nav__link">
+    Steps to handle raster data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download" title="Download" class="md-nav__link">
+    Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login" title="Login" class="md-nav__link">
+    Login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-raster-workspace" title="Create a raster workspace" class="md-nav__link">
+    Create a raster workspace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-a-store-datasource" title="Select a store datasource" class="md-nav__link">
+    Select a store datasource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-raster-store" title="Create a raster store" class="md-nav__link">
+    Create a raster store
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-layer" title="Create a layer" class="md-nav__link">
+    Create a layer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-review" title="Publish review" class="md-nav__link">
+    Publish review
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-preview" title="Layer preview" class="md-nav__link">
+    Layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-preview-result" title="Layer preview result" class="md-nav__link">
+    Layer preview result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compressed-raster-layer-with-only-grey-band" title="Compressed raster layer with only grey band" class="md-nav__link">
+    Compressed raster layer with only grey band
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-geotiff-file-failed-being-processed-for-unknown-reason" title="The geotiff file failed being processed for unknown reason" class="md-nav__link">
+    The geotiff file failed being processed for unknown reason
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-stack-trace" title="Exception stack trace" class="md-nav__link">
+    Exception stack trace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis-layer-preview" title="QGIS layer preview" class="md-nav__link">
+    QGIS layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis-geotiff-layer-export" title="QGIS geotiff layer export" class="md-nav__link">
+    QGIS geotiff layer export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geoserver-layer-preview" title="GeoServer layer preview" class="md-nav__link">
+    GeoServer layer preview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cause-analysis" title="Cause analysis" class="md-nav__link">
+    Cause analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-style-in-geoserver" title="Define style in GeoServer" class="md-nav__link">
+    Define style in GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-style-in-qgis" title="Create style in QGIS" class="md-nav__link">
+    Create style in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-style-in-qgis" title="Export style in QGIS" class="md-nav__link">
+    Export style in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-the-qml-content" title="Copy the .qml content" class="md-nav__link">
+    Copy the .qml content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-the-style-template-in-geoserver" title="Generate the style template in GeoServer" class="md-nav__link">
+    Generate the style template in GeoServer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specify-the-style-content" title="Specify the style content" class="md-nav__link">
+    Specify the style content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-sld-in-qgis" title="Generate .sld in QGIS" class="md-nav__link">
+    Generate .sld in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-layer-basic-info" title="Edit layer basic info" class="md-nav__link">
+    Edit layer basic info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-wms-settings" title="Edit WMS Settings" class="md-nav__link">
+    Edit WMS Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer" title="Preview layer" class="md-nav__link">
+    Preview layer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer-when-editing-style" title="Preview layer when editing style" class="md-nav__link">
+    Preview layer when editing style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-additional-styles" title="Add additional styles" class="md-nav__link">
+    Add additional styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preview-layer-with-additional-styles" title="Preview layer with additional styles" class="md-nav__link">
+    Preview layer with additional styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-cors-for-geoserver" title="Enable CORS for GeoServer" class="md-nav__link">
+    Enable CORS for GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-repository" title="Clone repository" class="md-nav__link">
+    Clone repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-webxml" title="Create web.xml" class="md-nav__link">
+    Create web.xml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-cors" title="Enable CORS" class="md-nav__link">
+    Enable CORS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-hub-modification" title="Docker hub modification" class="md-nav__link">
+    Docker hub modification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-push" title="Build and push" class="md-nav__link">
+    Build and push
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tomcat-error-log" title="Tomcat error log" class="md-nav__link">
+    Tomcat error log
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-http" title="Client http" class="md-nav__link">
+    Client http
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#renderer-the-raster-layer-in-the-web" title="Renderer the raster layer in the web" class="md-nav__link">
+    Renderer the raster layer in the web
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-layer-using-wms" title="Leaflet layer using WMS" class="md-nav__link">
+    Leaflet layer using WMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-layer-using-wmts" title="Leaflet layer using WMTS" class="md-nav__link">
+    Leaflet layer using WMTS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openlayers-layer-using-wmts" title="OpenLayers layer using WMTS" class="md-nav__link">
+    OpenLayers layer using WMTS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footnotes" title="Footnotes" class="md-nav__link">
+    Footnotes
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Serve raster tiles in GeoServer</h1>
+                
+                <p><a href="https://github.com/geoserver/geoserver">GeoServer</a> is an open source server for sharing geospatial data.
+Designed for interoperability, it publishes data from any major spatial data source using open standards.
+<!-- more --></p>
+<h2 id="steps-to-handle-raster-data">Steps to handle raster data</h2>
+<h3 id="download">Download</h3>
+<p>Download <a href="http://geoserver.org/download/">GeoServer</a> and install, or create by a <a href="https://hub.docker.com/r/kartoza/geoserver">docker container</a></p>
+<h3 id="login">Login</h3>
+<p>Login the GeoServer by admin user, the default username/password is admin/geoserver.
+<img alt="Login" src="/imgs/geoserver-login.png" /></p>
+<h3 id="create-a-raster-workspace">Create a raster workspace</h3>
+<p><img alt="Create workspace" src="/imgs/create-workspace.png" /></p>
+<h3 id="select-a-store-datasource">Select a store datasource</h3>
+<p>Here we select GeoTIFF
+<img alt="Create store geotiff" src="/imgs/create-store-geotiff.png" /></p>
+<h3 id="create-a-raster-store">Create a raster store</h3>
+<p>Here we specify a *.tif file
+<img alt="Create store" src="/imgs/create-store.png" /></p>
+<h3 id="create-a-layer">Create a layer</h3>
+<p>Create the layer under new created store and the format is <workspace>:<store>, and then publish it
+<img alt="Create layer" src="/imgs/create-layer.png" /></p>
+<h3 id="publish-review">Publish review</h3>
+<p>Have a review of all the information it reads including the band definitions, and save it
+<img alt="Publish layer" src="/imgs/publish-layer.png" /></p>
+<h3 id="layer-preview">Layer preview</h3>
+<p>Go the the layer preview and find the layer, and try to view it by OpenLayers
+<img alt="Layer preview" src="/imgs/layer-preview.png" /></p>
+<h3 id="layer-preview-result">Layer preview result</h3>
+<p>The geotiff file successfully being processed if we can see the layer
+<img alt="Layer preview result" src="/imgs/layer-preview-result.png" /></p>
+<h2 id="compressed-raster-layer-with-only-grey-band">Compressed raster layer with only grey band</h2>
+<h3 id="the-geotiff-file-failed-being-processed-for-unknown-reason">The geotiff file failed being processed for unknown reason</h3>
+<p><img alt="Layer preview result" src="/imgs/error-layer.png" /></p>
+<h3 id="exception-stack-trace">Exception stack trace</h3>
+<div class="codehilite"><pre><span></span>Caused by: java.lang.NullPointerException
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2110)
+        ......
+&lt;a href=&quot;#exception&quot; style=&quot;font-weight:bold&quot;&gt;View the full exception stack trace&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
+</pre></div>
+
+<h3 id="qgis-layer-preview">QGIS layer preview</h3>
+<p>Drag the geotiff file into the QGIS for preview
+<img alt="QGIS preview" src="/imgs/qgis-preview.png" /></p>
+<h3 id="qgis-geotiff-layer-export">QGIS geotiff layer export</h3>
+<p>Display the current layer, Select the menu item "Layer-Save as..." and export the geotiff with 4326 crs
+<img alt="QGIS export" src="/imgs/qgis-export.png" /></p>
+<h3 id="geoserver-layer-preview">GeoServer layer preview</h3>
+<p>Modify the store in GeoServer to connect to the new geotiff file, and preview the layer again. It works with no color scheme
+<img alt="QGIS export preview" src="/imgs/geoserver-qgis-export.png" /></p>
+<h3 id="cause-analysis">Cause analysis</h3>
+<p>The error raster geotiff only has one grey band, and the QGIS exported geotiff file is nearly twice the size of the original one. 
+It is a compressed one, and that's why QGIS produces a bigger size when we save it as another. QGIS does not compress it, hence the new image is bigger. GeoServer doesn't accept compressed geotiff data.
+Regarding the GeoServer color problem, It's because that the style in GeoServer is not well defined.</p>
+<h2 id="define-style-in-geoserver">Define style in GeoServer</h2>
+<h3 id="create-style-in-qgis">Create style in QGIS</h3>
+<ol>
+<li>Open QGIS, drag the geotiff file into the QGIS.</li>
+<li>Right click on the data layer and select 'Properties', then select 'Style' on the left side.</li>
+<li>Change the render type to 'Singleband pseudocolor' and change the style by specifying the color ranges.
+<img alt="QGIS style" src="/imgs/qgis-style.png" /></li>
+</ol>
+<h3 id="export-style-in-qgis">Export style in QGIS</h3>
+<p>Apply the change to see the new layer. Save the style using the 'Save Style' button on the bottom and save as .qml file.
+<img alt="QGIS styled layer" src="/imgs/qgis-styled-layer.png" /></p>
+<h3 id="copy-the-qml-content">Copy the .qml content</h3>
+<p>Open the .qml file with notepad and review the colorrampshader part.
+<img alt="QGIS styled layer" src="/imgs/qgis-style-qml.png" /></p>
+<h3 id="generate-the-style-template-in-geoserver">Generate the style template in GeoServer</h3>
+<ol>
+<li>Go to the GeoServer admin page and click on 'Styles' and add a new style.</li>
+<li>Name the style and select the workspace, then choose 'Copy from existing style', select 'dem' and press 'copy...'</li>
+</ol>
+<h3 id="specify-the-style-content">Specify the style content</h3>
+<ol>
+<li>Change the name, title and abstract.</li>
+<li>Translate the .qml content into the GeoServer style content here. Notice the 'value'/'label'/'color' values in .qml match the 'quantity'/'label'/'color' in GeoServer. If the opacity is 0.0, it means that the color will not be visible, so it will be white.</li>
+<li>Press 'Validate' to check if it works. If there are no errors, then 'submit'.
+<img alt="QGIS styled layer" src="/imgs/geoserver-style.png" /></li>
+</ol>
+<h3 id="generate-sld-in-qgis">Generate .sld in QGIS</h3>
+<p>Comparing with exporting the .qml style in QGIS, we can directly generate .sld in QGIS and copy the content to create a style in GeoServer.
+<img alt="QGIS styled sld" src="/imgs/geoserver-style-sld.png" /></p>
+<h3 id="edit-layer-basic-info">Edit layer basic info</h3>
+<p>Go to 'Layers' and select the layer we just created. Make sure 'Enabled' and 'Advertised' are turned on and check if the 'Coverage Band Details' are set correctly, if not adjust them.
+<img alt="GeoServer layer edit" src="/imgs/geoserver-layer-style1.png" /></p>
+<h3 id="edit-wms-settings">Edit WMS Settings</h3>
+<p>Select the 'Publishing' tab. With the 'WMS Settings' select 'Default Style' and change it to the style we just created. 'Save' the layer again.
+<img alt="GeoServer layer edit" src="/imgs/geoserver-layer-style2.png" /></p>
+<h3 id="preview-layer">Preview layer</h3>
+<p>View the layer again with the 'Layer preview' and 'Open Layers'. Now the layer should be displayed correctly.
+<img alt="GeoServer layer preview" src="/imgs/geoserver-layer-preview-color.png" /></p>
+<h3 id="preview-layer-when-editing-style">Preview layer when editing style</h3>
+<p>We could also edit the style and preview the result as soon as we apply in the style editing page.
+<img alt="GeoServer layer preview" src="/imgs/style-preview.png" /></p>
+<h3 id="add-additional-styles">Add additional styles</h3>
+<p>Edit the layer again and with the 'WMS Settings' select additional styles and save. Remember to add the newly added style into it as well otherwise the restful api cannot list this style info under the layer.
+<img alt="GeoServer layer styles" src="/imgs/geoserver-layer-styles.png" /></p>
+<h3 id="preview-layer-with-additional-styles">Preview layer with additional styles</h3>
+<p>Preview the layer again and we could switch the style to any available one and see the result.
+<img alt="GeoServer layer preview change" src="/imgs/geoserver-preview-change-style.png" /></p>
+<h2 id="enable-cors-for-geoserver">Enable CORS for GeoServer</h2>
+<h3 id="clone-repository">Clone repository</h3>
+<p>Clone the github repository <a href="https://github.com/kartoza/docker-geoserver">docker-geoserver</a>.</p>
+<h3 id="create-webxml">Create web.xml</h3>
+<p>The contents of <code>resources/overlays</code> will be copied to the image file system during the build. For example, to include a static web xml with CORS support <code>web.xml</code>, create the file at <code>resources/overlays/usr/local/tomcat/conf/web.xml</code>.</p>
+<h3 id="enable-cors">Enable CORS</h3>
+<p>Add CORS enabled content into the web.xml as bellow. The full content of the web.xml can be found <a href="/imgs/web.xml">here</a>.
+<div class="codehilite"><pre><span></span><span class="nt">&lt;filter&gt;</span>
+    <span class="nt">&lt;filter-name&gt;</span>CorsFilter<span class="nt">&lt;/filter-name&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.catalina.filters.CorsFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;init-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>cors.allowed.origins<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>*<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/init-param&gt;</span>
+    <span class="nt">&lt;init-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>cors.allowed.methods<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>GET,POST,HEAD,OPTIONS,PUT<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/init-param&gt;</span>
+    <span class="nt">&lt;init-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>cors.allowed.headers<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/init-param&gt;</span>
+    <span class="nt">&lt;init-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>cors.exposed.headers<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>Access-Control-Allow-Origin,Access-Control-Allow-Credentials<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/init-param&gt;</span>
+    <span class="nt">&lt;init-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>cors.preflight.maxage<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>10<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/init-param&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+<span class="nt">&lt;filter-mapping&gt;</span>
+    <span class="nt">&lt;filter-name&gt;</span>CorsFilter<span class="nt">&lt;/filter-name&gt;</span>
+    <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/filter-mapping&gt;</span>
+</pre></div></p>
+<h3 id="docker-hub-modification">Docker hub modification</h3>
+<p>Modify the build.sh script to own hub repository.
+<img alt="GeoServer build" src="/imgs/geoserver-build.png" /></p>
+<h3 id="build-and-push">Build and push</h3>
+<p>Build the docker image and push to own docker hub. Now the CORS enabled GeoServer docker image is ready to use.
+<div class="codehilite"><pre><span></span>./build.sh
+docker pull hustakin/geoserver
+</pre></div></p>
+<h3 id="tomcat-error-log">Tomcat error log</h3>
+<p>Sometimes the GeoServer container will met 404 issue. That's because the tomcat failed to start because of your modification. We could attach to the GeoServer container and inspect the tomcat error log to find the reason.
+<img alt="GeoServer error" src="/imgs/geoserver-error.png" /></p>
+<h3 id="client-http">Client http</h3>
+<p>Please be noted the client HTTP should not use the credentials for CORS requests. For example, here I get feature information for raster data in angular6 client by clicking on the layer.
+<img alt="GeoServer cors" src="/imgs/geoserver-angular2.png" /></p>
+<h2 id="renderer-the-raster-layer-in-the-web">Renderer the raster layer in the web</h2>
+<h3 id="leaflet-layer-using-wms">Leaflet layer using WMS</h3>
+<p><div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">wmsLayer</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://localhost:9999/geoserver/raster/wms?&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;raster:demo&#39;</span><span class="p">,</span>
+    <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;1.1.1&#39;</span><span class="p">,</span>
+    <span class="nx">styles</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">//Use the default style, we can also specify additional styles</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
+    <span class="nx">transparent</span>: <span class="kt">true</span><span class="p">,</span>
+    <span class="nx">maxZoom</span>: <span class="kt">25</span><span class="p">,</span>
+    <span class="nx">tiled</span>: <span class="kt">true</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">zoom</span>: <span class="kt">0</span><span class="p">,</span>
+    <span class="nx">maxZoom</span>: <span class="kt">25</span><span class="p">,</span>
+    <span class="nx">maxNativeZoom</span>: <span class="kt">18</span><span class="p">,</span>
+    <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span><span class="nx">wmsLayer</span><span class="p">],</span>
+<span class="p">});</span>
+</pre></div>
+<img alt="Leaflet layer" src="/imgs/leaflet.png" /></p>
+<h3 id="leaflet-layer-using-wmts">Leaflet layer using WMTS</h3>
+<p>Please be noted that we should use <a href="http://epsg.io/900913">EPSG:900913</a> other than EPSG:4326 here which for historical reasons is what GeoServer calls Web Mercator.
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">wmtsLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">L</span><span class="p">.</span><span class="nx">TileLayer</span><span class="p">.</span><span class="nx">WMTS</span><span class="p">(</span><span class="s1">&#39;http://localhost:9999/geoserver/gwc/service/wmts&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">layer</span><span class="o">:</span> <span class="s1">&#39;raster:demo&#39;</span><span class="p">,</span>
+    <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nx">tilematrixSet</span><span class="o">:</span> <span class="s2">&quot;EPSG:900913&quot;</span><span class="p">,</span> <span class="c1">//Important!! It should be EPSG:900913 other than EPSG:4326</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+    <span class="nx">maxZoom</span>: <span class="kt">25</span><span class="p">,</span>
+    <span class="nx">attribution</span><span class="o">:</span> <span class="s2">&quot;&lt;a href=&#39;https://github.com/mylen/leaflet.TileLayer.WMTS&#39;&gt;GitHub&lt;/a&gt;&amp;copy; &lt;a href=&#39;http://www.ign.fr&#39;&gt;IGN&lt;/a&gt;&quot;</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">zoom</span>: <span class="kt">0</span><span class="p">,</span>
+    <span class="nx">maxZoom</span>: <span class="kt">25</span><span class="p">,</span>
+    <span class="nx">maxNativeZoom</span>: <span class="kt">18</span><span class="p">,</span>
+    <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span><span class="nx">wmtsLayer</span><span class="p">],</span>
+<span class="p">});</span>
+</pre></div>
+<img alt="Leaflet layer" src="/imgs/leaflet-wmts.png" /></p>
+<h3 id="openlayers-layer-using-wmts">OpenLayers layer using WMTS</h3>
+<p><div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">gridNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;EPSG:4326:0&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:1&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:2&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:3&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:4&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:5&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:6&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:7&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:8&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:9&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:10&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:11&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:12&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:13&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:14&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:15&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:16&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:17&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:18&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:19&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:20&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:21&#39;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">baseParams</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VERSION&#39;</span><span class="p">,</span> <span class="s1">&#39;LAYER&#39;</span><span class="p">,</span> <span class="s1">&#39;STYLE&#39;</span><span class="p">,</span> <span class="s1">&#39;TILEMATRIX&#39;</span><span class="p">,</span> <span class="s1">&#39;TILEMATRIXSET&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVICE&#39;</span><span class="p">,</span> <span class="s1">&#39;FORMAT&#39;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">VERSION</span><span class="o">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+    <span class="nx">LAYER</span><span class="o">:</span> <span class="s1">&#39;raster:demo&#39;</span><span class="p">,</span>
+    <span class="nx">STYLE</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">//Use the default style, we can also specify additional styles</span>
+    <span class="nx">TILEMATRIX</span>: <span class="kt">gridNames</span><span class="p">,</span>
+    <span class="nx">TILEMATRIXSET</span><span class="o">:</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span>
+    <span class="nx">SERVICE</span><span class="o">:</span> <span class="s1">&#39;WMTS&#39;</span><span class="p">,</span>
+    <span class="nx">FORMAT</span><span class="o">:</span> <span class="s1">&#39;image/png&#39;</span>
+<span class="p">};</span>
+<span class="kd">let</span> <span class="nx">projection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Projection</span><span class="p">({</span>
+    <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span>
+    <span class="nx">units</span><span class="o">:</span> <span class="s1">&#39;degrees&#39;</span><span class="p">,</span>
+    <span class="nx">axisOrientation</span><span class="o">:</span> <span class="s1">&#39;neu&#39;</span>
+<span class="p">});,</span>
+<span class="kd">let</span> <span class="nx">resolutions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.703125</span><span class="p">,</span> <span class="mf">0.3515625</span><span class="p">,</span> <span class="mf">0.17578125</span><span class="p">,</span> <span class="mf">0.087890625</span><span class="p">,</span> <span class="mf">0.0439453125</span><span class="p">,</span> <span class="mf">0.02197265625</span><span class="p">,</span> <span class="mf">0.010986328125</span><span class="p">,</span> <span class="mf">0.0054931640625</span><span class="p">,</span> <span class="mf">0.00274658203125</span><span class="p">,</span> <span class="mf">0.001373291015625</span><span class="p">,</span> <span class="mf">6.866455078125</span><span class="nx">E</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">3.4332275390625</span><span class="nx">E</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.71661376953125</span><span class="nx">E</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">8.58306884765625</span><span class="nx">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">4.291534423828125</span><span class="nx">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.1457672119140625</span><span class="nx">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.0728836059570312</span><span class="nx">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">5.364418029785156</span><span class="nx">E</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">2.682209014892578</span><span class="nx">E</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">1.341104507446289</span><span class="nx">E</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">6.705522537231445</span><span class="nx">E</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mf">3.3527612686157227</span><span class="nx">E</span><span class="o">-</span><span class="mi">7</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:9999/geoserver/gwc/service/wmts?&#39;</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">param</span> <span class="k">in</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">baseParams</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nx">params</span><span class="p">[</span><span class="nx">param</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WMTS</span><span class="p">({</span>
+    <span class="nx">url</span><span class="p">,</span>
+    <span class="nx">layer</span>: <span class="kt">params.LAYER</span><span class="p">,</span>
+    <span class="nx">matrixSet</span>: <span class="kt">params.TILEMATRIXSET</span><span class="p">,</span>
+    <span class="nx">format</span>: <span class="kt">params.FORMAT</span><span class="p">,</span>
+    <span class="nx">projection</span>: <span class="kt">projection</span><span class="p">,</span>
+    <span class="nx">tileGrid</span>: <span class="kt">new</span> <span class="nx">WMTSTileGrid</span><span class="p">({</span>
+        <span class="nx">tileSize</span><span class="o">:</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+        <span class="nx">extent</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+        <span class="nx">origin</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+        <span class="nx">resolutions</span>: <span class="kt">resolutions</span><span class="p">,</span>
+        <span class="nx">matrixIds</span>: <span class="kt">params.TILEMATRIX</span>
+    <span class="p">}),</span>
+    <span class="nx">style</span>: <span class="kt">params.STYLE</span><span class="p">,</span>
+    <span class="nx">wrapX</span>: <span class="kt">true</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">wmsLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TileLayer</span><span class="p">({</span>
+    <span class="nx">source</span>: <span class="kt">source</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">View</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="nx">zoom</span>: <span class="kt">2</span><span class="p">,</span>
+    <span class="nx">projection</span>: <span class="kt">projection</span><span class="p">;,</span>
+    <span class="nx">extent</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">({</span>
+    <span class="nx">controls</span><span class="o">:</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">MousePosition</span><span class="p">(),</span>
+        <span class="k">new</span> <span class="nx">Zoom</span><span class="p">(),</span>
+    <span class="p">],</span>
+    <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span><span class="nx">wmsLayer</span><span class="p">],</span>
+    <span class="nx">target</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+    <span class="nx">view</span>: <span class="kt">wmsVioew</span>
+<span class="p">});</span>
+
+<span class="c1">//Get layer feature information by clicking on the layer</span>
+<span class="nx">map</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;singleclick&#39;</span><span class="p">,</span> <span class="nx">evt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+  <span class="kr">const</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">resolution</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">getResolution</span><span class="p">();</span>
+  <span class="kr">const</span> <span class="nx">tilegrid</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">getTileGrid</span><span class="p">();</span>
+  <span class="kr">const</span> <span class="nx">tileResolutions</span> <span class="o">=</span> <span class="nx">tilegrid</span><span class="p">.</span><span class="nx">getResolutions</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">zoomIdx</span><span class="p">,</span> <span class="nx">diff</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tileResolutions</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">tileResolution</span> <span class="o">=</span> <span class="nx">tileResolutions</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="kr">const</span> <span class="nx">diffP</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">resolution</span> <span class="o">-</span> <span class="nx">tileResolution</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">diffP</span> <span class="o">&lt;</span> <span class="nx">diff</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">diff</span> <span class="o">=</span> <span class="nx">diffP</span><span class="p">;</span>
+      <span class="nx">zoomIdx</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">tileResolution</span> <span class="o">&lt;</span> <span class="nx">resolution</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="kr">const</span> <span class="nx">tileSize</span> <span class="o">=</span> <span class="nx">tilegrid</span><span class="p">.</span><span class="nx">getTileSize</span><span class="p">(</span><span class="nx">zoomIdx</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">tileOrigin</span> <span class="o">=</span> <span class="nx">tilegrid</span><span class="p">.</span><span class="nx">getOrigin</span><span class="p">(</span><span class="nx">zoomIdx</span><span class="p">);</span>
+
+  <span class="kr">const</span> <span class="nx">fx</span> <span class="o">=</span> <span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">coordinate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">tileOrigin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="nx">resolution</span> <span class="o">*</span> <span class="nx">tileSize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="kr">const</span> <span class="nx">fy</span> <span class="o">=</span> <span class="p">(</span><span class="nx">tileOrigin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">coordinate</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="nx">resolution</span> <span class="o">*</span> <span class="nx">tileSize</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="kr">const</span> <span class="nx">tileCol</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">fx</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">tileRow</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">fy</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">tileI</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">fx</span> <span class="o">-</span> <span class="nx">tileCol</span><span class="p">)</span> <span class="o">*</span> <span class="nx">tileSize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="kr">const</span> <span class="nx">tileJ</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">fy</span> <span class="o">-</span> <span class="nx">tileRow</span><span class="p">)</span> <span class="o">*</span> <span class="nx">tileSize</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="kr">const</span> <span class="nx">matrixIds</span> <span class="o">=</span> <span class="nx">tilegrid</span><span class="p">.</span><span class="nx">getMatrixIds</span><span class="p">()[</span><span class="nx">zoomIdx</span><span class="p">];</span>
+
+  <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">param</span> <span class="k">in</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">param</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;TILEMATRIX&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39;TILEMATRIX=&#39;</span> <span class="o">+</span> <span class="nx">matrixIds</span> <span class="o">+</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nx">params</span><span class="p">[</span><span class="nx">param</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">url</span> <span class="o">=</span> <span class="nx">url</span>
+    <span class="o">+</span> <span class="s1">&#39;SERVICE=WMTS&amp;REQUEST=GetFeatureInfo&#39;</span>
+    <span class="o">+</span> <span class="s1">&#39;&amp;INFOFORMAT=&#39;</span> <span class="o">+</span> <span class="s1">&#39;text/html&#39;</span>
+    <span class="o">+</span> <span class="s1">&#39;&amp;TileCol=&#39;</span> <span class="o">+</span> <span class="nx">tileCol</span>
+    <span class="o">+</span> <span class="s1">&#39;&amp;TileRow=&#39;</span> <span class="o">+</span> <span class="nx">tileRow</span>
+    <span class="o">+</span> <span class="s1">&#39;&amp;I=&#39;</span> <span class="o">+</span> <span class="nx">tileI</span>
+    <span class="o">+</span> <span class="s1">&#39;&amp;J=&#39;</span> <span class="o">+</span> <span class="nx">tileJ</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Loading... please wait...&#39;</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+      <span class="c1">// withCredentials: true,</span>
+      <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span> <span class="kr">as</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+      <span class="nx">headers</span>: <span class="kt">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+        <span class="s1">&#39;Accept&#39;</span><span class="o">:</span> <span class="s1">&#39;*/*&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/html&#39;</span>
+      <span class="p">}),</span>
+    <span class="p">})</span>
+      <span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">res</span><span class="p">;</span>
+      <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+<img alt="OpenLayers layer" src="/imgs/openlayers.png" /></p>
+<h2 id="footnotes">Footnotes</h2>
+<details class="note"><summary>Full exception stack trace from GeoServer console</summary><p>09 Sep 17:11:56 INFO [geoserver.wms] -
+Request: getServiceInfo
+Sep 09, 2019 5:11:56 PM org.geoserver.GeoserverInitStartupListener$1 errorOccurred
+INFO: Problem occurs when computing a tile by the owner.
+java.lang.RuntimeException: javax.imageio.IIOException: Illegal value for Predictor in TIFF file
+        at com.sun.media.jai.imageioimpl.ImageReadOpImage.computeTile(ImageReadOpImage.java:706)
+        at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+        at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2085)
+        at javax.media.jai.PlanarImage.getExtendedData(PlanarImage.java:2440)
+        at javax.media.jai.ScaleOpImage.computeTile(ScaleOpImage.java:1255)
+        at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+        at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2085)
+        at javax.media.jai.StatisticsOpImage.getProperty(StatisticsOpImage.java:292)
+        at com.sun.media.jai.opimage.ExtremaOpImage.getProperty(ExtremaOpImage.java:100)
+        at javax.media.jai.RenderedOp$1.getProperty(RenderedOp.java:1808)
+        at javax.media.jai.PropertyEnvironment.getProperty(PropertyEnvironment.java:197)
+        at javax.media.jai.PropertySourceImpl.getProperty(PropertySourceImpl.java:277)
+        at javax.media.jai.WritablePropertySourceImpl.getProperty(WritablePropertySourceImpl.java:130)
+        at javax.media.jai.RenderedOp.getProperty(RenderedOp.java:1982)
+        at org.geotools.image.ImageWorker.getComputedProperty(ImageWorker.java:1033)
+        at org.geotools.image.ImageWorker.getExtremas(ImageWorker.java:1089)
+        at org.geotools.image.ImageWorker.rescaleToBytes(ImageWorker.java:1400)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:139)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:53)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter$1.execute(StyleVisitorCoverageProcessingNodeAdapter.java:97)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:234)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:332)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:52)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter.getOutput(StyleVisitorCoverageProcessingNodeAdapter.java:130)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.symbolize(GridCoverageRenderer.java:484)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:1021)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:831)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1036)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:349)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:265)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:132)
+        at org.geoserver.wms.GetMap.executeInternal(GetMap.java:720)
+        at org.geoserver.wms.GetMap.run(GetMap.java:300)
+        at org.geoserver.wms.GetMap.run(GetMap.java:123)
+        at org.geoserver.wms.DefaultWebMapService.getMap(DefaultWebMapService.java:251)
+        at sun.reflect.GeneratedMethodAccessor296.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+        at org.geoserver.kml.WebMapServiceKmlInterceptor.invoke(WebMapServiceKmlInterceptor.java:38)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:59)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:33)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:72)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:52)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.ows.util.RequestObjectLogger.invoke(RequestObjectLogger.java:50)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+        at com.sun.proxy.$Proxy96.getMap(Unknown Source)
+        at sun.reflect.GeneratedMethodAccessor254.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.geoserver.ows.Dispatcher.execute(Dispatcher.java:877)
+        at org.geoserver.ows.Dispatcher.handleRequestInternal(Dispatcher.java:264)
+        at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.java:174)
+        at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:50)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+        at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+        at org.geoserver.filters.ThreadLocalsCleanupFilter.doFilter(ThreadLocalsCleanupFilter.java:26)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:69)
+        at org.geoserver.wms.animate.AnimatorFilter.doFilter(AnimatorFilter.java:73)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+        at org.geoserver.filters.SpringDelegatingFilter.doFilter(SpringDelegatingFilter.java:41)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.platform.AdvancedDispatchFilter.doFilter(AdvancedDispatchFilter.java:37)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:317)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:114)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerAnonymousAuthenticationFilter.doFilter(GeoServerAnonymousAuthenticationFilter.java:51)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.geoserver.security.filter.GeoServerBasicAuthenticationFilter.doFilter(GeoServerBasicAuthenticationFilter.java:81)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+        at org.geoserver.security.filter.GeoServerSecurityContextPersistenceFilter$1.doFilter(GeoServerSecurityContextPersistenceFilter.java:52)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
+        at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:177)
+        at org.geoserver.security.GeoServerSecurityFilterChainProxy.doFilter(GeoServerSecurityFilterChainProxy.java:141)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.LoggingFilter.doFilter(LoggingFilter.java:90)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.XFrameOptionsFilter.doFilter(XFrameOptionsFilter.java:79)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.GZIPFilter.doFilter(GZIPFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SessionDebugFilter.doFilter(SessionDebugFilter.java:46)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.FlushSafeFilter.doFilter(FlushSafeFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:256)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:219)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+        at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+        at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
+        at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+        at org.eclipse.jetty.server.Server.handle(Server.java:499)
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+        at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+        at java.lang.Thread.run(Thread.java:748)
+Caused by: javax.imageio.IIOException: Illegal value for Predictor in TIFF file
+        at it.geosolutions.imageioimpl.plugins.tiff.TIFFLZWDecompressor.<init>(TIFFLZWDecompressor.java:118)
+        at it.geosolutions.imageioimpl.plugins.tiff.TIFFImageReader.read(TIFFImageReader.java:1856)
+        at com.sun.media.jai.imageioimpl.ImageReadOpImage.computeTile(ImageReadOpImage.java:697)
+        ... 147 more</p>
+<p>Sep 09, 2019 5:11:56 PM org.geoserver.GeoserverInitStartupListener$1 errorOccurred
+INFO: Problem occurs when computing a tile by the owner.
+java.lang.NullPointerException
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2110)
+        at javax.media.jai.PlanarImage.getExtendedData(PlanarImage.java:2440)
+        at javax.media.jai.ScaleOpImage.computeTile(ScaleOpImage.java:1255)
+        at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+        at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2085)
+        at javax.media.jai.StatisticsOpImage.getProperty(StatisticsOpImage.java:292)
+        at com.sun.media.jai.opimage.ExtremaOpImage.getProperty(ExtremaOpImage.java:100)
+        at javax.media.jai.RenderedOp$1.getProperty(RenderedOp.java:1808)
+        at javax.media.jai.PropertyEnvironment.getProperty(PropertyEnvironment.java:197)
+        at javax.media.jai.PropertySourceImpl.getProperty(PropertySourceImpl.java:277)
+        at javax.media.jai.WritablePropertySourceImpl.getProperty(WritablePropertySourceImpl.java:130)
+        at javax.media.jai.RenderedOp.getProperty(RenderedOp.java:1982)
+        at org.geotools.image.ImageWorker.getComputedProperty(ImageWorker.java:1033)
+        at org.geotools.image.ImageWorker.getExtremas(ImageWorker.java:1089)
+        at org.geotools.image.ImageWorker.rescaleToBytes(ImageWorker.java:1400)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:139)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:53)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter$1.execute(StyleVisitorCoverageProcessingNodeAdapter.java:97)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:234)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:332)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:52)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter.getOutput(StyleVisitorCoverageProcessingNodeAdapter.java:130)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.symbolize(GridCoverageRenderer.java:484)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:1021)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:831)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1036)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:349)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:265)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:132)
+        at org.geoserver.wms.GetMap.executeInternal(GetMap.java:720)
+        at org.geoserver.wms.GetMap.run(GetMap.java:300)
+        at org.geoserver.wms.GetMap.run(GetMap.java:123)
+        at org.geoserver.wms.DefaultWebMapService.getMap(DefaultWebMapService.java:251)
+        at sun.reflect.GeneratedMethodAccessor296.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+        at org.geoserver.kml.WebMapServiceKmlInterceptor.invoke(WebMapServiceKmlInterceptor.java:38)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:59)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:33)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:72)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:52)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.ows.util.RequestObjectLogger.invoke(RequestObjectLogger.java:50)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+        at com.sun.proxy.$Proxy96.getMap(Unknown Source)
+        at sun.reflect.GeneratedMethodAccessor254.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.geoserver.ows.Dispatcher.execute(Dispatcher.java:877)
+        at org.geoserver.ows.Dispatcher.handleRequestInternal(Dispatcher.java:264)
+        at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.java:174)
+        at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:50)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+        at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+        at org.geoserver.filters.ThreadLocalsCleanupFilter.doFilter(ThreadLocalsCleanupFilter.java:26)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:69)
+        at org.geoserver.wms.animate.AnimatorFilter.doFilter(AnimatorFilter.java:73)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+        at org.geoserver.filters.SpringDelegatingFilter.doFilter(SpringDelegatingFilter.java:41)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.platform.AdvancedDispatchFilter.doFilter(AdvancedDispatchFilter.java:37)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:317)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:114)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerAnonymousAuthenticationFilter.doFilter(GeoServerAnonymousAuthenticationFilter.java:51)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.geoserver.security.filter.GeoServerBasicAuthenticationFilter.doFilter(GeoServerBasicAuthenticationFilter.java:81)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+        at org.geoserver.security.filter.GeoServerSecurityContextPersistenceFilter$1.doFilter(GeoServerSecurityContextPersistenceFilter.java:52)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
+        at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:177)
+        at org.geoserver.security.GeoServerSecurityFilterChainProxy.doFilter(GeoServerSecurityFilterChainProxy.java:141)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.LoggingFilter.doFilter(LoggingFilter.java:90)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.XFrameOptionsFilter.doFilter(XFrameOptionsFilter.java:79)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.GZIPFilter.doFilter(GZIPFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SessionDebugFilter.doFilter(SessionDebugFilter.java:46)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.FlushSafeFilter.doFilter(FlushSafeFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:256)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:219)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+        at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+        at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
+        at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+        at org.eclipse.jetty.server.Server.handle(Server.java:499)
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+        at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+        at java.lang.Thread.run(Thread.java:748)</p>
+<p>java.lang.NullPointerException
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2110)
+        at javax.media.jai.StatisticsOpImage.getProperty(StatisticsOpImage.java:292)
+        at com.sun.media.jai.opimage.ExtremaOpImage.getProperty(ExtremaOpImage.java:100)
+        at javax.media.jai.RenderedOp$1.getProperty(RenderedOp.java:1808)
+        at javax.media.jai.PropertyEnvironment.getProperty(PropertyEnvironment.java:197)
+        at javax.media.jai.PropertySourceImpl.getProperty(PropertySourceImpl.java:277)
+        at javax.media.jai.WritablePropertySourceImpl.getProperty(WritablePropertySourceImpl.java:130)
+        at javax.media.jai.RenderedOp.getProperty(RenderedOp.java:1982)
+        at org.geotools.image.ImageWorker.getComputedProperty(ImageWorker.java:1033)
+        at org.geotools.image.ImageWorker.getExtremas(ImageWorker.java:1089)
+        at org.geotools.image.ImageWorker.rescaleToBytes(ImageWorker.java:1400)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:139)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:53)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter$1.execute(StyleVisitorCoverageProcessingNodeAdapter.java:97)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:234)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:332)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:52)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter.getOutput(StyleVisitorCoverageProcessingNodeAdapter.java:130)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.symbolize(GridCoverageRenderer.java:484)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:1021)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:831)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1036)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:349)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:265)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:132)
+        at org.geoserver.wms.GetMap.executeInternal(GetMap.java:720)
+        at org.geoserver.wms.GetMap.run(GetMap.java:300)
+        at org.geoserver.wms.GetMap.run(GetMap.java:123)
+        at org.geoserver.wms.DefaultWebMapService.getMap(DefaultWebMapService.java:251)
+        at sun.reflect.GeneratedMethodAccessor296.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+        at org.geoserver.kml.WebMapServiceKmlInterceptor.invoke(WebMapServiceKmlInterceptor.java:38)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:59)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:33)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:72)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:52)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.ows.util.RequestObjectLogger.invoke(RequestObjectLogger.java:50)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+        at com.sun.proxy.$Proxy96.getMap(Unknown Source)
+        at sun.reflect.GeneratedMethodAccessor254.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.geoserver.ows.Dispatcher.execute(Dispatcher.java:877)
+        at org.geoserver.ows.Dispatcher.handleRequestInternal(Dispatcher.java:264)
+        at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.java:174)
+        at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:50)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+        at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+        at org.geoserver.filters.ThreadLocalsCleanupFilter.doFilter(ThreadLocalsCleanupFilter.java:26)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:69)
+        at org.geoserver.wms.animate.AnimatorFilter.doFilter(AnimatorFilter.java:73)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+        at org.geoserver.filters.SpringDelegatingFilter.doFilter(SpringDelegatingFilter.java:41)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.platform.AdvancedDispatchFilter.doFilter(AdvancedDispatchFilter.java:37)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:317)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:114)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerAnonymousAuthenticationFilter.doFilter(GeoServerAnonymousAuthenticationFilter.java:51)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.geoserver.security.filter.GeoServerBasicAuthenticationFilter.doFilter(GeoServerBasicAuthenticationFilter.java:81)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+        at org.geoserver.security.filter.GeoServerSecurityContextPersistenceFilter$1.doFilter(GeoServerSecurityContextPersistenceFilter.java:52)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
+        at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:177)
+        at org.geoserver.security.GeoServerSecurityFilterChainProxy.doFilter(GeoServerSecurityFilterChainProxy.java:141)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.LoggingFilter.doFilter(LoggingFilter.java:90)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.XFrameOptionsFilter.doFilter(XFrameOptionsFilter.java:79)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.GZIPFilter.doFilter(GZIPFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SessionDebugFilter.doFilter(SessionDebugFilter.java:46)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.FlushSafeFilter.doFilter(FlushSafeFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:256)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:219)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+        at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+        at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
+        at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+        at org.eclipse.jetty.server.Server.handle(Server.java:499)
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+        at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+        at java.lang.Thread.run(Thread.java:748)
+09 Sep 17:11:56 ERROR [geoserver.ows] -
+org.geoserver.platform.ServiceException: Error rendering coverage on the fast path
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:351)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:265)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:132)
+        at org.geoserver.wms.GetMap.executeInternal(GetMap.java:720)
+        at org.geoserver.wms.GetMap.run(GetMap.java:300)
+        at org.geoserver.wms.GetMap.run(GetMap.java:123)
+        at org.geoserver.wms.DefaultWebMapService.getMap(DefaultWebMapService.java:251)
+        at sun.reflect.GeneratedMethodAccessor296.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+        at org.geoserver.kml.WebMapServiceKmlInterceptor.invoke(WebMapServiceKmlInterceptor.java:38)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:59)
+        at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:33)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:72)
+        at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:52)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.geoserver.ows.util.RequestObjectLogger.invoke(RequestObjectLogger.java:50)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+        at com.sun.proxy.$Proxy96.getMap(Unknown Source)
+        at sun.reflect.GeneratedMethodAccessor254.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.geoserver.ows.Dispatcher.execute(Dispatcher.java:877)
+        at org.geoserver.ows.Dispatcher.handleRequestInternal(Dispatcher.java:264)
+        at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.java:174)
+        at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:50)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+        at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+        at org.geoserver.filters.ThreadLocalsCleanupFilter.doFilter(ThreadLocalsCleanupFilter.java:26)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:69)
+        at org.geoserver.wms.animate.AnimatorFilter.doFilter(AnimatorFilter.java:73)
+        at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+        at org.geoserver.filters.SpringDelegatingFilter.doFilter(SpringDelegatingFilter.java:41)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.platform.AdvancedDispatchFilter.doFilter(AdvancedDispatchFilter.java:37)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:317)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:114)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerAnonymousAuthenticationFilter.doFilter(GeoServerAnonymousAuthenticationFilter.java:51)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.geoserver.security.filter.GeoServerBasicAuthenticationFilter.doFilter(GeoServerBasicAuthenticationFilter.java:81)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+        at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+        at org.geoserver.security.filter.GeoServerSecurityContextPersistenceFilter$1.doFilter(GeoServerSecurityContextPersistenceFilter.java:52)
+        at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+        at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:331)
+        at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
+        at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:177)
+        at org.geoserver.security.GeoServerSecurityFilterChainProxy.doFilter(GeoServerSecurityFilterChainProxy.java:141)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.LoggingFilter.doFilter(LoggingFilter.java:90)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.XFrameOptionsFilter.doFilter(XFrameOptionsFilter.java:79)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.GZIPFilter.doFilter(GZIPFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.SessionDebugFilter.doFilter(SessionDebugFilter.java:46)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.geoserver.filters.FlushSafeFilter.doFilter(FlushSafeFilter.java:42)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:256)
+        at org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:219)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+        at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+        at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:215)
+        at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110)
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+        at org.eclipse.jetty.server.Server.handle(Server.java:499)
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+        at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+        at java.lang.Thread.run(Thread.java:748)
+Caused by: org.geoserver.platform.ServiceException: org.geotools.coverage.processing.CoverageProcessingException: java.lang.NullPointerException
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1200)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:349)
+        ... 117 more
+Caused by: org.geotools.coverage.processing.CoverageProcessingException: java.lang.NullPointerException
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:333)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:52)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter.getOutput(StyleVisitorCoverageProcessingNodeAdapter.java:130)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.symbolize(GridCoverageRenderer.java:484)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:1021)
+        at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:831)
+        at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1036)
+        ... 118 more
+Caused by: java.lang.NullPointerException
+        at javax.media.jai.PlanarImage.getData(PlanarImage.java:2110)
+        at javax.media.jai.StatisticsOpImage.getProperty(StatisticsOpImage.java:292)
+        at com.sun.media.jai.opimage.ExtremaOpImage.getProperty(ExtremaOpImage.java:100)
+        at javax.media.jai.RenderedOp$1.getProperty(RenderedOp.java:1808)
+        at javax.media.jai.PropertyEnvironment.getProperty(PropertyEnvironment.java:197)
+        at javax.media.jai.PropertySourceImpl.getProperty(PropertySourceImpl.java:277)
+        at javax.media.jai.WritablePropertySourceImpl.getProperty(WritablePropertySourceImpl.java:130)
+        at javax.media.jai.RenderedOp.getProperty(RenderedOp.java:1982)
+        at org.geotools.image.ImageWorker.getComputedProperty(ImageWorker.java:1033)
+        at org.geotools.image.ImageWorker.getExtremas(ImageWorker.java:1089)
+        at org.geotools.image.ImageWorker.rescaleToBytes(ImageWorker.java:1400)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:139)
+        at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:53)
+        at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter$1.execute(StyleVisitorCoverageProcessingNodeAdapter.java:97)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:234)
+        at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:332)
+        ... 124 more</p>
+</details>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Developing based on GeoServer restful api
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Build Ceph and Kubernetes based distributed file storage system
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Frankie Fan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

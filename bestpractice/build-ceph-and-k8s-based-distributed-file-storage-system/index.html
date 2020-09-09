@@ -1,0 +1,1301 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/">
+      
+      
+        <meta name="author" content="Frankie Fan">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Build Ceph and Kubernetes based distributed file storage system</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-146443611-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#install" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Frankie Fan's Memos
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Build Ceph and Kubernetes based distributed file storage system
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Frankie Fan's Memos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      DevOps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
+      Important linux commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+      Important Docker commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+      Getting started with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+      Amazon EC2 101
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practice
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practice
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+      Adding beautiful badges into the markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+      Setup Jenkins Pipeline and Blue Ocean in Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+      Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+      Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+      Play around with Keycloak in k8s
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+      Developing based on GeoServer restful api
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+      Serve raster tiles in GeoServer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Build Ceph and Kubernetes based distributed file storage system
+      </label>
+    
+    <a href="./" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link md-nav__link--active">
+      Build Ceph and Kubernetes based distributed file storage system
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" title="Install" class="md-nav__link">
+    Install
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-rook" title="Download rook" class="md-nav__link">
+    Download rook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-yaml" title="Copy yaml" class="md-nav__link">
+    Copy yaml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-rook-containers" title="Create rook containers" class="md-nav__link">
+    Create rook containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-volumes" title="Create volumes" class="md-nav__link">
+    Create volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-ceph-cluster" title="Create Ceph cluster" class="md-nav__link">
+    Create Ceph cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-create-operator-and-check-osd" title="Re-create operator and check osd" class="md-nav__link">
+    Re-create operator and check osd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-toolbox-and-test" title="Create toolbox and test" class="md-nav__link">
+    Create toolbox and test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-dashboard" title="Enable dashboard" class="md-nav__link">
+    Enable dashboard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-dashboard-ingress" title="Create dashboard ingress" class="md-nav__link">
+    Create dashboard ingress
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect-dashboard-password" title="Inspect dashboard password" class="md-nav__link">
+    Inspect dashboard password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-object-gateway" title="Create object gateway" class="md-nav__link">
+    Create object gateway
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-radosgw-user" title="Create radosgw user" class="md-nav__link">
+    Create radosgw user
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-in-cluster" title="Test S3 service in cluster" class="md-nav__link">
+    Test S3 service in cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-s3-external-service" title="Create S3 external service" class="md-nav__link">
+    Create S3 external service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-outside-cluster" title="Test S3 service outside cluster" class="md-nav__link">
+    Test S3 service outside cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-in-java" title="Test S3 service in Java" class="md-nav__link">
+    Test S3 service in Java
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tools 101
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tools 101
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+      Hexo get started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+      Getting started on mitmproxy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Life Experience
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Life Experience
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+      How to rent a house in Australia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+      International money transfer from CommonWealth bank to China
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+      A detailed list for updating address when moving
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" title="Install" class="md-nav__link">
+    Install
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-rook" title="Download rook" class="md-nav__link">
+    Download rook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-yaml" title="Copy yaml" class="md-nav__link">
+    Copy yaml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-rook-containers" title="Create rook containers" class="md-nav__link">
+    Create rook containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-volumes" title="Create volumes" class="md-nav__link">
+    Create volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-ceph-cluster" title="Create Ceph cluster" class="md-nav__link">
+    Create Ceph cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-create-operator-and-check-osd" title="Re-create operator and check osd" class="md-nav__link">
+    Re-create operator and check osd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-toolbox-and-test" title="Create toolbox and test" class="md-nav__link">
+    Create toolbox and test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-dashboard" title="Enable dashboard" class="md-nav__link">
+    Enable dashboard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-dashboard-ingress" title="Create dashboard ingress" class="md-nav__link">
+    Create dashboard ingress
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect-dashboard-password" title="Inspect dashboard password" class="md-nav__link">
+    Inspect dashboard password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-object-gateway" title="Create object gateway" class="md-nav__link">
+    Create object gateway
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-radosgw-user" title="Create radosgw user" class="md-nav__link">
+    Create radosgw user
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-in-cluster" title="Test S3 service in cluster" class="md-nav__link">
+    Test S3 service in cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-s3-external-service" title="Create S3 external service" class="md-nav__link">
+    Create S3 external service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-outside-cluster" title="Test S3 service outside cluster" class="md-nav__link">
+    Test S3 service outside cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-s3-service-in-java" title="Test S3 service in Java" class="md-nav__link">
+    Test S3 service in Java
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Build Ceph and Kubernetes based distributed file storage system</h1>
+                
+                <p>In this article, we are going to build a Ceph and Kubernetes based distributed file storage system and integrate into our java platform.
+<!-- more --></p>
+<h2 id="install">Install</h2>
+<h3 id="download-rook">Download rook</h3>
+<p>Download the rook ceph GitHub code.
+<div class="codehilite"><pre><span></span>git clone --single-branch --branch release-1.2 https://github.com/rook/rook.git
+</pre></div></p>
+<h3 id="copy-yaml">Copy yaml</h3>
+<p>Copy the common.yaml, operator.yaml and toolbox.yaml files from ./rook/cluster/examples/kubernetes/ceph/.
+<div class="codehilite"><pre><span></span>cp ../rook/cluster/examples/kubernetes/ceph/common.yaml ../rook/cluster/examples/kubernetes/ceph/operator.yaml ../rook/cluster/examples/kubernetes/ceph/toolbox.yaml .
+</pre></div></p>
+<h3 id="create-rook-containers">Create rook containers</h3>
+<p>Create the rook ceph containers, and wait the operator to be running status.
+<div class="codehilite"><pre><span></span>kubectl apply -f common.yaml
+kubectl apply -f operator.yaml
+kubectl get pod -n rook-ceph
+</pre></div></p>
+<h3 id="create-volumes">Create volumes</h3>
+<p>Create 3 20G volumes and attach to 3 linux instances. Format the disks. Mkdir /mnt/ceph-storage and mount them all.
+<div class="codehilite"><pre><span></span>sudo fdisk -l
+sudo mkfs.ext4 /dev/vdc
+sudo mount /dev/vdb /mnt/ceph-storage -t auto
+df -h
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="n">Filesystem</span>      <span class="k">Size</span>  <span class="n">Used</span> <span class="n">Avail</span> <span class="n">Use</span><span class="o">%</span> <span class="n">Mounted</span> <span class="k">on</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">vda1</span>        <span class="mi">30</span><span class="k">G</span>   <span class="mi">19</span><span class="k">G</span>   <span class="mi">11</span><span class="k">G</span>  <span class="mi">65</span><span class="o">%</span> <span class="o">/</span>
+<span class="n">devtmpfs</span>        <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>     <span class="mi">0</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">12</span><span class="n">K</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>  <span class="mi">298</span><span class="n">M</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="k">G</span>  <span class="mi">11</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>     <span class="mi">0</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgroup</span>
+<span class="n">tmpfs</span>           <span class="mi">581</span><span class="n">M</span>     <span class="mi">0</span>  <span class="mi">581</span><span class="n">M</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="k">user</span><span class="o">/</span><span class="mi">1000</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">vdb</span>         <span class="mi">20</span><span class="k">G</span>   <span class="mi">45</span><span class="n">M</span>   <span class="mi">19</span><span class="k">G</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">ceph</span><span class="o">-</span><span class="k">storage</span>
+</pre></div>
+
+
+<h3 id="create-ceph-cluster">Create Ceph cluster</h3>
+<p>Create cluster by the cluster.yaml. Notice the selected nodes have the disks attached. Each nodes/name field should match their <code>kubernetes.io/hostname</code> label. Notice the dashboard should be disabled first.
+<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CephCluster</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">dataDirHostPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/rook</span>
+  <span class="nt">mon</span><span class="p">:</span>
+    <span class="nt">count</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+  <span class="nt">cephVersion</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ceph/ceph:v14.2.4-20190917</span>
+    <span class="nt">allowUnsupported</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">dashboard</span><span class="p">:</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">network</span><span class="p">:</span>
+    <span class="nt">hostNetwork</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">storage</span><span class="p">:</span>
+    <span class="nt">useAllNodes</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">useAllDevices</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">config</span><span class="p">:</span>
+      <span class="nt">metadataDevice</span><span class="p">:</span>
+      <span class="nt">databaseSizeMB</span><span class="p">:</span> <span class="s">&quot;1024&quot;</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="nt">journalSizeMB</span><span class="p">:</span> <span class="s">&quot;1024&quot;</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+    <span class="nt">nodes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;slave.novalocal&quot;</span>
+        <span class="nt">directories</span><span class="p">:</span>         <span class="c1"># specific directories to use for storage can be specified for each node</span>
+          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="s">&quot;/mnt/ceph-storage&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;static.novalocal&quot;</span>
+        <span class="nt">directories</span><span class="p">:</span>         <span class="c1"># specific directories to use for storage can be specified for each node</span>
+          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="s">&quot;/mnt/ceph-storage&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;db.novalocal&quot;</span>
+        <span class="nt">directories</span><span class="p">:</span>         <span class="c1"># specific directories to use for storage can be specified for each node</span>
+          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="s">&quot;/mnt/ceph-storage&quot;</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>kubectl apply -f cluster.yaml
+kubectl get pod -n rook-ceph --watch
+</pre></div></p>
+<h3 id="re-create-operator-and-check-osd">Re-create operator and check osd</h3>
+<p>If error happens, remember to delete the folder dataDirHostPath on all nodes and delete the operator, then try again to create the cluster. Attach the operator pod to see the logs. When 3 mon and 3 osd pods are running it means the cluster is successfully created.
+<div class="codehilite"><pre><span></span>sudo rm -rf /var/lib/rook
+kubectl delete -f operator.yaml
+kubectl logs -f rook-ceph-operator-6b79d99f5c-9564s -n rook-ceph
+kubectl get pod -n rook-ceph
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="n">NAME</span>                                                        <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">265</span><span class="n">lj</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">b47v</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">dw6z</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">xgns</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">54</span><span class="n">hd5</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">9</span><span class="n">rgr8</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">5</span><span class="n">d999b68d6</span><span class="o">-</span><span class="mi">8</span><span class="n">vc2k</span>               <span class="mi">4</span><span class="o">/</span><span class="mi">4</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">5</span><span class="n">d999b68d6</span><span class="o">-</span><span class="n">xjg4z</span>               <span class="mi">4</span><span class="o">/</span><span class="mi">4</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">sp289</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="mi">7</span><span class="n">gk9s</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="mi">9</span><span class="n">sbwh</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">jwvxx</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">n9tcd</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">69</span><span class="n">b7d7887</span><span class="o">-</span><span class="mi">4</span><span class="n">l9l9</span>                   <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">69</span><span class="n">b7d7887</span><span class="o">-</span><span class="n">g48rb</span>                   <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">q9q5b</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">snhqj</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">v6jb8</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">db</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">fd7dcc457</span><span class="o">-</span><span class="n">qd7tx</span>       <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">deamon</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">7789457</span><span class="n">f5</span><span class="o">-</span><span class="n">v6vnc</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">slave</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">5</span><span class="n">d698c7d7b</span><span class="o">-</span><span class="n">hgbnw</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m59s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="k">static</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">58</span><span class="n">f769ccc</span><span class="o">-</span><span class="n">lsf5b</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m54s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">test</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">6</span><span class="n">fdc8dbc4f</span><span class="o">-</span><span class="n">ksk75</span>    <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mgr</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">7898</span><span class="n">b59757</span><span class="o">-</span><span class="mi">84</span><span class="n">tbd</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">7676</span><span class="n">f96769</span><span class="o">-</span><span class="mi">5</span><span class="n">mhc6</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">12</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="mi">79</span><span class="n">c9c9b59d</span><span class="o">-</span><span class="n">g82sc</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="k">c</span><span class="o">-</span><span class="mi">7</span><span class="n">b679d7497</span><span class="o">-</span><span class="n">x2hjg</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="k">operator</span><span class="o">-</span><span class="mi">6</span><span class="n">b79d99f5c</span><span class="o">-</span><span class="mi">9564</span><span class="n">s</span>                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">14</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="n">b59576bb4</span><span class="o">-</span><span class="n">rgsx8</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m57s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">74</span><span class="n">ff9d79c6</span><span class="o">-</span><span class="n">hpkc2</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m55s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">57748</span><span class="n">ff6bf</span><span class="o">-</span><span class="n">vf8jl</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m59s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="n">db</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">jf84v</span>                    <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="n">slave</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">j457l</span>                 <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="k">static</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">jt4vj</span>                <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">hwffd</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">jh8j5</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mcdjn</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mmzcb</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mppgh</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">tz5gm</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">vj7tg</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+</pre></div>
+
+
+<h3 id="create-toolbox-and-test">Create toolbox and test</h3>
+<p>Create toolbox pods by toolbox.yaml, and we can attach the pod then test the ceph status.
+<div class="codehilite"><pre><span></span>kubectl apply -f toolbox.yaml
+kubectl -n rook-ceph <span class="nb">exec</span> -it <span class="k">$(</span>kubectl -n rook-ceph get pod -l <span class="s2">&quot;app=rook-ceph-tools&quot;</span> -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="k">)</span> bash
+ceph status
+ceph osd status
+ceph df
+rados df
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">root@rook-ceph-tools-787dc6b944-spsjh /</span><span class="o">]</span><span class="err">#</span><span class="w"> </span><span class="n">ceph</span><span class="w"> </span><span class="n">status</span><span class="w"></span>
+<span class="w">  </span><span class="nl">cluster</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">id</span><span class="p">:</span><span class="w">     </span><span class="mi">2095</span><span class="n">eaca</span><span class="o">-</span><span class="mi">93</span><span class="n">b3</span><span class="o">-</span><span class="mi">4365</span><span class="o">-</span><span class="n">a5c8</span><span class="o">-</span><span class="mi">9</span><span class="n">b05269821a9</span><span class="w"></span>
+<span class="w">    </span><span class="nl">health</span><span class="p">:</span><span class="w"> </span><span class="n">HEALTH_OK</span><span class="w"></span>
+
+<span class="w">  </span><span class="nl">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">mon</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">daemons</span><span class="p">,</span><span class="w"> </span><span class="n">quorum</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="mi">26</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nl">mgr</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="n">since</span><span class="w"> </span><span class="mi">26</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nl">osd</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nl">osds</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="n">since</span><span class="w"> </span><span class="mi">25</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="n">since</span><span class="w"> </span><span class="mi">25</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">data</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">pools</span><span class="p">:</span><span class="w">   </span><span class="mi">0</span><span class="w"> </span><span class="n">pools</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">pgs</span><span class="w"></span>
+<span class="w">    </span><span class="nl">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">objects</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
+<span class="w">    </span><span class="k">usage</span><span class="err">:</span><span class="w">   </span><span class="mf">6.4</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="n">used</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">59</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="n">avail</span><span class="w"></span>
+<span class="w">    </span><span class="nl">pgs</span><span class="p">:</span><span class="w"></span>
+</pre></div>
+
+
+<h3 id="enable-dashboard">Enable dashboard</h3>
+<p>Modify the cluster.yaml to enable dashboard and apply to create the dashboard service.
+<div class="codehilite"><pre><span></span>vim cluster.yaml
+kubectl apply -f cluster.yaml
+kubectl get svc -n rook-ceph <span class="p">|</span>grep mgr-dashboard
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mgr</span><span class="o">-</span><span class="n">dashboard</span>    <span class="n">ClusterIP</span>   <span class="mi">10</span><span class="p">.</span><span class="mi">36</span><span class="p">.</span><span class="mi">19</span><span class="p">.</span><span class="mi">173</span>     <span class="o">&lt;</span><span class="k">none</span><span class="o">&gt;</span>        <span class="mi">7000</span><span class="o">/</span><span class="n">TCP</span>            <span class="mi">66</span><span class="n">s</span>
+</pre></div>
+
+
+<h3 id="create-dashboard-ingress">Create dashboard ingress</h3>
+<p>Now the dashboard service is ClusterIP mode which means we can only visit it in the cluster. Create dashboard Traefik yaml file dashboard-ingress.yaml to visit publicly.
+<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ceph-dashboard-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">rules</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dashboard.*.*</span>
+      <span class="nt">http</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+            <span class="nt">backend</span><span class="p">:</span>
+              <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph-mgr-dashboard</span>
+              <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7000</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>kubectl apply -f dashboard-ingress.yaml
+</pre></div></p>
+<h3 id="inspect-dashboard-password">Inspect dashboard password</h3>
+<p>Inspect the dashboard secret. The username is admin.
+<div class="codehilite"><pre><span></span>kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{[&#39;data&#39;][&#39;password&#39;]}&quot;</span> <span class="p">|</span> base64 --decode <span class="o">&amp;&amp;</span> <span class="nb">echo</span>
+</pre></div></p>
+<h3 id="create-object-gateway">Create object gateway</h3>
+<p>Create object gateway by the object.yaml. 
+<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CephObjectStore</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-store</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">metadataPool</span><span class="p">:</span>
+    <span class="nt">failureDomain</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
+    <span class="nt">replicated</span><span class="p">:</span>
+      <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+  <span class="nt">dataPool</span><span class="p">:</span>
+    <span class="nt">failureDomain</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
+    <span class="nt">replicated</span><span class="p">:</span>
+      <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+  <span class="nt">preservePoolsOnDelete</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">gateway</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3</span>
+    <span class="nt">sslCertificateRef</span><span class="p">:</span>
+    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">securePort</span><span class="p">:</span>
+    <span class="nt">instances</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="nt">placement</span><span class="p">:</span>
+    <span class="nt">annotations</span><span class="p">:</span>
+    <span class="nt">resources</span><span class="p">:</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>kubectl apply -f object.yaml
+kubectl -n rook-ceph get pod -l <span class="nv">app</span><span class="o">=</span>rook-ceph-rgw
+</pre></div></p>
+<h3 id="create-radosgw-user">Create radosgw user</h3>
+<p>Create a radosgw user in the toolbox.
+<div class="codehilite"><pre><span></span>kubectl -n rook-ceph <span class="nb">exec</span> -it <span class="k">$(</span>kubectl -n rook-ceph get pod -l <span class="s2">&quot;app=rook-ceph-tools&quot;</span> -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="k">)</span> bash
+radosgw-admin user create --uid<span class="o">=</span>myuser --display-name<span class="o">=</span>test-user --system
+ceph dashboard set-rgw-api-user-id myuser
+ceph dashboard set-rgw-api-access-key 32APIT3RA29JCO6OCR8P
+ceph dashboard set-rgw-api-secret-key 2ioxTu6iBFkYP8UKiycS90A2DFwRBklSI8Bp3iPQ
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="err">{</span>
+    <span class="ss">&quot;user_id&quot;</span><span class="p">:</span> <span class="ss">&quot;myuser&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;display_name&quot;</span><span class="p">:</span> <span class="ss">&quot;test-user&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;email&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;suspended&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="ss">&quot;max_buckets&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="ss">&quot;subusers&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;user&quot;</span><span class="p">:</span> <span class="ss">&quot;myuser&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;access_key&quot;</span><span class="p">:</span> <span class="ss">&quot;32APIT3RA29JCO6OCR8P&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;secret_key&quot;</span><span class="p">:</span> <span class="ss">&quot;2ioxTu6iBFkYP8UKiycS90A2DFwRBklSI8Bp3iPQ&quot;</span>
+        <span class="err">}</span>
+    <span class="p">],</span>
+    <span class="ss">&quot;swift_keys&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;caps&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;op_mask&quot;</span><span class="p">:</span> <span class="ss">&quot;read, write, delete&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;system&quot;</span><span class="p">:</span> <span class="ss">&quot;true&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;default_placement&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;default_storage_class&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;placement_tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;bucket_quota&quot;</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">&quot;enabled&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;check_on_raw&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;max_size&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="ss">&quot;max_size_kb&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">&quot;max_objects&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="ss">&quot;user_quota&quot;</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">&quot;enabled&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;check_on_raw&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;max_size&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="ss">&quot;max_size_kb&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">&quot;max_objects&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="ss">&quot;temp_url_keys&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;rgw&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;mfa_ids&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<h3 id="test-s3-service-in-cluster">Test S3 service in cluster</h3>
+<p>Connect the toolbox and test the object storage inside the cluster.
+<div class="codehilite"><pre><span></span>kubectl -n rook-ceph <span class="nb">exec</span> -it <span class="k">$(</span>kubectl -n rook-ceph get pod -l <span class="s2">&quot;app=rook-ceph-tools&quot;</span> -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="k">)</span> bash
+yum --assumeyes install s3cmd
+<span class="c1"># The content is as bellow. The host is where the rgw service is listening. Run kubectl -n rook-ceph get svc rook-ceph-rgw-my-store, then combine the clusterIP and the port.</span>
+vi .s3cfg
+s3cmd mb s3://test-bucket
+s3cmd ls
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="k">[default]</span>
+<span class="na">access_key</span> <span class="o">=</span> <span class="s">Y14QX4KYOBCdvwMU6E5R</span>
+<span class="na">secret_key</span> <span class="o">=</span> <span class="s">AbeWMQPzpGhZPCMOq9IEkZSxLIgtooQsdvx4Cb4v</span>
+<span class="na">host_base</span> <span class="o">=</span> <span class="s">10.100.191.33</span>
+<span class="na">host_bucket</span> <span class="o">=</span> <span class="s">10.100.191.33/%(bucket)</span>
+<span class="na">use_https</span> <span class="o">=</span> <span class="s">False</span>
+</pre></div>
+
+
+<h3 id="create-s3-external-service">Create S3 external service</h3>
+<p>Create the external service for the object store by using NodePort in the rgw-external.yaml. Cannot use Traefik here because it automatically redirect http to https which is not allowed in s3cmd.
+<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph-rgw-my-store-external</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph-rgw</span>
+    <span class="nt">rook_cluster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+    <span class="nt">rook_object_store</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-store</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">ports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rgw</span>
+      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+      <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+      <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">selector</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph-rgw</span>
+    <span class="nt">rook_cluster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+    <span class="nt">rook_object_store</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-store</span>
+  <span class="nt">sessionAffinity</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodePort</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>kubectl apply -f rgw-external.yaml
+</pre></div></p>
+<h3 id="test-s3-service-outside-cluster">Test S3 service outside cluster</h3>
+<p>Test the object storage outside the cluster. Remember to replace the credentials and endpoint.
+<div class="codehilite"><pre><span></span><span class="c1"># For windows we can download the s3cmd code from github and then &quot;python s3cmd --configure&quot; to save the configuration and then edit it with the below content.</span>
+<span class="c1"># Run kubectl -n rook-ceph get service rook-ceph-rgw-my-store-external, then combine the node public ip and the external port as the host bellow.</span>
+<span class="c1"># Run python s3cmd ls to test on Windows</span>
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="k">[default]</span>
+<span class="na">access_key</span> <span class="o">=</span> <span class="s">Y14QX4KYOBC83Vsev6E5R</span>
+<span class="na">secret_key</span> <span class="o">=</span> <span class="s">AbeWMQPzpGhZPCMOq9IEkZSLIsetooQcUfx4Cb4v</span>
+<span class="na">host_base</span> <span class="o">=</span> <span class="s">*:*</span>
+<span class="na">host_bucket</span> <span class="o">=</span> <span class="s">*:*/%(bucket)</span>
+<span class="na">use_https</span> <span class="o">=</span> <span class="s">False</span>
+</pre></div>
+
+
+<h3 id="test-s3-service-in-java">Test S3 service in Java</h3>
+<p>Test the object storage with java code. Remember to replace the credentials and endpoint. The code works for both Amazon S3 and Ceph S3 except the conn part.
+<div class="codehilite"><pre><span></span><span class="c1">//The conn here is for Ceph S3</span>
+<span class="n">AWSCredentials</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="o">(</span><span class="s">&quot;***&quot;</span><span class="o">,</span> <span class="s">&quot;***&quot;</span><span class="o">);</span>
+<span class="n">ClientConfiguration</span> <span class="n">clientConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClientConfiguration</span><span class="o">();</span>
+<span class="n">clientConfig</span><span class="o">.</span><span class="na">setProtocol</span><span class="o">(</span><span class="n">Protocol</span><span class="o">.</span><span class="na">HTTP</span><span class="o">);</span>
+<span class="n">AmazonS3</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">AmazonS3Client</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">withCredentials</span><span class="o">(</span><span class="k">new</span> <span class="n">AWSStaticCredentialsProvider</span><span class="o">(</span><span class="n">credentials</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">withClientConfiguration</span><span class="o">(</span><span class="n">clientConfig</span><span class="o">)</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">withEndpointConfiguration</span><span class="o">(</span><span class="k">new</span> <span class="n">AwsClientBuilder</span><span class="o">.</span><span class="na">EndpointConfiguration</span><span class="o">(</span><span class="s">&quot;*:*&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">))</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">enablePathStyleAccess</span><span class="o">()</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="c1">//The conn here is for Amazon S3</span>
+<span class="c1">//AWSCredentials credentials = new BasicAWSCredentials(&quot;***&quot;, &quot;***&quot;);</span>
+<span class="c1">//AmazonS3 conn = AmazonS3Client.builder()</span>
+<span class="c1">//        .withRegion(&quot;ap-northeast-1&quot;) //Important for Amazon</span>
+<span class="c1">//        .withCredentials(new AWSStaticCredentialsProvider(credentials))</span>
+<span class="c1">//        .build();</span>
+
+<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;C:\\Users\\fanf\\Pictures\\test.jpg&quot;</span><span class="o">);</span>
+<span class="n">FileInputStream</span> <span class="n">bais</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+<span class="n">ObjectMetadata</span> <span class="n">metadata</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="o">();</span>
+<span class="n">metadata</span><span class="o">.</span><span class="na">setContentLength</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+<span class="n">metadata</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&quot;image/jpg&quot;</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">putObject</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="o">,</span> <span class="n">bais</span><span class="o">,</span> <span class="n">metadata</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setObjectAcl</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="o">,</span> <span class="n">CannedAccessControlList</span><span class="o">.</span><span class="na">PublicRead</span><span class="o">);</span>
+
+<span class="n">ListObjectsRequest</span> <span class="n">listObjectsRequest</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">ListObjectsRequest</span><span class="o">().</span><span class="na">withBucketName</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">).</span><span class="na">withDelimiter</span><span class="o">(</span><span class="s">&quot;test-bucket/&quot;</span><span class="o">);</span>
+<span class="n">ObjectListing</span> <span class="n">objects2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listObjects</span><span class="o">(</span><span class="n">listObjectsRequest</span><span class="o">);</span>
+<span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objects2</span><span class="o">);</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="na">setBucketPolicy</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;public-read-write&quot;</span><span class="o">);</span>
+<span class="n">Bucket</span> <span class="n">bucket2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createBucket</span><span class="o">(</span><span class="s">&quot;new-bucket&quot;</span><span class="o">);</span>
+<span class="n">ByteArrayInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="s">&quot;Hello World!&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">putObject</span><span class="o">(</span><span class="n">bucket2</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="o">,</span> <span class="n">input</span><span class="o">,</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="o">());</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setObjectAcl</span><span class="o">(</span><span class="n">bucket2</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="o">,</span> <span class="n">CannedAccessControlList</span><span class="o">.</span><span class="na">PublicRead</span><span class="o">);</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Bucket</span><span class="o">&gt;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listBuckets</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Bucket</span> <span class="n">bucket</span> <span class="o">:</span> <span class="n">buckets</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+            <span class="n">StringUtils</span><span class="o">.</span><span class="na">fromDate</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">()));</span>
+    <span class="n">ObjectListing</span> <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listObjects</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="k">do</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">S3ObjectSummary</span> <span class="n">objectSummary</span> <span class="o">:</span> <span class="n">objects</span><span class="o">.</span><span class="na">getObjectSummaries</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objectSummary</span><span class="o">.</span><span class="na">getKey</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+                    <span class="n">objectSummary</span><span class="o">.</span><span class="na">getSize</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+                    <span class="n">StringUtils</span><span class="o">.</span><span class="na">fromDate</span><span class="o">(</span><span class="n">objectSummary</span><span class="o">.</span><span class="na">getLastModified</span><span class="o">()));</span>
+        <span class="o">}</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listNextBatchOfObjects</span><span class="o">(</span><span class="n">objects</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">isTruncated</span><span class="o">());</span>
+<span class="o">}</span>
+</pre></div></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Serve raster tiles in GeoServer
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Hexo get started
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Frankie Fan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
