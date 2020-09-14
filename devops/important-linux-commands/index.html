@@ -376,6 +376,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#singularity-in-hpc" title="Singularity in HPC" class="md-nav__link">
+    Singularity in HPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openstack-api" title="Openstack API" class="md-nav__link">
+    Openstack API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mongodb-operation" title="MongoDB operation" class="md-nav__link">
     MongoDB operation
   </a>
@@ -856,6 +870,20 @@
           <li class="md-nav__item">
   <a href="#nectarcloud-volume" title="NectarCloud volume" class="md-nav__link">
     NectarCloud volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singularity-in-hpc" title="Singularity in HPC" class="md-nav__link">
+    Singularity in HPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openstack-api" title="Openstack API" class="md-nav__link">
+    Openstack API
   </a>
   
 </li>
@@ -1383,6 +1411,31 @@ sudo umount /dev/vdc
 sudo e2fsck -f /dev/vdb
 sudo resize2fs /dev/vdc
 sudo mount /dev/vdc /data -t auto
+</pre></div>
+
+<h4 id="singularity-in-hpc">Singularity in HPC</h4>
+<div class="codehilite"><pre><span></span><span class="c1">#MongoDB</span>
+singularity pull docker://mongo:3.4
+singularity shell --bind data:/data mongo_3.4.sif
+singularity instance start mongo_3.4.sif mongodb
+mongod <span class="p">&amp;</span>
+mongo
+db
+</pre></div>
+
+<h4 id="openstack-api">Openstack API</h4>
+<div class="codehilite"><pre><span></span><span class="c1">#Install openstack client in Ubuntu</span>
+sudo apt update
+sudo apt-get install python-pip python-dev
+sudo apt  install python-openstackclient
+<span class="c1">#Replace the queue with Queue</span>
+<span class="c1">#...</span>
+<span class="c1">##import queue</span>
+<span class="c1">#import Queue as queue</span>
+<span class="c1">#...</span>
+vi /home/ubuntu/.local/lib/python2.7/site-packages/openstack/utils.py
+vi /home/ubuntu/.local/lib/python2.7/site-packages/openstack/cloud/openstackcloud.py
+openstack server list
 </pre></div>
 
 <h4 id="mongodb-operation">MongoDB operation</h4>
