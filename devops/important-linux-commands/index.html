@@ -383,6 +383,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lvm-management" title="LVM management" class="md-nav__link">
+    LVM management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#openstack-api" title="Openstack API" class="md-nav__link">
     Openstack API
   </a>
@@ -510,6 +517,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-nav__link">
+      Getting started with Vagrant
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -533,6 +552,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
+      Integrate Google Analytics with a web application
+    </a>
+  </li>
+
         
           
           
@@ -578,6 +609,42 @@
   <li class="md-nav__item">
     <a href="../../bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
       Introduce Rollbar and Slack for realtime exception alerts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/create--app-icon-launch-screen-for-flutter/" title="How to create an app icon and launch screen for flutter" class="md-nav__link">
+      How to create an app icon and launch screen for flutter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-nav__link">
+      Generate required flutter app screenshots for different devices
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bestpractice/flutter-app-distribution-for-testing/" title="How to make flutter app distribution for testing in Firebase" class="md-nav__link">
+      How to make flutter app distribution  for testing in Firebase
     </a>
   </li>
 
@@ -877,6 +944,13 @@
           <li class="md-nav__item">
   <a href="#singularity-in-hpc" title="Singularity in HPC" class="md-nav__link">
     Singularity in HPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvm-management" title="LVM management" class="md-nav__link">
+    LVM management
   </a>
   
 </li>
@@ -1421,6 +1495,16 @@ singularity instance start mongo_3.4.sif mongodb
 mongod <span class="p">&amp;</span>
 mongo
 db
+</pre></div>
+
+<h4 id="lvm-management">LVM management</h4>
+<div class="codehilite"><pre><span></span><span class="c1">#Install lvextend</span>
+yum whatprovides */lvextend
+sudo yum install lvm2
+
+<span class="c1">#Enlarge the / disk</span>
+df -h
+sudo lvextend -L +50G /dev/vda1
 </pre></div>
 
 <h4 id="openstack-api">Openstack API</h4>
