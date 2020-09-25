@@ -329,12 +329,79 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-      
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Using VNC to Operate a Desktop on Ubuntu 18.04
+      </label>
     
     <a href="./" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link md-nav__link--active">
       Using VNC to Operate a Desktop on Ubuntu 18.04
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-ubuntu-desktop-and-vnc-server" title="Install ubuntu-desktop and VNC server" class="md-nav__link">
+    Install ubuntu-desktop and VNC server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-vnc-server-and-set-access-password" title="Launch VNC server and set access password" class="md-nav__link">
+    Launch VNC server and set access password
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-vnc-from-your-desktop" title="Connecting to VNC From your Desktop" class="md-nav__link">
+    Connecting to VNC From your Desktop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-vnc-from-your-desktop_1" title="Connecting to VNC From your Desktop" class="md-nav__link">
+    Connecting to VNC From your Desktop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fix-the-vnc-grey-screen-issue" title="Fix the VNC grey screen issue" class="md-nav__link">
+    Fix the VNC grey screen issue
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restart-the-vnc-server-after-modification" title="Restart the VNC server after modification" class="md-nav__link">
+    Restart the VNC server after modification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connected-to-vnc-from-your-desktop" title="Connected to VNC From your Desktop" class="md-nav__link">
+    Connected to VNC From your Desktop
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -610,8 +677,64 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-ubuntu-desktop-and-vnc-server" title="Install ubuntu-desktop and VNC server" class="md-nav__link">
+    Install ubuntu-desktop and VNC server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-vnc-server-and-set-access-password" title="Launch VNC server and set access password" class="md-nav__link">
+    Launch VNC server and set access password
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-vnc-from-your-desktop" title="Connecting to VNC From your Desktop" class="md-nav__link">
+    Connecting to VNC From your Desktop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-vnc-from-your-desktop_1" title="Connecting to VNC From your Desktop" class="md-nav__link">
+    Connecting to VNC From your Desktop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fix-the-vnc-grey-screen-issue" title="Fix the VNC grey screen issue" class="md-nav__link">
+    Fix the VNC grey screen issue
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restart-the-vnc-server-after-modification" title="Restart the VNC server after modification" class="md-nav__link">
+    Restart the VNC server after modification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connected-to-vnc-from-your-desktop" title="Connected to VNC From your Desktop" class="md-nav__link">
+    Connected to VNC From your Desktop
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
   
 </nav>
                   </div>
@@ -624,29 +747,36 @@
               
                 
                 
+                  <h1>Using VNC to Operate a Desktop on Ubuntu 18.04</h1>
+                
                 <h3 id="install-ubuntu-desktop-and-vnc-server">Install ubuntu-desktop and VNC server</h3>
-<p>```shell script</p>
-<h1 id="update-the-package-sources">Update the package sources</h1>
-<p>sudo apt-get update
-sudo apt-get upgrade</p>
-<h1 id="install-ubuntu-desktop">Install ubuntu-desktop</h1>
-<p>sudo apt-get install ubuntu-desktop</p>
-<h1 id="install-vnc-server">Install VNC server</h1>
-<p>sudo apt-get install vnc4server</p>
-<h1 id="install-gnome-tools">Install gnome tools</h1>
-<p>sudo apt-get install gnome-core gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal</p>
-<h1 id="fix-the-vi-directiondelete-key-not-working-issue">Fix the vi direction/delete key not working issue</h1>
-<p>sudo apt-get remove vim-common
-sudo apt-get install vim</p>
-<h1 id="install-net-tools-to-test-network">Install net tools to test network</h1>
-<p>sudo apt install net-tools
-netstat -tulpn
-<div class="codehilite"><pre><span></span><span class="o">###</span> <span class="n">Launch</span> <span class="n">VNC</span> <span class="n">server</span> <span class="k">and</span> <span class="k">set</span> <span class="k">access</span> <span class="n">password</span>
-<span class="o">```</span><span class="n">shell</span> <span class="n">script</span>
-<span class="n">vncserver</span> <span class="p">:</span><span class="mi">1</span>
+<div class="codehilite"><pre><span></span><span class="c1">#Update the package sources</span>
+sudo apt-get update
+sudo apt-get upgrade
 
-<span class="o">#</span><span class="n">Telnet</span> <span class="k">to</span> <span class="n">test</span> <span class="n">VNC</span> <span class="n">server</span> <span class="n">it</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">running</span>
-<span class="n">telnet</span> <span class="n">localhost</span> <span class="mi">5901</span>
+<span class="c1">#Install ubuntu-desktop</span>
+sudo apt-get install ubuntu-desktop
+
+<span class="c1">#Install VNC server</span>
+sudo apt-get install vnc4server
+
+<span class="c1">#Install gnome tools</span>
+sudo apt-get install gnome-core gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+
+<span class="c1">#Fix the vi direction/delete key not working issue</span>
+sudo apt-get remove vim-common
+sudo apt-get install vim
+
+<span class="c1">#Install net tools to test network</span>
+sudo apt install net-tools
+netstat -tulpn
+</pre></div>
+
+<h3 id="launch-vnc-server-and-set-access-password">Launch VNC server and set access password</h3>
+<p><div class="codehilite"><pre><span></span>vncserver :1
+
+<span class="c1">#Telnet to test VNC server it&#39;s running</span>
+telnet localhost <span class="m">5901</span>
 </pre></div>
 <img alt="VNC server" src="/imgs/vncserver/launch-vnc.png" /></p>
 <h3 id="connecting-to-vnc-from-your-desktop">Connecting to VNC From your Desktop</h3>
@@ -658,37 +788,37 @@ Create a connection and specify your ubuntu address with the port 5901 and conne
 <img alt="VNC server" src="/imgs/vncserver/vnc-connected-initial.png" /></p>
 <h3 id="fix-the-vnc-grey-screen-issue">Fix the VNC grey screen issue</h3>
 <p>You should modify the xstartup script to fix this issue.
-```shell script
-vi .vnc/xstartup
-<div class="codehilite"><pre><span></span><span class="nv">xstartup</span> <span class="nv">content</span>
-```<span class="nv">shell</span> <span class="nv">script</span>
-#<span class="o">!/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">sh</span>
+<div class="codehilite"><pre><span></span>vi .vnc/xstartup
+</pre></div></p>
+<p>xstartup content
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/sh</span>
 
-# <span class="nv">Uncomment</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">two</span> <span class="nv">lines</span> <span class="k">for</span> <span class="nv">normal</span> <span class="nv">desktop</span>:
-#<span class="nv">unset</span> <span class="nv">SESSION_MANAGER</span>
-#<span class="k">exec</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">X11</span><span class="o">/</span><span class="nv">xinit</span><span class="o">/</span><span class="nv">xinitrc</span>
+<span class="c1"># Uncomment the following two lines for normal desktop:</span>
+<span class="c1">#unset SESSION_MANAGER</span>
+<span class="c1">#exec /etc/X11/xinit/xinitrc</span>
 
-[ <span class="o">-</span><span class="nv">x</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">vnc</span><span class="o">/</span><span class="nv">xstartup</span> ] <span class="o">&amp;&amp;</span> <span class="k">exec</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">vnc</span><span class="o">/</span><span class="nv">xstartup</span>
-[ <span class="o">-</span><span class="nv">r</span> $<span class="nv">HOME</span><span class="o">/</span>.<span class="nv">Xresources</span> ] <span class="o">&amp;&amp;</span> <span class="nv">xrdb</span> $<span class="nv">HOME</span><span class="o">/</span>.<span class="nv">Xresources</span>
-<span class="nv">xsetroot</span> <span class="o">-</span><span class="nv">solid</span> <span class="nv">grey</span>
-<span class="nv">vncconfig</span> <span class="o">-</span><span class="nv">iconic</span> <span class="o">-</span><span class="nv">nowin</span> <span class="o">&amp;</span>
-<span class="nv">x</span><span class="o">-</span><span class="nv">terminal</span><span class="o">-</span><span class="nv">emulator</span> <span class="o">-</span><span class="nv">geometry</span> <span class="mi">80</span><span class="nv">x24</span><span class="o">+</span><span class="mi">10</span><span class="o">+</span><span class="mi">10</span> <span class="o">-</span><span class="nv">ls</span> <span class="o">-</span><span class="nv">title</span> <span class="s2">&quot;</span><span class="s">$VNCDESKTOP Desktop</span><span class="s2">&quot;</span> <span class="o">&amp;</span>
-<span class="nv">x</span><span class="o">-</span><span class="nv">window</span><span class="o">-</span><span class="nv">manager</span> <span class="o">&amp;</span>
+<span class="o">[</span> -x /etc/vnc/xstartup <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exec</span> /etc/vnc/xstartup
+<span class="o">[</span> -r <span class="nv">$HOME</span>/.Xresources <span class="o">]</span> <span class="o">&amp;&amp;</span> xrdb <span class="nv">$HOME</span>/.Xresources
+xsetroot -solid grey
+vncconfig -iconic -nowin <span class="p">&amp;</span>
+x-terminal-emulator -geometry 80x24+10+10 -ls -title <span class="s2">&quot;</span><span class="nv">$VNCDESKTOP</span><span class="s2"> Desktop&quot;</span> <span class="p">&amp;</span>
+x-window-manager <span class="p">&amp;</span>
 
-#<span class="nv">These</span> <span class="nv">are</span> <span class="nv">newly</span> <span class="nv">added</span> <span class="nv">commands</span>
-<span class="nv">export</span> <span class="nv">XKL_XMODMAP_DISABLE</span><span class="o">=</span><span class="mi">1</span>
-<span class="nv">unset</span> <span class="nv">SESSION_MANAGER</span>
-<span class="nv">unset</span> <span class="nv">DBUS_SESSION_BUS_ADDRESS</span>
-<span class="nv">gnome</span><span class="o">-</span><span class="nv">panel</span> <span class="o">&amp;</span>
-<span class="nv">gnmoe</span><span class="o">-</span><span class="nv">settings</span><span class="o">-</span><span class="nv">daemon</span> <span class="o">&amp;</span>
-<span class="nv">metacity</span> <span class="o">&amp;</span>
-<span class="nv">nautilus</span> <span class="o">&amp;</span>
-<span class="nv">gnome</span><span class="o">-</span><span class="nv">terminal</span> <span class="o">&amp;</span>
+<span class="c1">#These are newly added commands</span>
+<span class="nb">export</span> <span class="nv">XKL_XMODMAP_DISABLE</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">unset</span> SESSION_MANAGER
+<span class="nb">unset</span> DBUS_SESSION_BUS_ADDRESS
+gnome-panel <span class="p">&amp;</span>
+gnmoe-settings-daemon <span class="p">&amp;</span>
+metacity <span class="p">&amp;</span>
+nautilus <span class="p">&amp;</span>
+gnome-terminal <span class="p">&amp;</span>
 </pre></div></p>
 <h3 id="restart-the-vnc-server-after-modification">Restart the VNC server after modification</h3>
-<p><code>shell script
-vncserver -kill :1
-vncserver</code></p>
+<div class="codehilite"><pre><span></span>vncserver -kill :1
+vncserver
+</pre></div>
+
 <h3 id="connected-to-vnc-from-your-desktop">Connected to VNC From your Desktop</h3>
 <p>Now you can connected to your VNC server desktop
 <img alt="VNC server" src="/imgs/vncserver/vnc-view-connected.png" /></p>
