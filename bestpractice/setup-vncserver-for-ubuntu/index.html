@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://hustakin.github.io/bestpractice/integrate-google-analytics-with-web-app/">
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/setup-vncserver-for-ubuntu/">
       
       
         <meta name="author" content="Frankie Fan">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Integrate Google Analytics with a web application</title>
+        <title>Using VNC to Operate a Desktop on Ubuntu 18.04</title>
       
     
     
@@ -112,6 +112,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#install-ubuntu-desktop-and-vnc-server" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -134,7 +138,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Integrate Google Analytics with a web application
+                Using VNC to Operate a Desktop on Ubuntu 18.04
               
             </span>
           
@@ -318,18 +322,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link">
-      Using VNC to Operate a Desktop on Ubuntu 18.04
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -337,11 +329,25 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
     
-    <a href="./" title="Integrate Google Analytics with a web application" class="md-nav__link md-nav__link--active">
-      Integrate Google Analytics with a web application
+    
+    <a href="./" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link md-nav__link--active">
+      Using VNC to Operate a Desktop on Ubuntu 18.04
     </a>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
+      Integrate Google Analytics with a web application
+    </a>
   </li>
 
         
@@ -597,35 +603,95 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Integrate Google Analytics with a web application</h1>
-                
-                <ol>
-<li>Goto the Google Analytics website. Create an account for the application</li>
-</ol>
-<p><img alt="/imgs/ga/ga-dashboard.png" src="/imgs/ga/ga-create-account.png" /></p>
-<ol>
-<li>Select the "Apps and web" if having both website and app.</li>
-</ol>
-<p><img alt="/imgs/ga/ga-select-apps-web.png" src="/imgs/ga/ga-select-apps-web.png" /></p>
-<ol>
-<li>Set up a data stream for the website</li>
-</ol>
-<p><img alt="/imgs/ga/ga-setup-data-stream.png" src="/imgs/ga/ga-setup-data-stream.png" /></p>
-<p><img alt="/imgs/ga/ga-setup-data-stream-2.png" src="/imgs/ga/ga-setup-data-stream-2.png" /></p>
-<ol>
-<li>Copy the created data stream gtag code into the header part of website.</li>
-</ol>
-<p><img alt="/imgs/ga/ga-cp-gtag.png" src="/imgs/ga/ga-cp-gtag.png" /></p>
-<ol>
-<li>Feel free to goto the Home or Realtime page to see the analytics.</li>
-</ol>
-<p><img alt="/imgs/ga/ga-dashboard.png" src="/imgs/ga/ga-dashboard.png" /></p>
+                <h3 id="install-ubuntu-desktop-and-vnc-server">Install ubuntu-desktop and VNC server</h3>
+<p>```shell script</p>
+<h1 id="update-the-package-sources">Update the package sources</h1>
+<p>sudo apt-get update
+sudo apt-get upgrade</p>
+<h1 id="install-ubuntu-desktop">Install ubuntu-desktop</h1>
+<p>sudo apt-get install ubuntu-desktop</p>
+<h1 id="install-vnc-server">Install VNC server</h1>
+<p>sudo apt-get install vnc4server</p>
+<h1 id="install-gnome-tools">Install gnome tools</h1>
+<p>sudo apt-get install gnome-core gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal</p>
+<h1 id="fix-the-vi-directiondelete-key-not-working-issue">Fix the vi direction/delete key not working issue</h1>
+<p>sudo apt-get remove vim-common
+sudo apt-get install vim</p>
+<h1 id="install-net-tools-to-test-network">Install net tools to test network</h1>
+<p>sudo apt install net-tools
+netstat -tulpn
+<div class="codehilite"><pre><span></span><span class="o">###</span> <span class="n">Launch</span> <span class="n">VNC</span> <span class="n">server</span> <span class="k">and</span> <span class="k">set</span> <span class="k">access</span> <span class="n">password</span>
+<span class="o">```</span><span class="n">shell</span> <span class="n">script</span>
+<span class="n">vncserver</span> <span class="p">:</span><span class="mi">1</span>
+
+<span class="o">#</span><span class="n">Telnet</span> <span class="k">to</span> <span class="n">test</span> <span class="n">VNC</span> <span class="n">server</span> <span class="n">it</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">running</span>
+<span class="n">telnet</span> <span class="n">localhost</span> <span class="mi">5901</span>
+</pre></div>
+<img alt="VNC server" src="/imgs/vncserver/launch-vnc.png" /></p>
+<h3 id="connecting-to-vnc-from-your-desktop">Connecting to VNC From your Desktop</h3>
+<p>Download and install the <a href="https://www.realvnc.com/en/connect/download/viewer/">RealVNC Viewer</a> on your laptop.
+Create a connection and specify your ubuntu address with the port 5901 and connect it, remember to input the password you just set.
+<img alt="VNC server" src="/imgs/vncserver/vnc-viewer-create.png" /></p>
+<h3 id="connecting-to-vnc-from-your-desktop_1">Connecting to VNC From your Desktop</h3>
+<p>You may see the blank Gnome desktop after you connect to your VNC server.
+<img alt="VNC server" src="/imgs/vncserver/vnc-connected-initial.png" /></p>
+<h3 id="fix-the-vnc-grey-screen-issue">Fix the VNC grey screen issue</h3>
+<p>You should modify the xstartup script to fix this issue.
+```shell script
+vi .vnc/xstartup
+<div class="codehilite"><pre><span></span><span class="nv">xstartup</span> <span class="nv">content</span>
+```<span class="nv">shell</span> <span class="nv">script</span>
+#<span class="o">!/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">sh</span>
+
+# <span class="nv">Uncomment</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">two</span> <span class="nv">lines</span> <span class="k">for</span> <span class="nv">normal</span> <span class="nv">desktop</span>:
+#<span class="nv">unset</span> <span class="nv">SESSION_MANAGER</span>
+#<span class="k">exec</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">X11</span><span class="o">/</span><span class="nv">xinit</span><span class="o">/</span><span class="nv">xinitrc</span>
+
+[ <span class="o">-</span><span class="nv">x</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">vnc</span><span class="o">/</span><span class="nv">xstartup</span> ] <span class="o">&amp;&amp;</span> <span class="k">exec</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">vnc</span><span class="o">/</span><span class="nv">xstartup</span>
+[ <span class="o">-</span><span class="nv">r</span> $<span class="nv">HOME</span><span class="o">/</span>.<span class="nv">Xresources</span> ] <span class="o">&amp;&amp;</span> <span class="nv">xrdb</span> $<span class="nv">HOME</span><span class="o">/</span>.<span class="nv">Xresources</span>
+<span class="nv">xsetroot</span> <span class="o">-</span><span class="nv">solid</span> <span class="nv">grey</span>
+<span class="nv">vncconfig</span> <span class="o">-</span><span class="nv">iconic</span> <span class="o">-</span><span class="nv">nowin</span> <span class="o">&amp;</span>
+<span class="nv">x</span><span class="o">-</span><span class="nv">terminal</span><span class="o">-</span><span class="nv">emulator</span> <span class="o">-</span><span class="nv">geometry</span> <span class="mi">80</span><span class="nv">x24</span><span class="o">+</span><span class="mi">10</span><span class="o">+</span><span class="mi">10</span> <span class="o">-</span><span class="nv">ls</span> <span class="o">-</span><span class="nv">title</span> <span class="s2">&quot;</span><span class="s">$VNCDESKTOP Desktop</span><span class="s2">&quot;</span> <span class="o">&amp;</span>
+<span class="nv">x</span><span class="o">-</span><span class="nv">window</span><span class="o">-</span><span class="nv">manager</span> <span class="o">&amp;</span>
+
+#<span class="nv">These</span> <span class="nv">are</span> <span class="nv">newly</span> <span class="nv">added</span> <span class="nv">commands</span>
+<span class="nv">export</span> <span class="nv">XKL_XMODMAP_DISABLE</span><span class="o">=</span><span class="mi">1</span>
+<span class="nv">unset</span> <span class="nv">SESSION_MANAGER</span>
+<span class="nv">unset</span> <span class="nv">DBUS_SESSION_BUS_ADDRESS</span>
+<span class="nv">gnome</span><span class="o">-</span><span class="nv">panel</span> <span class="o">&amp;</span>
+<span class="nv">gnmoe</span><span class="o">-</span><span class="nv">settings</span><span class="o">-</span><span class="nv">daemon</span> <span class="o">&amp;</span>
+<span class="nv">metacity</span> <span class="o">&amp;</span>
+<span class="nv">nautilus</span> <span class="o">&amp;</span>
+<span class="nv">gnome</span><span class="o">-</span><span class="nv">terminal</span> <span class="o">&amp;</span>
+</pre></div></p>
+<h3 id="restart-the-vnc-server-after-modification">Restart the VNC server after modification</h3>
+<p><code>shell script
+vncserver -kill :1
+vncserver</code></p>
+<h3 id="connected-to-vnc-from-your-desktop">Connected to VNC From your Desktop</h3>
+<p>Now you can connected to your VNC server desktop
+<img alt="VNC server" src="/imgs/vncserver/vnc-view-connected.png" /></p>
                 
                   
                 
@@ -646,7 +712,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../devops/getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -655,19 +721,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Using VNC to Operate a Desktop on Ubuntu 18.04
+                Getting started with Vagrant
               </span>
             </div>
           </a>
         
         
-          <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Adding beautiful badges into the markdown
+                Integrate Google Analytics with a web application
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
