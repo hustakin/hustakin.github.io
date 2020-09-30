@@ -1,14 +1,10 @@
 
-
-
-
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
         <link rel="canonical" href="https://hustakin.github.io/devops/getting-started-with-kubernetes/">
@@ -16,153 +12,119 @@
       
         <meta name="author" content="Frankie Fan">
       
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
     
     
       
-        <title>Getting started with Kubernetes</title>
+        <title>Getting started with Kubernetes - Frankie Fan's Memos</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
-      
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
-      
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
       
         
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
         
-        <meta name="theme-color" content="#009688">
+          
+          
+          <meta name="theme-color" content="#009485">
+        
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
-    
     
       
+        
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
     
       
         
-<script>
-  window.ga = window.ga || function() {
-    (ga.q = ga.q || []).push(arguments)
-  }
-  ga.l = +new Date
-  /* Setup integration and send page view */
-  ga("create", "UA-146443611-1", "auto")
-  ga("set", "anonymizeIp", true)
-  ga("send", "pageview")
-  /* Register handler to log search on blur */
-  document.addEventListener("DOMContentLoaded", () => {
-    if (document.forms.search) {
-      var query = document.forms.search.query
-      query.addEventListener("blur", function() {
-        if (this.value) {
-          var path = document.location.pathname;
-          ga("send", "pageview", path + "?q=" + this.value)
-        }
-      })
-    }
-  })
-</script>
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-146443611-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
 <script async src="https://www.google-analytics.com/analytics.js"></script>
       
     
     
   </head>
   
-    
-    
-    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-      </defs>
-    </svg>
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+      
+  
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-    
-      <a href="#install-on-linux-cluster" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#install-on-linux-cluster" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
     
       <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              Frankie Fan's Memos
-            </span>
-            <span class="md-header-nav__topic">
-              
-                Getting started with Kubernetes
-              
-            </span>
-          
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Frankie Fan's Memos
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Getting started with Kubernetes
+            
+          </span>
         </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
       </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
+        <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Initializing search
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -170,31 +132,30 @@
     </div>
   </div>
 </div>
-        
-      </div>
-      
-    </div>
+    
+    
   </nav>
 </header>
     
-    <div class="md-container">
+    <div class="md-container" data-md-component="container">
+      
       
         
       
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
           
             
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
-        <i class="md-icon"></i>
-      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
     </a>
     Frankie Fan's Memos
   </label>
@@ -222,13 +183,15 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       DevOps
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         DevOps
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -267,11 +230,12 @@
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Getting started with Kubernetes
+        <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" title="Getting started with Kubernetes" class="md-nav__link md-nav__link--active">
@@ -279,58 +243,61 @@
     </a>
     
       
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-on-linux-cluster" title="Install on linux cluster" class="md-nav__link">
+  <a href="#install-on-linux-cluster" class="md-nav__link">
     Install on linux cluster
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Install on linux cluster">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#compile-kubernetes" title="Compile kubernetes" class="md-nav__link">
+  <a href="#compile-kubernetes" class="md-nav__link">
     Compile kubernetes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-master-node" title="Install master node" class="md-nav__link">
+  <a href="#install-master-node" class="md-nav__link">
     Install master node
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-slave-node" title="Install slave node" class="md-nav__link">
+  <a href="#install-slave-node" class="md-nav__link">
     Install slave node
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-metrics-server" title="Install metrics server" class="md-nav__link">
+  <a href="#install-metrics-server" class="md-nav__link">
     Install metrics server
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-prometheus" title="Install prometheus" class="md-nav__link">
+  <a href="#install-prometheus" class="md-nav__link">
     Install prometheus
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-helm" title="Install helm" class="md-nav__link">
+  <a href="#install-helm" class="md-nav__link">
     Install helm
   </a>
   
@@ -342,57 +309,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#traefik" title="Traefik" class="md-nav__link">
+  <a href="#traefik" class="md-nav__link">
     Traefik
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Traefik">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-traefik-toml" title="Create Traefik toml" class="md-nav__link">
+  <a href="#create-traefik-toml" class="md-nav__link">
     Create Traefik toml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-yaml" title="Create Traefik yaml" class="md-nav__link">
+  <a href="#create-traefik-yaml" class="md-nav__link">
     Create Traefik yaml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-rbac" title="Create Traefik rbac" class="md-nav__link">
+  <a href="#create-traefik-rbac" class="md-nav__link">
     Create Traefik rbac
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-web-ui-ingress" title="Create Traefik web-ui ingress" class="md-nav__link">
+  <a href="#create-traefik-web-ui-ingress" class="md-nav__link">
     Create Traefik web-ui ingress
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-https-cert" title="Create Traefik HTTPS cert" class="md-nav__link">
+  <a href="#create-traefik-https-cert" class="md-nav__link">
     Create Traefik HTTPS cert
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#renew-traefik-https-cert" title="Renew Traefik HTTPS cert" class="md-nav__link">
+  <a href="#renew-traefik-https-cert" class="md-nav__link">
     Renew Traefik HTTPS cert
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-traefiktoml" title="Update Traefik.toml" class="md-nav__link">
+  <a href="#update-traefiktoml" class="md-nav__link">
     Update Traefik.toml
   </a>
   
@@ -404,43 +371,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-dashboard-for-local" title="Kubernetes Dashboard for local" class="md-nav__link">
+  <a href="#kubernetes-dashboard-for-local" class="md-nav__link">
     Kubernetes Dashboard for local
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Kubernetes Dashboard for local">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-service-account" title="Create service account" class="md-nav__link">
+  <a href="#create-service-account" class="md-nav__link">
     Create service account
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-role-binding" title="Create role binding" class="md-nav__link">
+  <a href="#create-role-binding" class="md-nav__link">
     Create role binding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-yaml" title="Apply yaml" class="md-nav__link">
+  <a href="#apply-yaml" class="md-nav__link">
     Apply yaml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#retrieve-login-token" title="Retrieve login token" class="md-nav__link">
+  <a href="#retrieve-login-token" class="md-nav__link">
     Retrieve login token
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-dashboard" title="Install dashboard" class="md-nav__link">
+  <a href="#install-dashboard" class="md-nav__link">
     Install dashboard
   </a>
   
@@ -452,64 +419,64 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-dashboard-for-public" title="Kubernetes Dashboard for public" class="md-nav__link">
+  <a href="#kubernetes-dashboard-for-public" class="md-nav__link">
     Kubernetes Dashboard for public
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Kubernetes Dashboard for public">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-certificates" title="Create certificates" class="md-nav__link">
+  <a href="#create-certificates" class="md-nav__link">
     Create certificates
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-dashboard_1" title="Install dashboard" class="md-nav__link">
+  <a href="#install-dashboard_1" class="md-nav__link">
     Install dashboard
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-psp" title="Create PSP" class="md-nav__link">
+  <a href="#create-psp" class="md-nav__link">
     Create PSP
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-role" title="Create role" class="md-nav__link">
+  <a href="#create-role" class="md-nav__link">
     Create role
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-role-and-account" title="Bind role and account" class="md-nav__link">
+  <a href="#bind-role-and-account" class="md-nav__link">
     Bind role and account
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#expose-service-on-nodeport" title="Expose service on NodePort" class="md-nav__link">
+  <a href="#expose-service-on-nodeport" class="md-nav__link">
     Expose service on NodePort
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#navigate-the-dashboard-publicly" title="Navigate the dashboard publicly" class="md-nav__link">
+  <a href="#navigate-the-dashboard-publicly" class="md-nav__link">
     Navigate the dashboard publicly
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#expose-traefik-ingress" title="Expose Traefik ingress" class="md-nav__link">
+  <a href="#expose-traefik-ingress" class="md-nav__link">
     Expose Traefik ingress
   </a>
   
@@ -521,36 +488,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scenarios" title="Scenarios" class="md-nav__link">
+  <a href="#scenarios" class="md-nav__link">
     Scenarios
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Scenarios">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#run-a-busybox-container" title="Run a busybox container" class="md-nav__link">
+  <a href="#run-a-busybox-container" class="md-nav__link">
     Run a busybox container
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user-docker-hub-secret-in-pods" title="User docker hub secret in pods" class="md-nav__link">
+  <a href="#user-docker-hub-secret-in-pods" class="md-nav__link">
     User docker hub secret in pods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-storage-class" title="Default storage class" class="md-nav__link">
+  <a href="#default-storage-class" class="md-nav__link">
     Default storage class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-mongodb-with-two-db-auth-settings" title="Create MongoDB with two DB auth settings" class="md-nav__link">
+  <a href="#create-mongodb-with-two-db-auth-settings" class="md-nav__link">
     Create MongoDB with two DB auth settings
   </a>
   
@@ -562,15 +529,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-commands" title="Useful commands" class="md-nav__link">
+  <a href="#useful-commands" class="md-nav__link">
     Useful commands
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -615,13 +578,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Best Practice
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Best Practice" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
         Best Practice
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -795,13 +760,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Tools 101
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Tools 101" data-md-level="1">
       <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
         Tools 101
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -843,13 +810,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Life Experience
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Life Experience" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
         Life Experience
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -907,58 +876,61 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-on-linux-cluster" title="Install on linux cluster" class="md-nav__link">
+  <a href="#install-on-linux-cluster" class="md-nav__link">
     Install on linux cluster
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Install on linux cluster">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#compile-kubernetes" title="Compile kubernetes" class="md-nav__link">
+  <a href="#compile-kubernetes" class="md-nav__link">
     Compile kubernetes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-master-node" title="Install master node" class="md-nav__link">
+  <a href="#install-master-node" class="md-nav__link">
     Install master node
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-slave-node" title="Install slave node" class="md-nav__link">
+  <a href="#install-slave-node" class="md-nav__link">
     Install slave node
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-metrics-server" title="Install metrics server" class="md-nav__link">
+  <a href="#install-metrics-server" class="md-nav__link">
     Install metrics server
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-prometheus" title="Install prometheus" class="md-nav__link">
+  <a href="#install-prometheus" class="md-nav__link">
     Install prometheus
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-helm" title="Install helm" class="md-nav__link">
+  <a href="#install-helm" class="md-nav__link">
     Install helm
   </a>
   
@@ -970,57 +942,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#traefik" title="Traefik" class="md-nav__link">
+  <a href="#traefik" class="md-nav__link">
     Traefik
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Traefik">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-traefik-toml" title="Create Traefik toml" class="md-nav__link">
+  <a href="#create-traefik-toml" class="md-nav__link">
     Create Traefik toml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-yaml" title="Create Traefik yaml" class="md-nav__link">
+  <a href="#create-traefik-yaml" class="md-nav__link">
     Create Traefik yaml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-rbac" title="Create Traefik rbac" class="md-nav__link">
+  <a href="#create-traefik-rbac" class="md-nav__link">
     Create Traefik rbac
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-web-ui-ingress" title="Create Traefik web-ui ingress" class="md-nav__link">
+  <a href="#create-traefik-web-ui-ingress" class="md-nav__link">
     Create Traefik web-ui ingress
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-traefik-https-cert" title="Create Traefik HTTPS cert" class="md-nav__link">
+  <a href="#create-traefik-https-cert" class="md-nav__link">
     Create Traefik HTTPS cert
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#renew-traefik-https-cert" title="Renew Traefik HTTPS cert" class="md-nav__link">
+  <a href="#renew-traefik-https-cert" class="md-nav__link">
     Renew Traefik HTTPS cert
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-traefiktoml" title="Update Traefik.toml" class="md-nav__link">
+  <a href="#update-traefiktoml" class="md-nav__link">
     Update Traefik.toml
   </a>
   
@@ -1032,43 +1004,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-dashboard-for-local" title="Kubernetes Dashboard for local" class="md-nav__link">
+  <a href="#kubernetes-dashboard-for-local" class="md-nav__link">
     Kubernetes Dashboard for local
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Kubernetes Dashboard for local">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-service-account" title="Create service account" class="md-nav__link">
+  <a href="#create-service-account" class="md-nav__link">
     Create service account
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-role-binding" title="Create role binding" class="md-nav__link">
+  <a href="#create-role-binding" class="md-nav__link">
     Create role binding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-yaml" title="Apply yaml" class="md-nav__link">
+  <a href="#apply-yaml" class="md-nav__link">
     Apply yaml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#retrieve-login-token" title="Retrieve login token" class="md-nav__link">
+  <a href="#retrieve-login-token" class="md-nav__link">
     Retrieve login token
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-dashboard" title="Install dashboard" class="md-nav__link">
+  <a href="#install-dashboard" class="md-nav__link">
     Install dashboard
   </a>
   
@@ -1080,64 +1052,64 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-dashboard-for-public" title="Kubernetes Dashboard for public" class="md-nav__link">
+  <a href="#kubernetes-dashboard-for-public" class="md-nav__link">
     Kubernetes Dashboard for public
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Kubernetes Dashboard for public">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-certificates" title="Create certificates" class="md-nav__link">
+  <a href="#create-certificates" class="md-nav__link">
     Create certificates
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-dashboard_1" title="Install dashboard" class="md-nav__link">
+  <a href="#install-dashboard_1" class="md-nav__link">
     Install dashboard
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-psp" title="Create PSP" class="md-nav__link">
+  <a href="#create-psp" class="md-nav__link">
     Create PSP
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-role" title="Create role" class="md-nav__link">
+  <a href="#create-role" class="md-nav__link">
     Create role
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-role-and-account" title="Bind role and account" class="md-nav__link">
+  <a href="#bind-role-and-account" class="md-nav__link">
     Bind role and account
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#expose-service-on-nodeport" title="Expose service on NodePort" class="md-nav__link">
+  <a href="#expose-service-on-nodeport" class="md-nav__link">
     Expose service on NodePort
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#navigate-the-dashboard-publicly" title="Navigate the dashboard publicly" class="md-nav__link">
+  <a href="#navigate-the-dashboard-publicly" class="md-nav__link">
     Navigate the dashboard publicly
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#expose-traefik-ingress" title="Expose Traefik ingress" class="md-nav__link">
+  <a href="#expose-traefik-ingress" class="md-nav__link">
     Expose Traefik ingress
   </a>
   
@@ -1149,36 +1121,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scenarios" title="Scenarios" class="md-nav__link">
+  <a href="#scenarios" class="md-nav__link">
     Scenarios
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Scenarios">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#run-a-busybox-container" title="Run a busybox container" class="md-nav__link">
+  <a href="#run-a-busybox-container" class="md-nav__link">
     Run a busybox container
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user-docker-hub-secret-in-pods" title="User docker hub secret in pods" class="md-nav__link">
+  <a href="#user-docker-hub-secret-in-pods" class="md-nav__link">
     User docker hub secret in pods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-storage-class" title="Default storage class" class="md-nav__link">
+  <a href="#default-storage-class" class="md-nav__link">
     Default storage class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-mongodb-with-two-db-auth-settings" title="Create MongoDB with two DB auth settings" class="md-nav__link">
+  <a href="#create-mongodb-with-two-db-auth-settings" class="md-nav__link">
     Create MongoDB with two DB auth settings
   </a>
   
@@ -1190,15 +1162,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-commands" title="Useful commands" class="md-nav__link">
+  <a href="#useful-commands" class="md-nav__link">
     Useful commands
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -1221,13 +1189,13 @@
 <!-- more --></p>
 <h2 id="install-on-linux-cluster">Install on linux cluster</h2>
 <h3 id="compile-kubernetes">Compile kubernetes</h3>
-<div class="codehilite"><pre><span></span>git clone https://github.com/kubernetes/kubernetes.git
+<div class="highlight"><pre><span></span><code>git clone https://github.com/kubernetes/kubernetes.git
 <span class="nb">cd</span> kubernetes
 make release
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-master-node">Install master node</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Add repos</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Add repos</span>
 cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
 <span class="s">[kubernetes]</span>
 <span class="s">name=Kubernetes</span>
@@ -1262,31 +1230,31 @@ kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
 mkdir -p <span class="nv">$HOME</span>/.kube
 sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
 sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-slave-node">Install slave node</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Run on master node to get the join commands</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Run on master node to get the join commands</span>
 sudo kubeadm token create --print-join-command
 
 <span class="c1">#Copy the join commands and run on slave node</span>
 kubeadm join &lt;master-ip&gt;:6443 --token 2kjo2d.8qno0vzvbgabp1e8 --discovery-token-ca-cert-hash sha256:2f1ebea7d7369a2d18b58f2926573e193e13ef7525649df1740ddb87963e1315
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-metrics-server">Install metrics server</h3>
-<div class="codehilite"><pre><span></span>git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+<div class="highlight"><pre><span></span><code>git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 kubectl create -f kubernetes-metrics-server/
 kubectl top nodes
 kubectl top pods
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-prometheus">Install prometheus</h3>
-<div class="codehilite"><pre><span></span>kubectl apply --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml
+<div class="highlight"><pre><span></span><code>kubectl apply --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml
 <span class="c1">#Maybe you should download the manifests-all.yaml and customize it yourself. For example, you would add Grafana configuration in it.</span>
 <span class="c1">#Create Traefik ingress yaml and apply</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-helm">Install helm</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Download helm tar.gz file from https://github.com/helm/helm/releases</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Download helm tar.gz file from https://github.com/helm/helm/releases</span>
 tar -zxvf helm-v2.14.1-linux-amd64.tar.gz
 sudo cp linux-amd64/helm /usr/local/bin
 helm init
@@ -1294,11 +1262,11 @@ helm version
 kubectl get pod -n kube-system -l <span class="nv">app</span><span class="o">=</span>helm
 kubectl create -f rbac.yml
 kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&#39;{&quot;spec&quot;:{&quot;template&quot;:{&quot;spec&quot;:{&quot;serviceAccount&quot;:&quot;tiller&quot;}}}}&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="traefik">Traefik</h2>
 <h3 id="create-traefik-toml">Create Traefik toml</h3>
-<div class="codehilite"><pre><span></span><span class="n">defaultEntryPoints</span> <span class="o">=</span> <span class="k">[&quot;http&quot;,&quot;https&quot;]</span>
+<div class="highlight"><pre><span></span><code><span class="n">defaultEntryPoints</span> <span class="o">=</span> <span class="k">[&quot;http&quot;,&quot;https&quot;]</span>
 <span class="c1"># Enable inner-cluster https navigation</span>
 <span class="n">insecureSkipVerify</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="k">[entryPoints]</span>
@@ -1316,10 +1284,10 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
   <span class="k">[metrics.prometheus]</span>
     <span class="n">entryPoint</span> <span class="o">=</span> <span class="s">&quot;traefik&quot;</span>
     <span class="n">buckets</span> <span class="o">=</span> <span class="k">[0.1, 0.3, 1.2, 5.0]</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-traefik-yaml">Create Traefik yaml</h3>
-<div class="codehilite"><pre><span></span><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-controller</span>
@@ -1392,10 +1360,10 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
       <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
       <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
   <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodePort</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-traefik-rbac">Create Traefik rbac</h3>
-<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-controller</span>
@@ -1437,10 +1405,10 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
   <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
     <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-controller</span>
     <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-traefik-web-ui-ingress">Create Traefik web-ui ingress</h3>
-<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-web-ui</span>
@@ -1455,10 +1423,10 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
           <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-service</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-traefik-https-cert">Create Traefik HTTPS cert</h3>
-<div class="codehilite"><pre><span></span>sudo -s
+<div class="highlight"><pre><span></span><code>sudo -s
 <span class="nb">cd</span> /etc/letsencrypt/live/<span class="o">[</span>domain<span class="o">]</span>
 <span class="c1">#Update https cert keys and go to domain management console to modify the txt record</span>
 kubectl create secret generic traefik-cert --from-file<span class="o">=</span>privkey.pem --from-file<span class="o">=</span>cert.pem -n kube-system
@@ -1466,36 +1434,36 @@ cp cert.pem privkey.pem /etc/kubernetes/ssl/
 <span class="c1">#exit and go to the traefik k8s scripts folder</span>
 kubectl create configmap traefik-conf --from-file<span class="o">=</span>traefik.toml -n kube-system
 kubectl get cm -n kube-system
-</pre></div>
+</code></pre></div>
 
 <h3 id="renew-traefik-https-cert">Renew Traefik HTTPS cert</h3>
-<div class="codehilite"><pre><span></span>kubectl delete secret traefik-cert -n kube-system
+<div class="highlight"><pre><span></span><code>kubectl delete secret traefik-cert -n kube-system
 kubectl delete configmap traefik-conf -n kube-system
 kubectl delete -f traefik.yml
 <span class="c1">#Re-run the above &quot;Create Traefik HTTPS cert&quot; steps</span>
 kubectl create -f traefik.yml
-</pre></div>
+</code></pre></div>
 
 <h3 id="update-traefiktoml">Update Traefik.toml</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Firstly modify the traefik.toml</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Firstly modify the traefik.toml</span>
 kubectl delete configmap traefik-conf -n kube-system
 kubectl create configmap traefik-conf --from-file<span class="o">=</span>traefik.toml -n kube-system
 kubectl delete -f traefik.yml
 kubectl create -f traefik.yml
-</pre></div>
+</code></pre></div>
 
 <h2 id="kubernetes-dashboard-for-local">Kubernetes Dashboard for local</h2>
 <h3 id="create-service-account">Create service account</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#admin-user.yaml</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#admin-user.yaml</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin-user</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-role-binding">Create role binding</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#admin-user-role-binding.yaml</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#admin-user-role-binding.yaml</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -1508,48 +1476,48 @@ kubectl create -f traefik.yml
 <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin-user</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="apply-yaml">Apply yaml</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Apply service account</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Apply service account</span>
 kubectl create -f admin-user.yaml
 
 <span class="c1">#Apply role binding</span>
 kubectl create -f admin-user-role-binding.yaml
-</pre></div>
+</code></pre></div>
 
 <h3 id="retrieve-login-token">Retrieve login token</h3>
-<div class="codehilite"><pre><span></span>kubectl -n kube-system describe secret <span class="k">$(</span>kubectl -n kube-system get secret <span class="p">|</span> grep admin-user <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>kubectl -n kube-system describe secret <span class="k">$(</span>kubectl -n kube-system get secret <span class="p">|</span> grep admin-user <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+</code></pre></div>
 
 <h3 id="install-dashboard">Install dashboard</h3>
-<div class="codehilite"><pre><span></span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+<div class="highlight"><pre><span></span><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
 
 <span class="c1">#Create proxy to allow only localhost navigating</span>
 kubectl proxy
 kubectl proxy --address<span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span> --accept-hosts<span class="o">=</span><span class="s1">&#39;^*$&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="kubernetes-dashboard-for-public">Kubernetes Dashboard for public</h2>
 <h3 id="create-certificates">Create certificates</h3>
-<div class="codehilite"><pre><span></span>mkdir <span class="nv">$HOME</span>/certs
+<div class="highlight"><pre><span></span><code>mkdir <span class="nv">$HOME</span>/certs
 <span class="nb">cd</span> <span class="nv">$HOME</span>/certs
 openssl genrsa -out dashboard.key <span class="m">2048</span>
 openssl rsa -in dashboard.key -out dashboard.key
 openssl req -sha256 -new -key dashboard.key -out dashboard.csr -subj <span class="s1">&#39;/CN=localhost&#39;</span>
 openssl x509 -req -sha256 -days <span class="m">365</span> -in dashboard.csr -signkey dashboard.key -out dashboard.crt
 kubectl -n kube-system create secret generic kubernetes-dashboard-certs --from-file<span class="o">=</span><span class="nv">$HOME</span>/certs
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-dashboard_1">Install dashboard</h3>
-<div class="codehilite"><pre><span></span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+<div class="highlight"><pre><span></span><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
 <span class="c1">#Wait and check if the replica set is fulfilled</span>
 kubectl -n kube-system get rs
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-psp">Create PSP</h3>
-<div class="codehilite"><pre><span></span>kubectl -n kube-system create -f - <span class="s">&lt;&lt;EOF</span>
+<div class="highlight"><pre><span></span><code>kubectl -n kube-system create -f - <span class="s">&lt;&lt;EOF</span>
 <span class="s">apiVersion: extensions/v1beta1</span>
 <span class="s">kind: PodSecurityPolicy</span>
 <span class="s">metadata:</span>
@@ -1567,32 +1535,32 @@ kubectl -n kube-system get rs
 <span class="s">  volumes:</span>
 <span class="s">  - &#39;*&#39;</span>
 <span class="s">EOF</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-role">Create role</h3>
-<div class="codehilite"><pre><span></span>kubectl -n kube-system create role psp:dashboard --verb<span class="o">=</span>use --resource<span class="o">=</span>podsecuritypolicy --resource-name<span class="o">=</span>dashboard
-</pre></div>
+<div class="highlight"><pre><span></span><code>kubectl -n kube-system create role psp:dashboard --verb<span class="o">=</span>use --resource<span class="o">=</span>podsecuritypolicy --resource-name<span class="o">=</span>dashboard
+</code></pre></div>
 
 <h3 id="bind-role-and-account">Bind role and account</h3>
-<div class="codehilite"><pre><span></span>kubectl -n kube-system create rolebinding kubernetes-dashboard-policy --role<span class="o">=</span>psp:dashboard --serviceaccount<span class="o">=</span>kube-system:kubernetes-dashboard
+<div class="highlight"><pre><span></span><code>kubectl -n kube-system create rolebinding kubernetes-dashboard-policy --role<span class="o">=</span>psp:dashboard --serviceaccount<span class="o">=</span>kube-system:kubernetes-dashboard
 kubectl --as<span class="o">=</span>system:serviceaccount:kube-system:kubernetes-dashboard -n kube-system auth can-i use podsecuritypolicy/dashboard
-</pre></div>
+</code></pre></div>
 
 <h3 id="expose-service-on-nodeport">Expose service on NodePort</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Edit the kubernetes-dashboard service and change the following options:</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Edit the kubernetes-dashboard service and change the following options:</span>
 <span class="c1">#   spec.type from ClusterIP to NodePort</span>
 *   spec.ports<span class="o">[</span><span class="m">0</span><span class="o">]</span>.nodePort from <span class="m">32641</span> to whatever port you want it to be exposed on
 kubectl -n kube-system edit service kubernetes-dashboard
 kubectl -n kube-system get services
-</pre></div>
+</code></pre></div>
 
 <h3 id="navigate-the-dashboard-publicly">Navigate the dashboard publicly</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Configure the dns in the domain provider console</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Configure the dns in the domain provider console</span>
 https://<span class="o">[</span>domain<span class="o">]</span>:30104/
-</pre></div>
+</code></pre></div>
 
 <h3 id="expose-traefik-ingress">Expose Traefik ingress</h3>
-<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dashboard-ingress</span>
@@ -1606,15 +1574,15 @@ https://<span class="o">[</span>domain<span class="o">]</span>:30104/
             <span class="nt">backend</span><span class="p">:</span>
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">443</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="scenarios">Scenarios</h2>
 <h3 id="run-a-busybox-container">Run a busybox container</h3>
-<div class="codehilite"><pre><span></span>kubectl run -i --tty --image busybox <span class="nb">test</span> --restart<span class="o">=</span>Never --rm /bin/sh
-</pre></div>
+<div class="highlight"><pre><span></span><code>kubectl run -i --tty --image busybox <span class="nb">test</span> --restart<span class="o">=</span>Never --rm /bin/sh
+</code></pre></div>
 
 <h3 id="user-docker-hub-secret-in-pods">User docker hub secret in pods</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#docker login and get the file: ~/.docker/config.json</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#docker login and get the file: ~/.docker/config.json</span>
 docker login
 kubectl create secret generic docker-hub --from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span>~/.docker/config.json --type<span class="o">=</span>kubernetes.io/dockerconfigjson --namespace<span class="o">=</span><span class="nb">test</span>
 
@@ -1636,10 +1604,10 @@ spec:
           image: demo/test-server
       imagePullSecrets:
         - name: docker-hub
-</pre></div>
+</code></pre></div>
 
 <h3 id="default-storage-class">Default storage class</h3>
-<div class="codehilite"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">StorageClass</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">standard</span>
@@ -1650,10 +1618,10 @@ spec:
 <span class="nt">mountOptions</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
 <span class="nt">volumeBindingMode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Immediate</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="create-mongodb-with-two-db-auth-settings">Create MongoDB with two DB auth settings</h3>
-<div class="codehilite"><pre><span></span><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dev-mongodb</span>
@@ -1773,7 +1741,7 @@ spec:
   <span class="nt">resources</span><span class="p">:</span>
     <span class="nt">requests</span><span class="p">:</span>
       <span class="nt">storage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="useful-commands">Useful commands</h2>
 <table>
@@ -1844,34 +1812,34 @@ spec:
 <footer class="md-footer">
   
     <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../important-docker-commands/" title="Important Docker commands" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+          <a href="../important-docker-commands/" title="Important Docker commands" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
                 Important Docker commands
-              </span>
+              </div>
             </div>
           </a>
         
         
-          <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
+          <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
                 Amazon EC2 101
-              </span>
+              </div>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
             </div>
           </a>
         
@@ -1886,21 +1854,49 @@ spec:
             Copyright &copy; 2020 Frankie Fan
           </div>
         
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
       </div>
       
   <div class="md-footer-social">
-    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+      
+      
+        
+        
+      
+      <a href="https://github.com/hustakin" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
     
-      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+      
+      
+        
+        
+      
+      <a href="https://linkedin.com/in/hustakin" target="_blank" rel="noopener" title="linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
     
-      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/hustakin" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://instagram.com/hustakin" target="_blank" rel="noopener" title="instagram.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+      </a>
     
   </div>
 
@@ -1910,9 +1906,18 @@ spec:
       
     </div>
     
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
       
     
   </body>

@@ -1,14 +1,10 @@
 
-
-
-
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
         <link rel="canonical" href="https://hustakin.github.io/devops/important-docker-commands/">
@@ -16,153 +12,119 @@
       
         <meta name="author" content="Frankie Fan">
       
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
     
     
       
-        <title>Important Docker commands</title>
+        <title>Important Docker commands - Frankie Fan's Memos</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
-      
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
-      
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
       
         
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
         
-        <meta name="theme-color" content="#009688">
+          
+          
+          <meta name="theme-color" content="#009485">
+        
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
-    
     
       
+        
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
     
       
         
-<script>
-  window.ga = window.ga || function() {
-    (ga.q = ga.q || []).push(arguments)
-  }
-  ga.l = +new Date
-  /* Setup integration and send page view */
-  ga("create", "UA-146443611-1", "auto")
-  ga("set", "anonymizeIp", true)
-  ga("send", "pageview")
-  /* Register handler to log search on blur */
-  document.addEventListener("DOMContentLoaded", () => {
-    if (document.forms.search) {
-      var query = document.forms.search.query
-      query.addEventListener("blur", function() {
-        if (this.value) {
-          var path = document.location.pathname;
-          ga("send", "pageview", path + "?q=" + this.value)
-        }
-      })
-    }
-  })
-</script>
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-146443611-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
 <script async src="https://www.google-analytics.com/analytics.js"></script>
       
     
     
   </head>
   
-    
-    
-    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-      </defs>
-    </svg>
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+      
+  
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-    
-      <a href="#install" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#install" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
     
       <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              Frankie Fan's Memos
-            </span>
-            <span class="md-header-nav__topic">
-              
-                Important Docker commands
-              
-            </span>
-          
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Frankie Fan's Memos
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Important Docker commands
+            
+          </span>
         </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
       </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
+        <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Initializing search
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -170,31 +132,30 @@
     </div>
   </div>
 </div>
-        
-      </div>
-      
-    </div>
+    
+    
   </nav>
 </header>
     
-    <div class="md-container">
+    <div class="md-container" data-md-component="container">
+      
       
         
       
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
           
             
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
-        <i class="md-icon"></i>
-      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
     </a>
     Frankie Fan's Memos
   </label>
@@ -222,13 +183,15 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       DevOps
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         DevOps
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -255,11 +218,12 @@
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Important Docker commands
+        <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" title="Important Docker commands" class="md-nav__link md-nav__link--active">
@@ -267,58 +231,61 @@
     </a>
     
       
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install" title="Install" class="md-nav__link">
+  <a href="#install" class="md-nav__link">
     Install
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Install">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-docker" title="Install Docker" class="md-nav__link">
+  <a href="#install-docker" class="md-nav__link">
     Install Docker
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-docker-machine" title="Install Docker-machine" class="md-nav__link">
+  <a href="#install-docker-machine" class="md-nav__link">
     Install Docker-machine
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-docker-compose" title="Install Docker-compose" class="md-nav__link">
+  <a href="#install-docker-compose" class="md-nav__link">
     Install Docker-compose
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-fig" title="Install Fig" class="md-nav__link">
+  <a href="#install-fig" class="md-nav__link">
     Install Fig
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-shipyard" title="Install Shipyard" class="md-nav__link">
+  <a href="#install-shipyard" class="md-nav__link">
     Install Shipyard
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-rancher" title="Install Rancher" class="md-nav__link">
+  <a href="#install-rancher" class="md-nav__link">
     Install Rancher
   </a>
   
@@ -330,71 +297,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-containers" title="Docker containers" class="md-nav__link">
+  <a href="#docker-containers" class="md-nav__link">
     Docker containers
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Docker containers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#nsenter" title="nsenter" class="md-nav__link">
+  <a href="#nsenter" class="md-nav__link">
     nsenter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vsftpd" title="VSFTPD" class="md-nav__link">
+  <a href="#vsftpd" class="md-nav__link">
     VSFTPD
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mysql" title="MySQL" class="md-nav__link">
+  <a href="#mysql" class="md-nav__link">
     MySQL
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mongodb" title="MongoDB" class="md-nav__link">
+  <a href="#mongodb" class="md-nav__link">
     MongoDB
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#springboot" title="SpringBoot" class="md-nav__link">
+  <a href="#springboot" class="md-nav__link">
     SpringBoot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#nginx" title="Nginx" class="md-nav__link">
+  <a href="#nginx" class="md-nav__link">
     Nginx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rstudio" title="RStudio" class="md-nav__link">
+  <a href="#rstudio" class="md-nav__link">
     RStudio
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#jenkins" title="Jenkins" class="md-nav__link">
+  <a href="#jenkins" class="md-nav__link">
     Jenkins
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#wordpress" title="Wordpress" class="md-nav__link">
+  <a href="#wordpress" class="md-nav__link">
     Wordpress
   </a>
   
@@ -406,22 +373,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-commands" title="Docker commands" class="md-nav__link">
+  <a href="#docker-commands" class="md-nav__link">
     Docker commands
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basic-commands" title="Basic commands" class="md-nav__link">
+  <a href="#basic-commands" class="md-nav__link">
     Basic commands
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -478,13 +441,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Best Practice
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Best Practice" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
         Best Practice
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -658,13 +623,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Tools 101
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Tools 101" data-md-level="1">
       <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
         Tools 101
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -706,13 +673,15 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Life Experience
+      <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+    <nav class="md-nav" aria-label="Life Experience" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
         Life Experience
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -770,58 +739,61 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-<nav class="md-nav md-nav--secondary">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install" title="Install" class="md-nav__link">
+  <a href="#install" class="md-nav__link">
     Install
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Install">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-docker" title="Install Docker" class="md-nav__link">
+  <a href="#install-docker" class="md-nav__link">
     Install Docker
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-docker-machine" title="Install Docker-machine" class="md-nav__link">
+  <a href="#install-docker-machine" class="md-nav__link">
     Install Docker-machine
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-docker-compose" title="Install Docker-compose" class="md-nav__link">
+  <a href="#install-docker-compose" class="md-nav__link">
     Install Docker-compose
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-fig" title="Install Fig" class="md-nav__link">
+  <a href="#install-fig" class="md-nav__link">
     Install Fig
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-shipyard" title="Install Shipyard" class="md-nav__link">
+  <a href="#install-shipyard" class="md-nav__link">
     Install Shipyard
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-rancher" title="Install Rancher" class="md-nav__link">
+  <a href="#install-rancher" class="md-nav__link">
     Install Rancher
   </a>
   
@@ -833,71 +805,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-containers" title="Docker containers" class="md-nav__link">
+  <a href="#docker-containers" class="md-nav__link">
     Docker containers
   </a>
   
-    <nav class="md-nav">
+    <nav class="md-nav" aria-label="Docker containers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#nsenter" title="nsenter" class="md-nav__link">
+  <a href="#nsenter" class="md-nav__link">
     nsenter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vsftpd" title="VSFTPD" class="md-nav__link">
+  <a href="#vsftpd" class="md-nav__link">
     VSFTPD
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mysql" title="MySQL" class="md-nav__link">
+  <a href="#mysql" class="md-nav__link">
     MySQL
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mongodb" title="MongoDB" class="md-nav__link">
+  <a href="#mongodb" class="md-nav__link">
     MongoDB
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#springboot" title="SpringBoot" class="md-nav__link">
+  <a href="#springboot" class="md-nav__link">
     SpringBoot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#nginx" title="Nginx" class="md-nav__link">
+  <a href="#nginx" class="md-nav__link">
     Nginx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rstudio" title="RStudio" class="md-nav__link">
+  <a href="#rstudio" class="md-nav__link">
     RStudio
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#jenkins" title="Jenkins" class="md-nav__link">
+  <a href="#jenkins" class="md-nav__link">
     Jenkins
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#wordpress" title="Wordpress" class="md-nav__link">
+  <a href="#wordpress" class="md-nav__link">
     Wordpress
   </a>
   
@@ -909,22 +881,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-commands" title="Docker commands" class="md-nav__link">
+  <a href="#docker-commands" class="md-nav__link">
     Docker commands
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basic-commands" title="Basic commands" class="md-nav__link">
+  <a href="#basic-commands" class="md-nav__link">
     Basic commands
   </a>
   
 </li>
-      
-      
-      
-      
       
     </ul>
   
@@ -955,7 +923,7 @@ Containerization is increasingly popular because containers are:</p>
 <!-- more --></p>
 <h2 id="install">Install</h2>
 <h3 id="install-docker">Install Docker</h3>
-<div class="codehilite"><pre><span></span>sudo curl -sSL https://get.docker.com/ <span class="p">|</span> sh
+<div class="highlight"><pre><span></span><code>sudo curl -sSL https://get.docker.com/ <span class="p">|</span> sh
 
 <span class="c1">#Docker user group setting (If not set, then docker build or docker-compose down commands would meet error like cannot connect to docker daemon)</span>
 <span class="c1">#Create the docker group</span>
@@ -965,16 +933,16 @@ sudo usermod -aG docker <span class="nv">$USER</span>
 <span class="c1">#Logout and login to the server again</span>
 
 <span class="c1">#BaseDeviceUUID configured in: /var/lib/docker/devicemapper/metadata/deviceset-metadata</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-docker-machine">Install Docker-machine</h3>
-<div class="codehilite"><pre><span></span>curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machine-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt;/tmp/docker-machine <span class="o">&amp;&amp;</span>
+<div class="highlight"><pre><span></span><code>curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machine-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt;/tmp/docker-machine <span class="o">&amp;&amp;</span>
 chmod +x /tmp/docker-machine <span class="o">&amp;&amp;</span>
 sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-docker-compose">Install Docker-compose</h3>
-<div class="codehilite"><pre><span></span>sudo curl -L https://github.com/docker/compose/releases/download/1.20.0/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> -o /usr/local/bin/docker-compose
+<div class="highlight"><pre><span></span><code>sudo curl -L https://github.com/docker/compose/releases/download/1.20.0/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
@@ -989,38 +957,38 @@ docker-compose up -d
 
 <span class="c1">#Remove docker-compose containers</span>
 docker-compose rm -v
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-fig">Install Fig</h3>
-<div class="codehilite"><pre><span></span>curl -L https://github.com/docker/fig/releases/download/1.18.0/fig-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt; /usr/local/bin/fig<span class="p">;</span> chmod +x /usr/local/bin/fig
+<div class="highlight"><pre><span></span><code>curl -L https://github.com/docker/fig/releases/download/1.18.0/fig-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt; /usr/local/bin/fig<span class="p">;</span> chmod +x /usr/local/bin/fig
 sudo pip install -U fig
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-shipyard">Install Shipyard</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Master node</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Master node</span>
 curl -sSL https://shipyard-project.com/deploy <span class="p">|</span> <span class="nv">PORT</span><span class="o">=</span><span class="m">8888</span> bash -s
 
 <span class="c1">#Slave node</span>
 curl -sSL https://shipyard-project.com/deploy <span class="p">|</span> <span class="nv">ACTION</span><span class="o">=</span>node <span class="nv">DISCOVERY</span><span class="o">=</span>etcd://http://&lt;master&gt;/:4001 bash -s
-</pre></div>
+</code></pre></div>
 
 <h3 id="install-rancher">Install Rancher</h3>
-<div class="codehilite"><pre><span></span>sudo docker run -d --restart<span class="o">=</span>unless-stopped -p <span class="m">8888</span>:8080 rancher/server
+<div class="highlight"><pre><span></span><code>sudo docker run -d --restart<span class="o">=</span>unless-stopped -p <span class="m">8888</span>:8080 rancher/server
 sudo docker run -d --restart<span class="o">=</span>always -p <span class="m">8888</span>:8080 rancher/server
-</pre></div>
+</code></pre></div>
 
 <h2 id="docker-containers">Docker containers</h2>
 <h3 id="nsenter">nsenter</h3>
-<div class="codehilite"><pre><span></span>docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+<div class="highlight"><pre><span></span><code>docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
 
 <span class="c1">#First, figure out the PID of the container you want to enter</span>
 <span class="nv">PID</span><span class="o">=</span><span class="k">$(</span>docker inspect --format <span class="o">{{</span>.State.Pid<span class="o">}}</span> &lt;container_name_or_ID&gt;<span class="k">)</span>
 <span class="c1">#Then enter the container</span>
 nsenter --target <span class="nv">$PID</span> --mount --uts --ipc --net --pid
-</pre></div>
+</code></pre></div>
 
 <h3 id="vsftpd">VSFTPD</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Run vsftpd ftp container</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Run vsftpd ftp container</span>
 sudo docker run -d -v /upload:/home/vsftpd <span class="se">\</span>
 -p <span class="m">20</span>:20 -p <span class="m">21</span>:21 -p <span class="m">40000</span>-40080:40000-40080 <span class="se">\</span>
 -e <span class="nv">FTP_USER</span><span class="o">=</span>user -e <span class="nv">FTP_PASS</span><span class="o">=</span>password <span class="se">\</span>
@@ -1032,14 +1000,14 @@ sudo docker run --name sftp -v /upload/terminal:/home/terminal/share -p <span cl
 
 <span class="c1">#Modify the user folder permissions</span>
 sudo chmod <span class="m">777</span> /upload/terminal/
-</pre></div>
+</code></pre></div>
 
 <h3 id="mysql">MySQL</h3>
-<div class="codehilite"><pre><span></span>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>admin -d mysql:5.7
-</pre></div>
+<div class="highlight"><pre><span></span><code>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>admin -d mysql:5.7
+</code></pre></div>
 
 <h3 id="mongodb">MongoDB</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Run mongodb container:</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Run mongodb container:</span>
 sudo docker run -p <span class="m">27017</span>:27017 -v /data/db:/data/db -h mongodb --name mongodb -d mongo
 
 <span class="c1">#Connect to mongodb</span>
@@ -1047,14 +1015,14 @@ sudo docker run -it --link mongodb:mongodb --rm mongo sh -c <span class="s1">&#3
 
 <span class="c1">#Dump db</span>
 docker run -i --rm --link reliable_mongo_<span class="si">${</span><span class="nv">RELIABLE_ENV_CONFIG</span><span class="si">}</span>:mongo -v /tmp/mongodump:/tmp mongo bash -c <span class="s1">&#39;mongodump -v --host $MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT --db &#39;</span><span class="nv">$1</span><span class="s1">&#39; --out=/tmp &amp;&amp; chmod 777 /tmp/*&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="springboot">SpringBoot</h3>
-<div class="codehilite"><pre><span></span>sudo docker run -it --link mongodb:mongodb -p <span class="m">8001</span>:8001 --name springboot-demo test/springboot-demo sh
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo docker run -it --link mongodb:mongodb -p <span class="m">8001</span>:8001 --name springboot-demo test/springboot-demo sh
+</code></pre></div>
 
 <h3 id="nginx">Nginx</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Run nginx container:</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Run nginx container:</span>
 docker container run <span class="se">\</span>
 -d <span class="se">\</span>
 -p <span class="m">80</span>:80 <span class="se">\</span>
@@ -1096,10 +1064,10 @@ server <span class="o">{</span>
     try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ /index.html <span class="o">=</span><span class="m">404</span><span class="p">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="rstudio">RStudio</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Dockerfile</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Dockerfile</span>
 FROM rocker/rstudio
 RUN R -e <span class="s1">&#39;install.packages(&quot;lubridate”)&#39;</span>
 
@@ -1109,10 +1077,10 @@ docker run --name rstudio -d -p <span class="m">8787</span>:8787 myrstudio
 
 <span class="c1">#Navigate the RStudio container</span>
 http://localhost:8787
-</pre></div>
+</code></pre></div>
 
 <h3 id="jenkins">Jenkins</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Run jenkins</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Run jenkins</span>
 sudo docker run --name jenkins -p <span class="m">8088</span>:8080 -p <span class="m">50000</span>:50000 -v /var/jenkins_home -d jenkins
 
 <span class="c1">#Backup jenkins data</span>
@@ -1124,17 +1092,17 @@ sudo tar -xzf jenkins_home.tar
 sudo chmod -R <span class="m">777</span> jenkins_home
 sudo docker cp jenkins_home jenkins:/var
 sudo docker restart jenkins
-</pre></div>
+</code></pre></div>
 
 <h3 id="wordpress">Wordpress</h3>
-<div class="codehilite"><pre><span></span><span class="c1">#Install mysql</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#Install mysql</span>
 sudo docker run --name mysql -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">431197</span> -d mysql
 
 <span class="c1">#Install wordpress</span>
 sudo docker run --name demo_wordpress --link mysql:mysql -p <span class="m">8080</span>:80 -d wordpress
 
 <span class="c1">#Browse wordpress homepage: http://[domain]:8080</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="docker-commands">Docker commands</h2>
 <table>
@@ -1180,7 +1148,7 @@ sudo docker run --name demo_wordpress --link mysql:mysql -p <span class="m">8080
 </tbody>
 </table>
 <h2 id="basic-commands">Basic commands</h2>
-<div class="codehilite"><pre><span></span>sudo docker info
+<div class="highlight"><pre><span></span><code>sudo docker info
 sudo docker ps -a
 sudo docker run --name deamon -d ubuntu:latest /bin/sh -c <span class="s2">&quot;while true; do echo hello world; sleep 1; done&quot;</span>
 sudo docker logs -ft deamon
@@ -1210,7 +1178,7 @@ journalctl -r -u docker   <span class="o">(</span>logs of docker engine<span cla
 journalctl -u docker.service   <span class="o">(</span>logs of docker engine<span class="o">)</span>
 systemctl status docker.service<span class="o">(</span>logs of starting docker engine<span class="o">)</span>
 journalctl -xe <span class="o">(</span>detailed logs of starting docker engine<span class="o">)</span>
-</pre></div>
+</code></pre></div>
                 
                   
                 
@@ -1229,34 +1197,34 @@ journalctl -xe <span class="o">(</span>detailed logs of starting docker engine<s
 <footer class="md-footer">
   
     <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../important-linux-commands/" title="Important linux commands" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+          <a href="../important-linux-commands/" title="Important linux commands" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
                 Important linux commands
-              </span>
+              </div>
             </div>
           </a>
         
         
-          <a href="../getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
+          <a href="../getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
                 Getting started with Kubernetes
-              </span>
+              </div>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
             </div>
           </a>
         
@@ -1271,21 +1239,49 @@ journalctl -xe <span class="o">(</span>detailed logs of starting docker engine<s
             Copyright &copy; 2020 Frankie Fan
           </div>
         
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
       </div>
       
   <div class="md-footer-social">
-    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/hustakin" class="md-footer-social__link fa fa-github"></a>
+      
+      
+        
+        
+      
+      <a href="https://github.com/hustakin" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
     
-      <a href="https://linkedin.com/in/hustakin" class="md-footer-social__link fa fa-linkedin"></a>
+      
+      
+        
+        
+      
+      <a href="https://linkedin.com/in/hustakin" target="_blank" rel="noopener" title="linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
     
-      <a href="https://instagram.com/hustakin" class="md-footer-social__link fa fa-instagram"></a>
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/hustakin" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://instagram.com/hustakin" target="_blank" rel="noopener" title="instagram.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+      </a>
     
   </div>
 
@@ -1295,9 +1291,18 @@ journalctl -xe <span class="o">(</span>detailed logs of starting docker engine<s
       
     </div>
     
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
       
     
   </body>
