@@ -326,8 +326,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rambox-pro-wechat" class="md-nav__link">
-    Rambox Pro &amp; Wechat
+  <a href="#rambox-pro" class="md-nav__link">
+    Rambox Pro
   </a>
   
 </li>
@@ -370,6 +370,13 @@
           <li class="md-nav__item">
   <a href="#wine-wechat" class="md-nav__link">
     Wine &amp; WeChat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zoom" class="md-nav__link">
+    Zoom
   </a>
   
 </li>
@@ -432,6 +439,13 @@
           <li class="md-nav__item">
   <a href="#aws-cli" class="md-nav__link">
     AWS CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis" class="md-nav__link">
+    QGIS
   </a>
   
 </li>
@@ -832,8 +846,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rambox-pro-wechat" class="md-nav__link">
-    Rambox Pro &amp; Wechat
+  <a href="#rambox-pro" class="md-nav__link">
+    Rambox Pro
   </a>
   
 </li>
@@ -876,6 +890,13 @@
           <li class="md-nav__item">
   <a href="#wine-wechat" class="md-nav__link">
     Wine &amp; WeChat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zoom" class="md-nav__link">
+    Zoom
   </a>
   
 </li>
@@ -938,6 +959,13 @@
           <li class="md-nav__item">
   <a href="#aws-cli" class="md-nav__link">
     AWS CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qgis" class="md-nav__link">
+    QGIS
   </a>
   
 </li>
@@ -1014,7 +1042,7 @@ sudo apt-get install chrome-gnome-shell
 Reboot the Ubuntu and press Super key to search Extensions. Have a work around settings and remember to toggle the "User themes"
 Install extensions from <a href="https://extensions.gnome.org/">the website</a>. You should install the "GNOME Shell integration" from the website first.
 Recommend extensions to install: OpenWeather, Screenshot Tool</p>
-<h4 id="rambox-pro-wechat">Rambox Pro &amp; Wechat</h4>
+<h4 id="rambox-pro">Rambox Pro</h4>
 <p><div class="highlight"><pre><span></span><code>sudo snap install ramboxpro
 wget -O- https://deepin-wine.i-m.dev/setup.sh <span class="p">|</span> sh
 </code></pre></div>
@@ -1053,6 +1081,10 @@ sudo apt install libjpeg62:i386
 <span class="c1">#Download WeChat .exe file from its homepage and wine run it to install</span>
 </code></pre></div>
 
+<h4 id="zoom">Zoom</h4>
+<p><div class="highlight"><pre><span></span><code>sudo apt install gdebi
+</code></pre></div>
+Download the Zoom from <a href="https://zoom.us/download?os=linux">here</a></p>
 <h2 id="development-environment">Development environment</h2>
 <h4 id="git">Git</h4>
 <div class="highlight"><pre><span></span><code>sudo apt-get install git
@@ -1094,6 +1126,15 @@ unzip awscliv2.zip
 sudo ./aws/install
 aws configure
 <span class="c1">#Input the aws credentials</span>
+</code></pre></div>
+
+<h4 id="qgis">QGIS</h4>
+<div class="highlight"><pre><span></span><code>sudo apt install gnupg software-properties-common
+wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key <span class="p">|</span> sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import
+sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
+sudo add-apt-repository <span class="s2">&quot;deb https://qgis.org/debian `lsb_release -c -s` main&quot;</span>
+sudo apt update
+sudo apt install qgis qgis-plugin-grass
 </code></pre></div>
 
 <h2 id="devops">DevOps</h2>
