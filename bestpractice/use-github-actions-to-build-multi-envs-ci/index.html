@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <link rel="canonical" href="https://hustakin.github.io/devops/things-todo-after-installing-ubuntu/">
+        <link rel="canonical" href="https://hustakin.github.io/bestpractice/use-github-actions-to-build-multi-envs-ci/">
       
       
         <meta name="author" content="Frankie Fan">
@@ -17,7 +17,7 @@
     
     
       
-        <title>Things to do after installing Ubuntu 20.04.1 LTS - Frankie Fan's Memos</title>
+        <title>Setup CI in Github Actions for multiple environments regarding SpringBoot - Frankie Fan's Memos</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#system-tools" class="md-skip">
+        <a href="#github-actions" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Things to do after installing Ubuntu 20.04.1 LTS
+              Setup CI in Github Actions for multiple environments regarding SpringBoot
             
           </span>
         </div>
@@ -178,12 +178,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       DevOps
@@ -203,7 +201,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../important-linux-commands/" title="Important linux commands" class="md-nav__link">
+    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
       Important linux commands
     </a>
   </li>
@@ -215,7 +213,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
       Important Docker commands
     </a>
   </li>
@@ -227,7 +225,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
       Getting started with Kubernetes
     </a>
   </li>
@@ -239,7 +237,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
       Amazon EC2 101
     </a>
   </li>
@@ -251,7 +249,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-nav__link">
+    <a href="../../devops/getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-nav__link">
       Getting started with Vagrant
     </a>
   </li>
@@ -261,259 +259,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Things to do after installing Ubuntu 20.04.1 LTS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" title="Things to do after installing Ubuntu 20.04.1 LTS" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../devops/things-todo-after-installing-ubuntu/" title="Things to do after installing Ubuntu 20.04.1 LTS" class="md-nav__link">
       Things to do after installing Ubuntu 20.04.1 LTS
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#system-tools" class="md-nav__link">
-    System tools
-  </a>
-  
-    <nav class="md-nav" aria-label="System tools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#chromium" class="md-nav__link">
-    Chromium
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vi" class="md-nav__link">
-    VI
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#input-method" class="md-nav__link">
-    Input method
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flameshot" class="md-nav__link">
-    Flameshot
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gnome-shell-extensions" class="md-nav__link">
-    GNOME Shell Extensions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rambox-pro" class="md-nav__link">
-    Rambox Pro
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#media-decoder" class="md-nav__link">
-    Media decoder
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flatpak" class="md-nav__link">
-    Flatpak
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#easyssh" class="md-nav__link">
-    EasySSH
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#easyssh_1" class="md-nav__link">
-    EasySSH
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#microsoft-teams" class="md-nav__link">
-    Microsoft Teams
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wine-wechat" class="md-nav__link">
-    Wine &amp; WeChat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zoom" class="md-nav__link">
-    Zoom
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filezilla" class="md-nav__link">
-    FileZilla
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#development-environment" class="md-nav__link">
-    Development environment
-  </a>
-  
-    <nav class="md-nav" aria-label="Development environment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#git" class="md-nav__link">
-    Git
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#maven" class="md-nav__link">
-    Maven
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#python3-pip3" class="md-nav__link">
-    python3 &amp; pip3
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spyder-anaconda" class="md-nav__link">
-    Spyder &amp; Anaconda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#intellij-idea-ultimate" class="md-nav__link">
-    Intellij Idea Ultimate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mkdocs" class="md-nav__link">
-    mkdocs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flutter" class="md-nav__link">
-    Flutter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#npm-angular-cli" class="md-nav__link">
-    npm &amp; angular-cli
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aws-cli" class="md-nav__link">
-    AWS CLI
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qgis" class="md-nav__link">
-    QGIS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#devops" class="md-nav__link">
-    DevOps
-  </a>
-  
-    <nav class="md-nav" aria-label="DevOps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#clean-cache" class="md-nav__link">
-    Clean cache
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-customized-programs-to-favorite" class="md-nav__link">
-    Add customized programs to favorite
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -526,10 +276,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Best Practice
@@ -547,11 +299,118 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../bestpractice/use-github-actions-to-build-multi-envs-ci/" title="Setup CI in Github Actions for multiple environments regarding SpringBoot" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Setup CI in Github Actions for multiple environments regarding SpringBoot
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Setup CI in Github Actions for multiple environments regarding SpringBoot" class="md-nav__link md-nav__link--active">
       Setup CI in Github Actions for multiple environments regarding SpringBoot
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-docker-hub-repository" class="md-nav__link">
+    Prepare Docker Hub repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-workflow-in-github-actions" class="md-nav__link">
+    Create workflow in GitHub Actions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-workflow-and-define-env" class="md-nav__link">
+    Write workflow and define env
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-secrets-for-the-github-repository" class="md-nav__link">
+    Create secrets for the Github repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-dockerfile" class="md-nav__link">
+    Create Dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-github-actions-workflow-logs" class="md-nav__link">
+    See GitHub Actions workflow logs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-dockerfile-for-springboot" class="md-nav__link">
+    Write Dockerfile for SpringBoot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-workflow-to-build-jar" class="md-nav__link">
+    Write workflow to build jar
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-more-workflow-for-other-branches" class="md-nav__link">
+    Add more workflow for other branches
+  </a>
+  
+    <nav class="md-nav" aria-label="Add more workflow for other branches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manually-run-or-trigger-docker-container-create-script" class="md-nav__link">
+    Manually run or trigger docker container create script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -561,7 +420,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link">
+    <a href="../setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link">
       Using VNC to Operate a Desktop on Ubuntu 18.04
     </a>
   </li>
@@ -573,7 +432,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
+    <a href="../integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
       Integrate Google Analytics with a web application
     </a>
   </li>
@@ -585,7 +444,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
       Adding beautiful badges into the markdown
     </a>
   </li>
@@ -597,7 +456,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
       Setup Jenkins Pipeline and Blue Ocean in Kubernetes
     </a>
   </li>
@@ -609,7 +468,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
       Continuous Integration with Jenkins and Docker
     </a>
   </li>
@@ -621,7 +480,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
       Introduce Rollbar and Slack for realtime exception alerts
     </a>
   </li>
@@ -633,7 +492,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/create--app-icon-launch-screen-for-flutter/" title="How to create an app icon and launch screen for flutter" class="md-nav__link">
+    <a href="../create--app-icon-launch-screen-for-flutter/" title="How to create an app icon and launch screen for flutter" class="md-nav__link">
       How to create an app icon and launch screen for flutter
     </a>
   </li>
@@ -645,7 +504,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-nav__link">
+    <a href="../auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-nav__link">
       Generate required flutter app screenshots for different devices
     </a>
   </li>
@@ -657,7 +516,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/flutter-app-distribution-for-testing/" title="How to make flutter app distribution for testing in Firebase" class="md-nav__link">
+    <a href="../flutter-app-distribution-for-testing/" title="How to make flutter app distribution for testing in Firebase" class="md-nav__link">
       How to make flutter app distribution  for testing in Firebase
     </a>
   </li>
@@ -669,7 +528,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+    <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
       Play around with Keycloak in k8s
     </a>
   </li>
@@ -681,7 +540,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
       Developing based on GeoServer restful api
     </a>
   </li>
@@ -693,7 +552,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+    <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
       Serve raster tiles in GeoServer
     </a>
   </li>
@@ -705,7 +564,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+    <a href="../build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
       Build Ceph and Kubernetes based distributed file storage system
     </a>
   </li>
@@ -842,6 +701,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -850,217 +711,72 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#system-tools" class="md-nav__link">
-    System tools
+  <a href="#prepare-docker-hub-repository" class="md-nav__link">
+    Prepare Docker Hub repository
   </a>
-  
-    <nav class="md-nav" aria-label="System tools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#chromium" class="md-nav__link">
-    Chromium
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vi" class="md-nav__link">
-    VI
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#input-method" class="md-nav__link">
-    Input method
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flameshot" class="md-nav__link">
-    Flameshot
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gnome-shell-extensions" class="md-nav__link">
-    GNOME Shell Extensions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rambox-pro" class="md-nav__link">
-    Rambox Pro
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#media-decoder" class="md-nav__link">
-    Media decoder
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flatpak" class="md-nav__link">
-    Flatpak
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#easyssh" class="md-nav__link">
-    EasySSH
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#easyssh_1" class="md-nav__link">
-    EasySSH
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#microsoft-teams" class="md-nav__link">
-    Microsoft Teams
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wine-wechat" class="md-nav__link">
-    Wine &amp; WeChat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zoom" class="md-nav__link">
-    Zoom
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filezilla" class="md-nav__link">
-    FileZilla
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-environment" class="md-nav__link">
-    Development environment
+  <a href="#create-workflow-in-github-actions" class="md-nav__link">
+    Create workflow in GitHub Actions
   </a>
-  
-    <nav class="md-nav" aria-label="Development environment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#git" class="md-nav__link">
-    Git
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#maven" class="md-nav__link">
-    Maven
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#python3-pip3" class="md-nav__link">
-    python3 &amp; pip3
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spyder-anaconda" class="md-nav__link">
-    Spyder &amp; Anaconda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#intellij-idea-ultimate" class="md-nav__link">
-    Intellij Idea Ultimate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mkdocs" class="md-nav__link">
-    mkdocs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flutter" class="md-nav__link">
-    Flutter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#npm-angular-cli" class="md-nav__link">
-    npm &amp; angular-cli
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aws-cli" class="md-nav__link">
-    AWS CLI
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qgis" class="md-nav__link">
-    QGIS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#devops" class="md-nav__link">
-    DevOps
-  </a>
-  
-    <nav class="md-nav" aria-label="DevOps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#clean-cache" class="md-nav__link">
-    Clean cache
+  <a href="#write-workflow-and-define-env" class="md-nav__link">
+    Write workflow and define env
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#create-secrets-for-the-github-repository" class="md-nav__link">
+    Create secrets for the Github repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-dockerfile" class="md-nav__link">
+    Create Dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-github-actions-workflow-logs" class="md-nav__link">
+    See GitHub Actions workflow logs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-dockerfile-for-springboot" class="md-nav__link">
+    Write Dockerfile for SpringBoot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-workflow-to-build-jar" class="md-nav__link">
+    Write workflow to build jar
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-more-workflow-for-other-branches" class="md-nav__link">
+    Add more workflow for other branches
+  </a>
+  
+    <nav class="md-nav" aria-label="Add more workflow for other branches">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-customized-programs-to-favorite" class="md-nav__link">
-    Add customized programs to favorite
+  <a href="#manually-run-or-trigger-docker-container-create-script" class="md-nav__link">
+    Manually run or trigger docker container create script
   </a>
   
 </li>
@@ -1083,165 +799,119 @@
               
                 
                 
-                  <h1>Things to do after installing Ubuntu 20.04.1 LTS</h1>
-                
-                <h2 id="system-tools">System tools</h2>
-<div class="highlight"><pre><span></span><code>sudo apt-get update
-</code></pre></div>
+                <h1 id="github-actions">GitHub Actions</h1>
+<p>Automate, customize, and execute your software development workflows right in your repository with GitHub Actions. You can discover, create, and share actions to perform any job you'd like, including CI/CD, and combine actions in a completely customized workflow.
+<!-- more --></p>
+<h2 id="prepare-docker-hub-repository">Prepare Docker Hub repository</h2>
+<p>Create a repository in your Docker hub for this GitHub repository Docker image</p>
+<h2 id="create-workflow-in-github-actions">Create workflow in GitHub Actions</h2>
+<p>Go to the Actions page of your GitHub repository, and create a whatever workflow you'd like.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-1.png" /></p>
+<h2 id="write-workflow-and-define-env">Write workflow and define env</h2>
+<p>Use a branch dev to trigger the CI. Define the build args "PROFILE" or any other argument in the workflow and you will use it as the profile to run SpringBoot. Be noted that you should define the Docker Hub account and repository here.
+<div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dev</span>
 
-<h4 id="chromium">Chromium</h4>
-<p>The open source Chrome in Ubuntu.</p>
-<h4 id="vi">VI</h4>
-<div class="highlight"><pre><span></span><code>sudo apt-get remove vim-common
-sudo apt-get install vim
-</code></pre></div>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">hello_world_job</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A job to build and push docker</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
 
-<h4 id="input-method">Input method</h4>
-<div class="highlight"><pre><span></span><code>sudo apt-get install fcitx fcitx-bin fcitx-googlepinyin
-fcitx-config-gtk3
-</code></pre></div>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Docker Buildx</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/setup-buildx-action@v1</span>
 
-<h4 id="flameshot">Flameshot</h4>
-<p><div class="highlight"><pre><span></span><code>sudo apt install flameshot
-</code></pre></div>
-Go to "Settings-Keyboard Shortcuts" of Ubuntu and add a shortcut for taking screenshots by the command: /usr/bin/flameshot gui</p>
-<h4 id="gnome-shell-extensions">GNOME Shell Extensions</h4>
-<p><div class="highlight"><pre><span></span><code>sudo apt install gnome-tweaks
-gnome-shell --version
-sudo apt install gnome-shell-extensions
-sudo apt-get install chrome-gnome-shell
-</code></pre></div>
-Reboot the Ubuntu and press Super key to search Extensions. Have a work around settings and remember to toggle the "User themes"
-Install extensions from <a href="https://extensions.gnome.org/">the website</a>. You should install the "GNOME Shell integration" from the website first.
-Recommend extensions to install: OpenWeather</p>
-<h4 id="rambox-pro">Rambox Pro</h4>
-<p><div class="highlight"><pre><span></span><code>sudo snap install ramboxpro
-wget -O- https://deepin-wine.i-m.dev/setup.sh <span class="p">|</span> sh
-</code></pre></div>
-Manage packages by dpkg
-<div class="highlight"><pre><span></span><code>sudo dpkg -i *.deb
-dpkg -l <span class="p">|</span> grep <span class="o">(</span>name<span class="o">)</span>
-sudo dpkg -r <span class="o">(</span>package<span class="o">)</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Login to DockerHub</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/login-action@v1</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_HUB_USER }}</span>
+          <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_HUB_PASS }}</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build and push</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v2</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">context</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+          <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./Dockerfile</span>
+          <span class="nt">pull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">push</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">cache-from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">type=registry,ref=hustakin/hello-world-docker-action:latest</span>
+          <span class="nt">cache-to</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">type=inline</span>
+          <span class="nt">tags</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hustakin/hello-world-docker-action:latest</span>
+          <span class="nt">build-args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PROFILE=nectar,ARG2=test</span>
 </code></pre></div></p>
-<h4 id="media-decoder">Media decoder</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install ubuntu-restricted-extras
-</code></pre></div>
-
-<h4 id="flatpak">Flatpak</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install flatpak
-</code></pre></div>
-
-<h4 id="easyssh">EasySSH</h4>
-<div class="highlight"><pre><span></span><code>sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo flatpak install flathub com.github.muriloventuroso.easyssh
-flatpak run com.github.muriloventuroso.easyssh
-</code></pre></div>
-
-<h4 id="easyssh_1">EasySSH</h4>
-<p>Download DropBox for Ubuntu <a href="https://www.dropbox.com/install-linux">here</a>. Setting the selective sync folders after installed and linked with you account because Dropbox doesn't support smart sync.</p>
-<h4 id="microsoft-teams">Microsoft Teams</h4>
-<p>Download Teams from <a href="https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/download-app#desktopAppDownloadregion">here</a>.</p>
-<h4 id="wine-wechat">Wine &amp; WeChat</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install wine64
-sudo apt install winetricks
-winetricks
-<span class="c1">#Download Windows programes .exe file</span>
-wine *.exe
-
-winetricks riched20
-sudo apt install libjpeg62:i386
-<span class="c1">#Download WeChat .exe file from its homepage and wine run it to install</span>
-</code></pre></div>
-
-<h4 id="zoom">Zoom</h4>
-<p><div class="highlight"><pre><span></span><code>sudo apt install gdebi
-</code></pre></div>
-Download the Zoom from <a href="https://zoom.us/download?os=linux">here</a></p>
-<h4 id="filezilla">FileZilla</h4>
-<p>Download the FileZilla from <a href="https://filezilla-project.org/download.php">here</a></p>
-<h2 id="development-environment">Development environment</h2>
-<h4 id="git">Git</h4>
-<div class="highlight"><pre><span></span><code>sudo apt-get install git
-</code></pre></div>
-
-<h4 id="maven">Maven</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install maven
-</code></pre></div>
-
-<h4 id="python3-pip3">python3 &amp; pip3</h4>
-<div class="highlight"><pre><span></span><code>sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.8
-python3 --version
-sudo apt install python3-pip
-</code></pre></div>
-
-<h4 id="spyder-anaconda">Spyder &amp; Anaconda</h4>
-<p>Download the Spyder with Anaconda from <a href="https://www.anaconda.com/products/individual">here</a>
-<div class="highlight"><pre><span></span><code>bash *.sh
+<h2 id="create-secrets-for-the-github-repository">Create secrets for the Github repository</h2>
+<p>You should create the secrets DOCKER_HUB_USER (Docker Hub account) and DOCKER_HUB_PASS (Docker Hub password) as per you defined in the above workflow.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-2.png" /></p>
+<h2 id="create-dockerfile">Create Dockerfile</h2>
+<p>Create a Dockerfile in the root folder of your project. You can specify the build argument in the Dockerfile and read it. You will see the Github Action workflow triggered after you push the code to the dev branch.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-3.png" /></p>
+<h2 id="see-github-actions-workflow-logs">See GitHub Actions workflow logs</h2>
+<p>You will see the build argument PROFILE could be get in your Dockerfile.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-4.png" /></p>
+<h2 id="write-dockerfile-for-springboot">Write Dockerfile for SpringBoot</h2>
+<p>The jar file of your SpringBoot project can be built by command: mvn clean package -Dmaven.test.skip=true. Write the Dockerfile to run your SpringBoot jar file. Please be noted you cannot read the ARG directly, but you can pass it to an env variable and read the variable instead.
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">FROM openjdk:8-jre</span>
+<span class="l l-Scalar l-Scalar-Plain">ARG PROFILE</span>
+<span class="l l-Scalar l-Scalar-Plain">ENV PROFILE_VAR=$PROFILE</span>
+<span class="l l-Scalar l-Scalar-Plain">VOLUME /tmp</span>
+<span class="l l-Scalar l-Scalar-Plain"># Add the built jar for docker image building</span>
+<span class="l l-Scalar l-Scalar-Plain">ADD target/hello-world-docker-action.jar hello-world-docker-action.jar</span>
+<span class="l l-Scalar l-Scalar-Plain">ENTRYPOINT [&quot;java&quot;,&quot;-Dspring.profiles.active=PROFILE_VAR&quot;,&quot;-jar&quot;,&quot;/hello-world-docker-action.jar&quot;]</span>
+<span class="l l-Scalar l-Scalar-Plain">EXPOSE 80</span>
 </code></pre></div></p>
-<h4 id="intellij-idea-ultimate">Intellij Idea Ultimate</h4>
-<div class="highlight"><pre><span></span><code>sudo snap install intellij-idea-ultimate --classic
+<h2 id="write-workflow-to-build-jar">Write workflow to build jar</h2>
+<p>Add a step to run the maven building command in order to get the above jar file.
+<div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dev</span>
 
-<span class="c1">#start the IDE</span>
-intellij-idea-ultimate
-</code></pre></div>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">hello_world_job</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A job to build and push docker</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
 
-<h4 id="mkdocs">mkdocs</h4>
-<div class="highlight"><pre><span></span><code>pip3 install pymdown-extensions mkdocs mkdocs-material
-</code></pre></div>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up JDK 1.8</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v1</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">java-version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.8</span>
 
-<h4 id="flutter">Flutter</h4>
-<div class="highlight"><pre><span></span><code>sudo snap install flutter --classic
-</code></pre></div>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build with Maven</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mvn clean package -Dmaven.test.skip=true</span>
 
-<h4 id="npm-angular-cli">npm &amp; angular-cli</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install npm
-sudo npm install -g @angular/cli
-</code></pre></div>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Docker Buildx</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/setup-buildx-action@v1</span>
 
-<h4 id="aws-cli">AWS CLI</h4>
-<div class="highlight"><pre><span></span><code>curl <span class="s2">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span> -o <span class="s2">&quot;awscliv2.zip&quot;</span>
-unzip awscliv2.zip
-sudo ./aws/install
-aws configure
-<span class="c1">#Input the aws credentials</span>
-</code></pre></div>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Login to DockerHub</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/login-action@v1</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_HUB_USER }}</span>
+          <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_HUB_PASS }}</span>
 
-<h4 id="qgis">QGIS</h4>
-<div class="highlight"><pre><span></span><code>sudo apt install gnupg software-properties-common
-wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key <span class="p">|</span> sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import
-sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-sudo add-apt-repository <span class="s2">&quot;deb https://qgis.org/debian `lsb_release -c -s` main&quot;</span>
-sudo apt update
-sudo apt install qgis qgis-plugin-grass
-</code></pre></div>
-
-<h2 id="devops">DevOps</h2>
-<h4 id="clean-cache">Clean cache</h4>
-<div class="highlight"><pre><span></span><code>sudo apt autoremove
-</code></pre></div>
-
-<h4 id="add-customized-programs-to-favorite">Add customized programs to favorite</h4>
-<p><div class="highlight"><pre><span></span><code><span class="c1">#Take EasySSH for example</span>
-sudo vi /usr/share/applications/easy-ssh.desktop
-</code></pre></div>
-The content of easy-ssh.desktop:
-<div class="highlight"><pre><span></span><code><span class="c">#Take EasySSH for example</span>
-<span class="err">[Desktop</span> <span class="err">Entry]</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">EasySSH</span>
-<span class="na">GenericName</span><span class="o">=</span><span class="s">SSH Client</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">SSH to remote servers</span>
-<span class="na">Exec</span><span class="o">=</span><span class="s">flatpak run com.github.muriloventuroso.easyssh</span>
-<span class="na">Terminal</span><span class="o">=</span><span class="s">false</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
-<span class="na">Icon</span><span class="o">=</span><span class="s">easyssh.png</span>
-<span class="na">StartupNotify</span><span class="o">=</span><span class="s">false</span>
-</code></pre></div>
-Download the EasySSH png file and save it as ~/.icons/easyssh.png.
-Press Super key and find the EasySSH program and right click to add it to favorite.</p>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build and push</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v2</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">context</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+          <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./Dockerfile</span>
+          <span class="nt">pull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">push</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">cache-from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">type=registry,ref=hustakin/hello-world-docker-action:latest</span>
+          <span class="nt">cache-to</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">type=inline</span>
+          <span class="nt">tags</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hustakin/hello-world-docker-action:latest</span>
+          <span class="nt">build-args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PROFILE=nectar,ARG2=test</span>
+</code></pre></div></p>
+<h2 id="add-more-workflow-for-other-branches">Add more workflow for other branches</h2>
+<p>Add another branch for another environment. Each workflow yml -&gt; Specific trigger branch -&gt; Specify each profile value for the env -&gt; Run the specific profile SpringBoot application.</p>
+<h3 id="manually-run-or-trigger-docker-container-create-script">Manually run or trigger docker container create script</h3>
+<p>In development mode, when you want to build a specific env you could push the code to the related trigger branch to let workflow run. After the workflow finish, you can manually run a shell script in the specific env to build docker container from the latest docker image in Docker Hub.
+You could also add a webook in your workflow to trigger the automatic building scripts for specific env.</p>
                 
                   
                 
@@ -1262,7 +932,7 @@ Press Super key and find the EasySSH program and right click to add it to favori
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../devops/things-todo-after-installing-ubuntu/" title="Things to do after installing Ubuntu 20.04.1 LTS" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1271,19 +941,19 @@ Press Super key and find the EasySSH program and right click to add it to favori
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Getting started with Vagrant
+                Things to do after installing Ubuntu 20.04.1 LTS
               </div>
             </div>
           </a>
         
         
-          <a href="../../bestpractice/use-github-actions-to-build-multi-envs-ci/" title="Setup CI in Github Actions for multiple environments regarding SpringBoot" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Setup CI in Github Actions for multiple environments regarding SpringBoot
+                Using VNC to Operate a Desktop on Ubuntu 18.04
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
