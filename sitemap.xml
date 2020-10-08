@@ -28,19 +28,11 @@
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/use-github-actions-to-build-multi-envs-ci/</loc>
-     <lastmod>2020-10-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://hustakin.github.io/bestpractice/setup-vncserver-for-ubuntu/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/integrate-google-analytics-with-web-app/</loc>
-     <lastmod>2020-10-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://hustakin.github.io/bestpractice/adding-beautiful-badges-into-the-markdown/</loc>
+     <loc>https://hustakin.github.io/bestpractice/use-github-actions-to-build-multi-envs-ci/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -52,11 +44,11 @@
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/</loc>
+     <loc>https://hustakin.github.io/bestpractice/keycloak-traefik-k8s/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/create--app-icon-launch-screen-for-flutter/</loc>
+     <loc>https://hustakin.github.io/bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -68,7 +60,15 @@
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/keycloak-traefik-k8s/</loc>
+     <loc>https://hustakin.github.io/bestpractice/create--app-icon-launch-screen-for-flutter/</loc>
+     <lastmod>2020-10-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://hustakin.github.io/bestpractice/integrate-google-analytics-with-web-app/</loc>
+     <lastmod>2020-10-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://hustakin.github.io/bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -80,15 +80,15 @@
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://hustakin.github.io/bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/</loc>
-     <lastmod>2020-10-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://hustakin.github.io/tools/hexo-get-started/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/tools/getting-started-with-mitmproxy/</loc>
+     <lastmod>2020-10-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://hustakin.github.io/bestpractice/adding-beautiful-badges-into-the-markdown/</loc>
      <lastmod>2020-10-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
