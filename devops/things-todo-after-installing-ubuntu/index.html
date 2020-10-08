@@ -430,6 +430,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#nodejs-npm-yarn-gulp" class="md-nav__link">
+    NodeJS &amp; NPM &amp; Yarn &amp; Gulp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#spyder-anaconda" class="md-nav__link">
     Spyder &amp; Anaconda
   </a>
@@ -1094,6 +1101,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#nodejs-npm-yarn-gulp" class="md-nav__link">
+    NodeJS &amp; NPM &amp; Yarn &amp; Gulp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#spyder-anaconda" class="md-nav__link">
     Spyder &amp; Anaconda
   </a>
@@ -1280,6 +1294,27 @@ sudo apt update
 sudo apt install python3.8
 python3 --version
 sudo apt install python3-pip
+</code></pre></div>
+
+<h4 id="nodejs-npm-yarn-gulp">NodeJS &amp; NPM &amp; Yarn &amp; Gulp</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">#Install NodeJS</span>
+sudo apt-get install --reinstall nodejs-legacy
+sudo apt-get purge nodejs --auto-remove
+sudo apt-get purge npm --auto-remove
+whereis node <span class="c1">#Then remove all the versions of node</span>
+sudo apt-get install nodejs
+node --version
+nodejs --version
+sudo apt-get install npm
+npm --version
+sudo npm install -g npm
+npm i -D typescript@3.4.5
+
+<span class="c1">#Install yarn</span>
+sudo apt install cmdtest
+
+<span class="c1">#Install Gulp</span>
+sudo apt install gulp
 </code></pre></div>
 
 <h4 id="spyder-anaconda">Spyder &amp; Anaconda</h4>
