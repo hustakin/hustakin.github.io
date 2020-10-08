@@ -414,8 +414,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manually-run-or-trigger-docker-container-create-script" class="md-nav__link">
-    Manually run or trigger docker container create script
+  <a href="#manuallyautomatically-run-docker-container-creating-scripts" class="md-nav__link">
+    Manually/Automatically run docker container creating scripts
   </a>
   
 </li>
@@ -886,8 +886,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manually-run-or-trigger-docker-container-create-script" class="md-nav__link">
-    Manually run or trigger docker container create script
+  <a href="#manuallyautomatically-run-docker-container-creating-scripts" class="md-nav__link">
+    Manually/Automatically run docker container creating scripts
   </a>
   
 </li>
@@ -1034,10 +1034,17 @@ Unlike the shell form, the exec form does not invoke a command shell. This means
           <span class="nt">build-args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PROFILE=nectar,ARG2=test</span>
 </code></pre></div></p>
 <h2 id="add-more-workflow-for-other-branches">Add more workflow for other branches</h2>
-<p>Add another branch for another environment. Each workflow yml -&gt; Specific trigger branch -&gt; Specify each profile value for the env -&gt; Run the specific profile SpringBoot application.</p>
-<h2 id="manually-run-or-trigger-docker-container-create-script">Manually run or trigger docker container create script</h2>
+<p>Add another branch for another environment. Each workflow yml -&gt; Specific trigger branch -&gt; Specify each profile value for the env -&gt; Run the specific profile SpringBoot application.
+Take another trigger branch and env "amazon" for example:
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-5.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-6.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-7.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-8.png" /></p>
+<h2 id="manuallyautomatically-run-docker-container-creating-scripts">Manually/Automatically run docker container creating scripts</h2>
 <p>In development mode, when you want to build a specific env you could push the code to the related trigger branch to let workflow run. After the workflow finish, you can manually run a shell script in the specific env to build docker container from the latest docker image in Docker Hub.
-You could also add a WebHook in your workflow or in your Docker Hub to trigger the automatic building scripts for specific env.</p>
+You could also add a WebHook in your workflow or in your <a href="https://docs.docker.com/docker-hub/webhooks/">Docker Hub</a> to trigger the automatic building scripts for specific env.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-9.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-10.png" /></p>
                 
                   
                 
