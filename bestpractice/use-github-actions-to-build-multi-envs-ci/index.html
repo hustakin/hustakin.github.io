@@ -393,6 +393,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#another-way-to-pass-variables" class="md-nav__link">
+    Another way to pass variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#write-workflow-to-build-jar" class="md-nav__link">
     Write workflow to build jar
   </a>
@@ -858,6 +865,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#another-way-to-pass-variables" class="md-nav__link">
+    Another way to pass variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#write-workflow-to-build-jar" class="md-nav__link">
     Write workflow to build jar
   </a>
@@ -958,6 +972,23 @@
 <span class="l l-Scalar l-Scalar-Plain">EXPOSE 80</span>
 </code></pre></div>
 Unlike the shell form, the exec form does not invoke a command shell. This means that normal shell processing does not happen. For example, ENTRYPOINT [ "echo", "$HOME" ] will not do variable substitution on $HOME. If you want shell processing then either use the shell form or execute a shell directly, for example: ENTRYPOINT [ "sh", "-c", "echo $HOME" ]. When using the exec form and executing a shell directly, as in the case for the shell form, it is the shell that is doing the environment variable expansion, not docker.</p>
+<h2 id="another-way-to-pass-variables">Another way to pass variables</h2>
+<p>There is another way to pass variables if the above way doesn't work. You can put the command into a script file and add the shell as entrypoint.
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">FROM openjdk:8-jre</span>
+<span class="l l-Scalar l-Scalar-Plain">ARG PROFILE</span>
+<span class="l l-Scalar l-Scalar-Plain">ENV PROFILE_VAR=$PROFILE</span>
+<span class="l l-Scalar l-Scalar-Plain">VOLUME /tmp</span>
+<span class="l l-Scalar l-Scalar-Plain"># Add the built jar for docker image building</span>
+<span class="l l-Scalar l-Scalar-Plain">ADD target/hello-world-docker-action.jar hello-world-docker-action.jar</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># Build a shell script because the ENTRYPOINT command doesn&#39;t like using ENV</span>
+<span class="l l-Scalar l-Scalar-Plain">RUN echo &quot;#!/bin/bash \n java -Dspring.profiles.active=${PROFILE_VAR} -jar /hello-world-docker-action.jar&quot; &gt; ./entrypoint.sh</span>
+<span class="l l-Scalar l-Scalar-Plain">RUN chmod +x ./entrypoint.sh</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># Run the generated shell script.</span>
+<span class="l l-Scalar l-Scalar-Plain">ENTRYPOINT [&quot;./entrypoint.sh&quot;]</span>
+<span class="l l-Scalar l-Scalar-Plain">EXPOSE 80</span>
+</code></pre></div></p>
 <h2 id="write-workflow-to-build-jar">Write workflow to build jar</h2>
 <p>Add a step to run the maven building command in order to get the above jar file.
 <div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
