@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://hustakin.github.io/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/important-linux-commands/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/important-docker-commands/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/getting-started-with-kubernetes/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/amazon-ec2-101/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/getting-started-with-vagrant/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/devops/things-todo-after-installing-ubuntu/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/setup-vncserver-for-ubuntu/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/use-github-actions-to-build-multi-envs-ci/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/setup-jenkins-pipeline-in-kubernetes/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/continuous-integration-with-jenkins-and-docker/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/keycloak-traefik-k8s/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/auto-generate-flutter-imgs/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/flutter-app-distribution-for-testing/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/create--app-icon-launch-screen-for-flutter/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/integrate-google-analytics-with-web-app/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/developing-based-on-geoserver-restful-api/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/serve-raster-tiles-in-geoserver/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/tools/hexo-get-started/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/tools/getting-started-with-mitmproxy/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/bestpractice/adding-beautiful-badges-into-the-markdown/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/life/how-to-rent-a-house-in-australia/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/life/international-money-transfer-from-commanwealth-bank-to-china/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://hustakin.github.io/life/a-detail-list-for-updating-address-when-moving/</loc>
-     <lastmod>2020-10-08</lastmod>
+     <lastmod>2020-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

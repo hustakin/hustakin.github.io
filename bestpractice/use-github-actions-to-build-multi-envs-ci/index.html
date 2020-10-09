@@ -17,7 +17,7 @@
     
     
       
-        <title>Setup CI in Github Actions for multiple environments regarding SpringBoot - Frankie Fan's Memos</title>
+        <title>Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular - Frankie Fan's Memos</title>
       
     
     
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Setup CI in Github Actions for multiple environments regarding SpringBoot
+              Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular
             
           </span>
         </div>
@@ -322,12 +322,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Setup CI in Github Actions for multiple environments regarding SpringBoot
+        Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Setup CI in Github Actions for multiple environments regarding SpringBoot" class="md-nav__link md-nav__link--active">
-      Setup CI in Github Actions for multiple environments regarding SpringBoot
+    <a href="./" title="Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular" class="md-nav__link md-nav__link--active">
+      Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular
     </a>
     
       
@@ -416,6 +416,13 @@
         <li class="md-nav__item">
   <a href="#manuallyautomatically-run-docker-container-creating-scripts" class="md-nav__link">
     Manually/Automatically run docker container creating scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#angular-profiles-passing" class="md-nav__link">
+    Angular profiles passing
   </a>
   
 </li>
@@ -892,6 +899,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#angular-profiles-passing" class="md-nav__link">
+    Angular profiles passing
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1045,6 +1059,11 @@ Take another trigger branch and env "amazon" for example:
 You could also add a WebHook in your workflow or in your <a href="https://docs.docker.com/docker-hub/webhooks/">Docker Hub</a> to trigger the automatic building scripts for specific env.
 <img alt="GitHub Actions" src="/imgs/github-actions/github-action-9.png" />
 <img alt="GitHub Actions" src="/imgs/github-actions/github-action-10.png" /></p>
+<h2 id="angular-profiles-passing">Angular profiles passing</h2>
+<p>Regarding Angular project, you will need to add env profiles in the "configurations" node of the angular.json, and add commands of different envs in your package.json. Now you could create workflows for all your env and execute different npm command to build.
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-11.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-12.png" />
+<img alt="GitHub Actions" src="/imgs/github-actions/github-action-13.png" /></p>
                 
                   
                 
