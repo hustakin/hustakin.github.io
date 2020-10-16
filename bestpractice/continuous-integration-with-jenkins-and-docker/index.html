@@ -1116,37 +1116,37 @@ sudo chmod <span class="m">777</span> ~/agriculture-platform/
 <h2 id="jenkins-configuration">Jenkins configuration</h2>
 <h3 id="publish-over-ssh-plugin">Publish over SSH plugin</h3>
 <p>Install the plugin "Publish over SSH" in Jenkins, and configure it, then test the connection.
-<img alt="Publish over SSH plugin" src="/imgs/publish-over-ssh.png" /></p>
+<img alt="Publish over SSH plugin" src="/imgs/jenkins-docker/publish-over-ssh.png" /></p>
 <h3 id="generate-api-token">Generate API token</h3>
 <p>Login your jenkins with admin user and click the user on the right hand side, then select configure and generate a token here.
-<img alt="Publish over SSH plugin" src="/imgs/jenkins-generate-token.png" /></p>
+<img alt="Publish over SSH plugin" src="/imgs/jenkins-docker/jenkins-generate-token.png" /></p>
 <h3 id="create-maven-project">Create maven project</h3>
 <p>Create a maven project in Jenkins, configure the git URL and credentials for it.
-<img alt="Create maven project" src="/imgs/jenkins-mvn-project.png" /></p>
+<img alt="Create maven project" src="/imgs/jenkins-docker/jenkins-mvn-project.png" /></p>
 <h3 id="enable-build-trigger">Enable build trigger</h3>
 <p>Enable the remote build trigger token which is the above generated API token.
-<img alt="Build trigger" src="/imgs/jenkins-build-trigger.png" /></p>
+<img alt="Build trigger" src="/imgs/jenkins-docker/jenkins-build-trigger.png" /></p>
 <h3 id="build-maven-commands">Build maven commands</h3>
 <p>Configure the build step with maven build commands.
-<img alt="Build goals" src="/imgs/jenkins-build-goal.png" /></p>
+<img alt="Build goals" src="/imgs/jenkins-docker/jenkins-build-goal.png" /></p>
 <h3 id="after-build-steps">After build steps</h3>
 <p>Configure the after build step to SSH and copy the jar file to the remote server. Here we execute a shell script to deploy the SpringBoot application.
-<img alt="Build publish" src="/imgs/jenkins-build-publish.png" /></p>
+<img alt="Build publish" src="/imgs/jenkins-docker/jenkins-build-publish.png" /></p>
 <h3 id="create-webhook-in-github">Create webhook in Github</h3>
 <p>Login the Bitbucket or Github and enter your SpringBoot project, enter the Webhooks page, add new a webhook with Jenkins server info and your job name and the above generated API token.</p>
 <p>The webhook will be invoked when you push any code to the master branch. The related jenkins project will receive this webhook request and execute the build job immediately.
-<img alt="Create webhook" src="/imgs/github-webhook.png" /></p>
+<img alt="Create webhook" src="/imgs/jenkins-docker/github-webhook.png" /></p>
 <h3 id="try-push-code">Try push code</h3>
 <p>If we try to push the code to Bitbucket now, we will find a webhook request error in Webhooks page.
-<img alt="Try push" src="/imgs/try-push.png" /></p>
+<img alt="Try push" src="/imgs/jenkins-docker/try-push.png" /></p>
 <h3 id="configure-global-security">Configure global security</h3>
 <p>We should login the Jenkins and configure the Global Security and enable the webhook in order to fix the above issue.
-<img alt="Configure global security" src="/imgs/jenkins-global-security.png" /></p>
+<img alt="Configure global security" src="/imgs/jenkins-docker/jenkins-global-security.png" /></p>
 <h2 id="deploy-configuration">Deploy configuration</h2>
 <h3 id="shell-scripts">Shell scripts</h3>
 <p>Now Jenkins is configured to transfer the SpringBoot jar to "~/agriculture-platform" folder and run the shell script "~/agriculture-platform/rebuild.sh".</p>
 <p>Login the remote server, we create "agriculture-platform" folder under ~, and create Dockerfile and rebuild.sh under it.
-<img alt="Shell scripts" src="/imgs/shell-scripts.png" /></p>
+<img alt="Shell scripts" src="/imgs/jenkins-docker/shell-scripts.png" /></p>
 <h3 id="springboot-dockerfile">SpringBoot Dockerfile</h3>
 <p>The Dockerfile content is as bellow, it creates a docker image and copy the jar into it, then run the jar.
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">hustakin/java8</span>
@@ -1168,7 +1168,7 @@ sudo docker run -p <span class="m">80</span>:80 -p <span class="m">443</span>:44
 </code></pre></div></p>
 <h3 id="push-code">Push code</h3>
 <p>After all the above configurations, now we completely finish the CI process. When we push the code to Bitbucket or Github, the Jenkins will start to maven build the code and transfer the jar to the remote server, then the remote server will rebuild the SpringBoot docker image and recreate the docker container.
-<img alt="CI build" src="/imgs/ci-build.png" /></p>
+<img alt="CI build" src="/imgs/jenkins-docker/ci-build.png" /></p>
                 
                   
                 
