@@ -1204,7 +1204,7 @@
 </tr>
 <tr>
 <td>Inspect the ports</td>
-<td>1. <code>netstat -ano &amp;#124; findstr 7001</code> <br/>2. <code>sudo netstat -tunlp</code> <br/>3. <code>netstat -aonp &amp;#124; grep 5050</code></td>
+<td>1. <code>netstat -ano | findstr 7001</code> <br/>2. <code>sudo netstat -tunlp</code> <br/>3. <code>netstat -aonp | grep 5050</code></td>
 </tr>
 <tr>
 <td>Inspect the firewall</td>
@@ -1220,11 +1220,11 @@
 </tr>
 <tr>
 <td>Inspect the process by pid</td>
-<td><code>tasklist &amp;#124; findstr 23416</code></td>
+<td><code>tasklist | findstr 23416</code></td>
 </tr>
 <tr>
 <td>Inspect the process by name</td>
-<td><code>ps -ef &amp;#124; grep nginx</code></td>
+<td><code>ps -ef | grep nginx</code></td>
 </tr>
 <tr>
 <td>Kill the process by pid</td>
@@ -1244,7 +1244,7 @@
 </tr>
 <tr>
 <td>Clean Linux temp files cursor and processes</td>
-<td>1. <code>sudo lsof &amp;#124; grep delete</code> <br/>2. <code>sudo kill *</code></td>
+<td>1. <code>sudo lsof | grep delete</code> <br/>2. <code>sudo kill *</code></td>
 </tr>
 <tr>
 <td>MacOS kill process using specific port</td>
@@ -1267,19 +1267,19 @@
 </tr>
 <tr>
 <td>Find a archive file containing the given xml file</td>
-<td><code>find . -name "*.jar" &amp;#124; xargs grep "*.xml"</code></td>
+<td><code>find . -name "*.jar" | xargs grep "*.xml"</code></td>
 </tr>
 <tr>
 <td>Find a file containing the given content under current path</td>
-<td>1. <code>grep -s -r "*" ./</code> <br/>2. <code>find . -name "*.xml" &amp;#124; xargs grep "*"</code></td>
+<td>1. <code>grep -s -r "*" ./</code> <br/>2. <code>find . -name "*.xml" | xargs grep "*"</code></td>
 </tr>
 <tr>
 <td>Find a file containing the given content under current path and only print the file name to the output file</td>
-<td><code>find . -name "*.*" &amp;#124; xargs grep -ri "APXMTMRR" -l &gt; grep_APXMTMRR.log</code></td>
+<td><code>find . -name "*.*" | xargs grep -ri "APXMTMRR" -l &gt; grep_APXMTMRR.log</code></td>
 </tr>
 <tr>
 <td>Find the top size files</td>
-<td>1. <code>du -a . &amp;#124; sort -n -r &amp;#124; head -n 10</code> <br/>2. <code>find . -type f -size +20000k -exec ls -lh {} \; &amp;#124; awk '{ print $9 ": " $5 }'</code></td>
+<td>1. <code>du -a . | sort -n -r | head -n 10</code> <br/>2. <code>find . -type f -size +20000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'</code></td>
 </tr>
 <tr>
 <td>List the folders' size in current folder</td>
@@ -1342,11 +1342,11 @@
 </tr>
 <tr>
 <td>List installed software by yum</td>
-<td>1. <code>yum list installed &amp;#124; grep docker</code> <br/>2. <code>yum -y list docker*</code></td>
+<td>1. <code>yum list installed | grep docker</code> <br/>2. <code>yum -y list docker*</code></td>
 </tr>
 <tr>
 <td>Search software by yum</td>
-<td><code>yum search java &amp;#124; grep 'java-'</code></td>
+<td><code>yum search java | grep 'java-'</code></td>
 </tr>
 <tr>
 <td>Install software by apt-get</td>
@@ -1354,7 +1354,7 @@
 </tr>
 <tr>
 <td>List installed software by RPM</td>
-<td><code>rpm -qa &amp;#124; grep docker</code></td>
+<td><code>rpm -qa | grep docker</code></td>
 </tr>
 </tbody>
 </table>
@@ -1392,7 +1392,7 @@
 <tbody>
 <tr>
 <td>Inspect JVM default heap flag</td>
-<td><code>java -XX:+PrintFlagsFinal -version &amp;#124; grep HeapSize</code></td>
+<td><code>java -XX:+PrintFlagsFinal -version | grep HeapSize</code></td>
 </tr>
 <tr>
 <td>Inspect the java process arguments</td>
@@ -1408,7 +1408,7 @@
 </tr>
 <tr>
 <td>List the basic class memory information by pid</td>
-<td><code>jmap -histo 1 &amp;#124; head</code></td>
+<td><code>jmap -histo 1 | head</code></td>
 </tr>
 <tr>
 <td>List the class loaders memory information by pid</td>
