@@ -667,8 +667,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exception-stack-trace" class="md-nav__link">
-    Exception stack trace
+  <a href="#exception-stack-trace-1" class="md-nav__link">
+    Exception stack trace 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-stack-trace-2" class="md-nav__link">
+    Exception stack trace 2
   </a>
   
 </li>
@@ -752,6 +759,13 @@
           <li class="md-nav__item">
   <a href="#generate-sld-in-qgis" class="md-nav__link">
     Generate .sld in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-style-in-geoserver-from-sld-file" class="md-nav__link">
+    Create style in Geoserver from .sld file
   </a>
   
 </li>
@@ -975,6 +989,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1155,8 +1181,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exception-stack-trace" class="md-nav__link">
-    Exception stack trace
+  <a href="#exception-stack-trace-1" class="md-nav__link">
+    Exception stack trace 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-stack-trace-2" class="md-nav__link">
+    Exception stack trace 2
   </a>
   
 </li>
@@ -1240,6 +1273,13 @@
           <li class="md-nav__item">
   <a href="#generate-sld-in-qgis" class="md-nav__link">
     Generate .sld in QGIS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-style-in-geoserver-from-sld-file" class="md-nav__link">
+    Create style in Geoserver from .sld file
   </a>
   
 </li>
@@ -1417,46 +1457,54 @@ Designed for interoperability, it publishes data from any major spatial data sou
 <p>Download <a href="http://geoserver.org/download/">GeoServer</a> and install, or create by a <a href="https://hub.docker.com/r/kartoza/geoserver">docker container</a></p>
 <h3 id="login">Login</h3>
 <p>Login the GeoServer by admin user, the default username/password is admin/geoserver.
-<img alt="Login" src="/imgs/geoserver-login.png" /></p>
+<img alt="Login" src="/imgs/geoserver-serve-raster/geoserver-login.png" /></p>
 <h3 id="create-a-raster-workspace">Create a raster workspace</h3>
-<p><img alt="Create workspace" src="/imgs/create-workspace.png" /></p>
+<p><img alt="Create workspace" src="/imgs/geoserver-serve-raster/create-workspace.png" /></p>
 <h3 id="select-a-store-datasource">Select a store datasource</h3>
 <p>Here we select GeoTIFF
-<img alt="Create store geotiff" src="/imgs/create-store-geotiff.png" /></p>
+<img alt="Create store geotiff" src="/imgs/geoserver-serve-raster/create-store-geotiff.png" /></p>
 <h3 id="create-a-raster-store">Create a raster store</h3>
 <p>Here we specify a *.tif file
-<img alt="Create store" src="/imgs/create-store.png" /></p>
+<img alt="Create store" src="/imgs/geoserver-serve-raster/create-store.png" /></p>
 <h3 id="create-a-layer">Create a layer</h3>
 <p>Create the layer under new created store and the format is <workspace>:<store>, and then publish it
-<img alt="Create layer" src="/imgs/create-layer.png" /></p>
+<img alt="Create layer" src="/imgs/geoserver-serve-raster/create-layer.png" /></p>
 <h3 id="publish-review">Publish review</h3>
 <p>Have a review of all the information it reads including the band definitions, and save it
-<img alt="Publish layer" src="/imgs/publish-layer.png" /></p>
+<img alt="Publish layer" src="/imgs/geoserver-serve-raster/publish-layer.png" /></p>
 <h3 id="layer-preview">Layer preview</h3>
 <p>Go the the layer preview and find the layer, and try to view it by OpenLayers
-<img alt="Layer preview" src="/imgs/layer-preview.png" /></p>
+<img alt="Layer preview" src="/imgs/geoserver-serve-raster/layer-preview.png" /></p>
 <h3 id="layer-preview-result">Layer preview result</h3>
 <p>The geotiff file successfully being processed if we can see the layer
-<img alt="Layer preview result" src="/imgs/layer-preview-result.png" /></p>
+<img alt="Layer preview result" src="/imgs/geoserver-serve-raster/layer-preview-result.png" /></p>
 <h2 id="compressed-raster-layer-with-only-grey-band">Compressed raster layer with only grey band</h2>
 <h3 id="the-geotiff-file-failed-being-processed-for-unknown-reason">The geotiff file failed being processed for unknown reason</h3>
-<p><img alt="Layer preview result" src="/imgs/error-layer.png" /></p>
-<h3 id="exception-stack-trace">Exception stack trace</h3>
+<p><img alt="Layer preview result" src="/imgs/geoserver-serve-raster/error-layer.png" /></p>
+<h3 id="exception-stack-trace-1">Exception stack trace 1</h3>
 <div class="highlight"><pre><span></span><code>Caused by: java.lang.NullPointerException
         at javax.media.jai.PlanarImage.getData(PlanarImage.java:2110)
         ......
 &lt;a href=&quot;#exception&quot; style=&quot;font-weight:bold&quot;&gt;View the full exception stack trace&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
 </code></pre></div>
 
+<h3 id="exception-stack-trace-2">Exception stack trace 2</h3>
+<div class="highlight"><pre><span></span><code>Caused by: javax.imageio.IIOException: Illegal value for Predictor in TIFF file
+    at it.geosolutions.imageioimpl.plugins.tiff.TIFFLZWDecompressor.&lt;init&gt;(TIFFLZWDecompressor.java:118)
+    at it.geosolutions.imageioimpl.plugins.tiff.TIFFImageReader.read(TIFFImageReader.java:1856)
+    at com.sun.media.jai.imageioimpl.ImageReadOpImage.computeTile(ImageReadOpImage.java:697)
+    ... 166 more
+</code></pre></div>
+
 <h3 id="qgis-layer-preview">QGIS layer preview</h3>
 <p>Drag the geotiff file into the QGIS for preview
-<img alt="QGIS preview" src="/imgs/qgis-preview.png" /></p>
+<img alt="QGIS preview" src="/imgs/geoserver-serve-raster/qgis-preview.png" /></p>
 <h3 id="qgis-geotiff-layer-export">QGIS geotiff layer export</h3>
 <p>Display the current layer, Select the menu item "Layer-Save as..." and export the geotiff with 4326 crs
-<img alt="QGIS export" src="/imgs/qgis-export.png" /></p>
+<img alt="QGIS export" src="/imgs/geoserver-serve-raster/qgis-export.png" /></p>
 <h3 id="geoserver-layer-preview">GeoServer layer preview</h3>
 <p>Modify the store in GeoServer to connect to the new geotiff file, and preview the layer again. It works with no color scheme
-<img alt="QGIS export preview" src="/imgs/geoserver-qgis-export.png" /></p>
+<img alt="QGIS export preview" src="/imgs/geoserver-serve-raster/geoserver-qgis-export.png" /></p>
 <h3 id="cause-analysis">Cause analysis</h3>
 <p>The error raster geotiff only has one grey band, and the QGIS exported geotiff file is nearly twice the size of the original one. 
 It is a compressed one, and that's why QGIS produces a bigger size when we save it as another. QGIS does not compress it, hence the new image is bigger. GeoServer doesn't accept compressed geotiff data.
@@ -1467,14 +1515,14 @@ Regarding the GeoServer color problem, It's because that the style in GeoServer 
 <li>Open QGIS, drag the geotiff file into the QGIS.</li>
 <li>Right click on the data layer and select 'Properties', then select 'Style' on the left side.</li>
 <li>Change the render type to 'Singleband pseudocolor' and change the style by specifying the color ranges.
-<img alt="QGIS style" src="/imgs/qgis-style.png" /></li>
+<img alt="QGIS style" src="/imgs/geoserver-serve-raster/qgis-style.png" /></li>
 </ol>
 <h3 id="export-style-in-qgis">Export style in QGIS</h3>
 <p>Apply the change to see the new layer. Save the style using the 'Save Style' button on the bottom and save as .qml file.
-<img alt="QGIS styled layer" src="/imgs/qgis-styled-layer.png" /></p>
+<img alt="QGIS styled layer" src="/imgs/geoserver-serve-raster/qgis-styled-layer.png" /></p>
 <h3 id="copy-the-qml-content">Copy the .qml content</h3>
 <p>Open the .qml file with notepad and review the colorrampshader part.
-<img alt="QGIS styled layer" src="/imgs/qgis-style-qml.png" /></p>
+<img alt="QGIS styled layer" src="/imgs/geoserver-serve-raster/qgis-style-qml.png" /></p>
 <h3 id="generate-the-style-template-in-geoserver">Generate the style template in GeoServer</h3>
 <ol>
 <li>Go to the GeoServer admin page and click on 'Styles' and add a new style.</li>
@@ -1485,36 +1533,39 @@ Regarding the GeoServer color problem, It's because that the style in GeoServer 
 <li>Change the name, title and abstract.</li>
 <li>Translate the .qml content into the GeoServer style content here. Notice the 'value'/'label'/'color' values in .qml match the 'quantity'/'label'/'color' in GeoServer. If the opacity is 0.0, it means that the color will not be visible, so it will be white.</li>
 <li>Press 'Validate' to check if it works. If there are no errors, then 'submit'.
-<img alt="QGIS styled layer" src="/imgs/geoserver-style.png" /></li>
+<img alt="QGIS styled layer" src="/imgs/geoserver-serve-raster/geoserver-style.png" /></li>
 </ol>
 <h3 id="generate-sld-in-qgis">Generate .sld in QGIS</h3>
 <p>Comparing with exporting the .qml style in QGIS, we can directly generate .sld in QGIS and copy the content to create a style in GeoServer.
-<img alt="QGIS styled sld" src="/imgs/geoserver-style-sld.png" /></p>
+<img alt="QGIS styled sld" src="/imgs/geoserver-serve-raster/geoserver-style-sld.png" /></p>
+<h3 id="create-style-in-geoserver-from-sld-file">Create style in Geoserver from .sld file</h3>
+<p>From the .sld file we exported from QGIS, we can easily create a style in GeoServer.
+<img alt="QGIS styled sld" src="/imgs/geoserver-serve-raster/geoserver-create-style-by-sld.png" /></p>
 <h3 id="edit-layer-basic-info">Edit layer basic info</h3>
 <p>Go to 'Layers' and select the layer we just created. Make sure 'Enabled' and 'Advertised' are turned on and check if the 'Coverage Band Details' are set correctly, if not adjust them.
-<img alt="GeoServer layer edit" src="/imgs/geoserver-layer-style1.png" /></p>
+<img alt="GeoServer layer edit" src="/imgs/geoserver-serve-raster/geoserver-layer-style1.png" /></p>
 <h3 id="edit-wms-settings">Edit WMS Settings</h3>
 <p>Select the 'Publishing' tab. With the 'WMS Settings' select 'Default Style' and change it to the style we just created. 'Save' the layer again.
-<img alt="GeoServer layer edit" src="/imgs/geoserver-layer-style2.png" /></p>
+<img alt="GeoServer layer edit" src="/imgs/geoserver-serve-raster/geoserver-layer-style2.png" /></p>
 <h3 id="preview-layer">Preview layer</h3>
 <p>View the layer again with the 'Layer preview' and 'Open Layers'. Now the layer should be displayed correctly.
-<img alt="GeoServer layer preview" src="/imgs/geoserver-layer-preview-color.png" /></p>
+<img alt="GeoServer layer preview" src="/imgs/geoserver-serve-raster/geoserver-layer-preview-color.png" /></p>
 <h3 id="preview-layer-when-editing-style">Preview layer when editing style</h3>
 <p>We could also edit the style and preview the result as soon as we apply in the style editing page.
-<img alt="GeoServer layer preview" src="/imgs/style-preview.png" /></p>
+<img alt="GeoServer layer preview" src="/imgs/geoserver-serve-raster/style-preview.png" /></p>
 <h3 id="add-additional-styles">Add additional styles</h3>
 <p>Edit the layer again and with the 'WMS Settings' select additional styles and save. Remember to add the newly added style into it as well otherwise the restful api cannot list this style info under the layer.
-<img alt="GeoServer layer styles" src="/imgs/geoserver-layer-styles.png" /></p>
+<img alt="GeoServer layer styles" src="/imgs/geoserver-serve-raster/geoserver-layer-styles.png" /></p>
 <h3 id="preview-layer-with-additional-styles">Preview layer with additional styles</h3>
 <p>Preview the layer again and we could switch the style to any available one and see the result.
-<img alt="GeoServer layer preview change" src="/imgs/geoserver-preview-change-style.png" /></p>
+<img alt="GeoServer layer preview change" src="/imgs/geoserver-serve-raster/geoserver-preview-change-style.png" /></p>
 <h2 id="enable-cors-for-geoserver">Enable CORS for GeoServer</h2>
 <h3 id="clone-repository">Clone repository</h3>
 <p>Clone the github repository <a href="https://github.com/kartoza/docker-geoserver">docker-geoserver</a>.</p>
 <h3 id="create-webxml">Create web.xml</h3>
 <p>The contents of <code>resources/overlays</code> will be copied to the image file system during the build. For example, to include a static web xml with CORS support <code>web.xml</code>, create the file at <code>resources/overlays/usr/local/tomcat/conf/web.xml</code>.</p>
 <h3 id="enable-cors">Enable CORS</h3>
-<p>Add CORS enabled content into the web.xml as bellow. The full content of the web.xml can be found <a href="/imgs/web.xml">here</a>.
+<p>Add CORS enabled content into the web.xml as bellow. The full content of the web.xml can be found <a href="/imgs/geoserver-serve-raster/web.xml">here</a>.
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>CorsFilter<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;filter-class&gt;</span>org.apache.catalina.filters.CorsFilter<span class="nt">&lt;/filter-class&gt;</span>
@@ -1546,7 +1597,7 @@ Regarding the GeoServer color problem, It's because that the style in GeoServer 
 </code></pre></div></p>
 <h3 id="docker-hub-modification">Docker hub modification</h3>
 <p>Modify the build.sh script to own hub repository.
-<img alt="GeoServer build" src="/imgs/geoserver-build.png" /></p>
+<img alt="GeoServer build" src="/imgs/geoserver-serve-raster/geoserver-build.png" /></p>
 <h3 id="build-and-push">Build and push</h3>
 <p>Build the docker image and push to own docker hub. Now the CORS enabled GeoServer docker image is ready to use.
 <div class="highlight"><pre><span></span><code>./build.sh
@@ -1554,10 +1605,10 @@ docker pull hustakin/geoserver
 </code></pre></div></p>
 <h3 id="tomcat-error-log">Tomcat error log</h3>
 <p>Sometimes the GeoServer container will met 404 issue. That's because the tomcat failed to start because of your modification. We could attach to the GeoServer container and inspect the tomcat error log to find the reason.
-<img alt="GeoServer error" src="/imgs/geoserver-error.png" /></p>
+<img alt="GeoServer error" src="/imgs/geoserver-serve-raster/geoserver-error.png" /></p>
 <h3 id="client-http">Client http</h3>
 <p>Please be noted the client HTTP should not use the credentials for CORS requests. For example, here I get feature information for raster data in angular6 client by clicking on the layer.
-<img alt="GeoServer cors" src="/imgs/geoserver-angular2.png" /></p>
+<img alt="GeoServer cors" src="/imgs/geoserver-serve-raster/geoserver-angular2.png" /></p>
 <h2 id="renderer-the-raster-layer-in-the-web">Renderer the raster layer in the web</h2>
 <h3 id="leaflet-layer-using-wms">Leaflet layer using WMS</h3>
 <p><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">wmsLayer</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://localhost:9999/geoserver/raster/wms?&#39;</span><span class="p">,</span> <span class="p">{</span>
@@ -1576,7 +1627,7 @@ docker pull hustakin/geoserver
     <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span><span class="nx">wmsLayer</span><span class="p">],</span>
 <span class="p">});</span>
 </code></pre></div>
-<img alt="Leaflet layer" src="/imgs/leaflet.png" /></p>
+<img alt="Leaflet layer" src="/imgs/geoserver-serve-raster/leaflet.png" /></p>
 <h3 id="leaflet-layer-using-wmts">Leaflet layer using WMTS</h3>
 <p>Please be noted that we should use <a href="http://epsg.io/900913">EPSG:900913</a> other than EPSG:4326 here which for historical reasons is what GeoServer calls Web Mercator.
 <div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">wmtsLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">L</span><span class="p">.</span><span class="nx">TileLayer</span><span class="p">.</span><span class="nx">WMTS</span><span class="p">(</span><span class="s1">&#39;http://localhost:9999/geoserver/gwc/service/wmts&#39;</span><span class="p">,</span> <span class="p">{</span>
@@ -1594,7 +1645,7 @@ docker pull hustakin/geoserver
     <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span><span class="nx">wmtsLayer</span><span class="p">],</span>
 <span class="p">});</span>
 </code></pre></div>
-<img alt="Leaflet layer" src="/imgs/leaflet-wmts.png" /></p>
+<img alt="Leaflet layer" src="/imgs/geoserver-serve-raster/leaflet-wmts.png" /></p>
 <h3 id="openlayers-layer-using-wmts">OpenLayers layer using WMTS</h3>
 <p><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">gridNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;EPSG:4326:0&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:1&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:2&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:3&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:4&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:5&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:6&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:7&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:8&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:9&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:10&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:11&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:12&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:13&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:14&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:15&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:16&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:17&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:18&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:19&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:20&#39;</span><span class="p">,</span> <span class="s1">&#39;EPSG:4326:21&#39;</span><span class="p">];</span>
 <span class="kd">let</span> <span class="nx">baseParams</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VERSION&#39;</span><span class="p">,</span> <span class="s1">&#39;LAYER&#39;</span><span class="p">,</span> <span class="s1">&#39;STYLE&#39;</span><span class="p">,</span> <span class="s1">&#39;TILEMATRIX&#39;</span><span class="p">,</span> <span class="s1">&#39;TILEMATRIXSET&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVICE&#39;</span><span class="p">,</span> <span class="s1">&#39;FORMAT&#39;</span><span class="p">];</span>
@@ -1724,9 +1775,9 @@ docker pull hustakin/geoserver
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<img alt="OpenLayers layer" src="/imgs/openlayers.png" /></p>
+<img alt="OpenLayers layer" src="/imgs/geoserver-serve-raster/openlayers.png" /></p>
 <h2 id="footnotes">Footnotes</h2>
-<details class="note"><summary>Full exception stack trace from GeoServer console</summary><p>09 Sep 17:11:56 INFO [geoserver.wms] -
+<details class="note"><summary>NullPointerException stack trace from GeoServer console</summary><p>09 Sep 17:11:56 INFO [geoserver.wms] -
 Request: getServiceInfo
 Sep 09, 2019 5:11:56 PM org.geoserver.GeoserverInitStartupListener$1 errorOccurred
 INFO: Problem occurs when computing a tile by the owner.
@@ -2324,6 +2375,181 @@ Caused by: java.lang.NullPointerException
         at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:234)
         at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:332)
         ... 124 more</p>
+</details>
+<details class="note"><summary>Illegal value exception from GeoServer console</summary><p>24-Nov-2020 04:49:03.269 INFO [http-nio-8080-exec-7] org.geoserver.GeoserverInitStartupListener$1.errorOccurred Problem occurs when computing a tile by the owner.
+ java.lang.RuntimeException: javax.imageio.IIOException: Illegal value for Predictor in TIFF file
+    at com.sun.media.jai.imageioimpl.ImageReadOpImage.computeTile(ImageReadOpImage.java:706)
+    at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+    at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+    at javax.media.jai.PlanarImage.cobbleFloat(PlanarImage.java:3254)
+    at javax.media.jai.PlanarImage.getData(PlanarImage.java:2181)
+    at it.geosolutions.jaiext.scale.ScaleOpImage.computeTile(ScaleOpImage.java:1651)
+    at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+    at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+    at it.geosolutions.jaiext.stats.SimpleStatsOpImage.computeTile(SimpleStatsOpImage.java:95)
+    at com.sun.media.jai.util.SunTileScheduler.scheduleTile(SunTileScheduler.java:904)
+    at javax.media.jai.OpImage.getTile(OpImage.java:1129)
+    at it.geosolutions.jaiext.stats.StatisticsOpImage.getProperty(StatisticsOpImage.java:333)
+    at javax.media.jai.RenderedOp$1.getProperty(RenderedOp.java:1808)
+    at javax.media.jai.PropertyEnvironment.getProperty(PropertyEnvironment.java:197)
+    at javax.media.jai.PropertySourceImpl.getProperty(PropertySourceImpl.java:277)
+    at javax.media.jai.WritablePropertySourceImpl.getProperty(WritablePropertySourceImpl.java:130)
+    at javax.media.jai.RenderedOp.getProperty(RenderedOp.java:1982)
+    at org.geotools.image.ImageWorker.getComputedProperty(ImageWorker.java:1078)
+    at org.geotools.image.ImageWorker.getExtremas(ImageWorker.java:1111)
+    at org.geotools.image.ImageWorker.rescaleToBytes(ImageWorker.java:1442)
+    at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:138)
+    at org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper.execute(RasterSymbolizerHelper.java:52)
+    at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter$1.execute(StyleVisitorCoverageProcessingNodeAdapter.java:96)
+    at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.checkExecuted(BaseCoverageProcessingNode.java:233)
+    at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:331)
+    at org.geotools.renderer.lite.gridcoverage2d.BaseCoverageProcessingNode.getOutput(BaseCoverageProcessingNode.java:51)
+    at org.geotools.renderer.lite.gridcoverage2d.StyleVisitorCoverageProcessingNodeAdapter.getOutput(StyleVisitorCoverageProcessingNodeAdapter.java:129)
+    at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.symbolize(GridCoverageRenderer.java:482)
+    at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:1018)
+    at org.geotools.renderer.lite.gridcoverage2d.GridCoverageRenderer.renderImage(GridCoverageRenderer.java:829)
+    at org.geoserver.wms.map.RenderedImageMapOutputFormat.directRasterRender(RenderedImageMapOutputFormat.java:1058)
+    at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:353)
+    at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:269)
+    at org.geoserver.wms.map.RenderedImageMapOutputFormat.produceMap(RenderedImageMapOutputFormat.java:132)
+    at org.geoserver.wms.GetMap.executeInternal(GetMap.java:707)
+    at org.geoserver.wms.GetMap.run(GetMap.java:287)
+    at org.geoserver.wms.GetMap.run(GetMap.java:110)
+    at org.geoserver.wms.DefaultWebMapService.getMap(DefaultWebMapService.java:251)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:498)
+    at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+    at org.geoserver.kml.WebMapServiceKmlInterceptor.invoke(WebMapServiceKmlInterceptor.java:38)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+    at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:55)
+    at org.geoserver.gwc.wms.CacheSeedingWebMapService.invoke(CacheSeedingWebMapService.java:31)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+    at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:72)
+    at org.geoserver.gwc.wms.CachingWebMapService.invoke(CachingWebMapService.java:52)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+    at org.geoserver.ows.util.RequestObjectLogger.invoke(RequestObjectLogger.java:50)
+    at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+    at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+    at com.sun.proxy.$Proxy46.getMap(Unknown Source)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:498)
+    at org.geoserver.ows.Dispatcher.execute(Dispatcher.java:877)
+    at org.geoserver.ows.Dispatcher.handleRequestInternal(Dispatcher.java:264)
+    at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.java:177)
+    at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+    at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998)
+    at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:890)
+    at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+    at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:875)
+    at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.apache.catalina.filters.CorsFilter.handleNonCORS(CorsFilter.java:430)
+    at org.apache.catalina.filters.CorsFilter.doFilter(CorsFilter.java:169)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.ThreadLocalsCleanupFilter.doFilter(ThreadLocalsCleanupFilter.java:26)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:69)
+    at org.geoserver.flow.controller.IpBlacklistFilter.doFilter(IpBlacklistFilter.java:89)
+    at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+    at org.geoserver.flow.ControlFlowCallback.doFilter(ControlFlowCallback.java:260)
+    at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+    at org.geoserver.wms.animate.AnimatorFilter.doFilter(AnimatorFilter.java:73)
+    at org.geoserver.filters.SpringDelegatingFilter$Chain.doFilter(SpringDelegatingFilter.java:66)
+    at org.geoserver.filters.SpringDelegatingFilter.doFilter(SpringDelegatingFilter.java:41)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.platform.AdvancedDispatchFilter.doFilter(AdvancedDispatchFilter.java:37)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+    at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+    at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+    at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+    at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+    at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+    at org.geoserver.security.filter.GeoServerAnonymousAuthenticationFilter.doFilter(GeoServerAnonymousAuthenticationFilter.java:51)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+    at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:158)
+    at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+    at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+    at org.geoserver.security.filter.GeoServerBasicAuthenticationFilter.doFilter(GeoServerBasicAuthenticationFilter.java:81)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:70)
+    at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+    at org.geoserver.security.filter.GeoServerSecurityContextPersistenceFilter$1.doFilter(GeoServerSecurityContextPersistenceFilter.java:52)
+    at org.geoserver.security.filter.GeoServerCompositeFilter$NestedFilterChain.doFilter(GeoServerCompositeFilter.java:74)
+    at org.geoserver.security.filter.GeoServerCompositeFilter.doFilter(GeoServerCompositeFilter.java:91)
+    at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+    at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+    at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+    at org.geoserver.security.GeoServerSecurityFilterChainProxy.doFilter(GeoServerSecurityFilterChainProxy.java:142)
+    at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+    at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.LoggingFilter.doFilter(LoggingFilter.java:90)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.XFrameOptionsFilter.doFilter(XFrameOptionsFilter.java:79)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.GZIPFilter.doFilter(GZIPFilter.java:42)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.SessionDebugFilter.doFilter(SessionDebugFilter.java:46)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.geoserver.filters.FlushSafeFilter.doFilter(FlushSafeFilter.java:42)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+    at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)
+    at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+    at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:494)
+    at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:137)
+    at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+    at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:651)
+    at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+    at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+    at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:407)
+    at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+    at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:754)
+    at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1376)
+    at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+    at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+    at java.lang.Thread.run(Thread.java:748)
+Caused by: javax.imageio.IIOException: Illegal value for Predictor in TIFF file
+    at it.geosolutions.imageioimpl.plugins.tiff.TIFFLZWDecompressor.<init>(TIFFLZWDecompressor.java:118)
+    at it.geosolutions.imageioimpl.plugins.tiff.TIFFImageReader.read(TIFFImageReader.java:1856)
+    at com.sun.media.jai.imageioimpl.ImageReadOpImage.computeTile(ImageReadOpImage.java:697)
+    ... 166 more</p>
 </details>
                 
                   

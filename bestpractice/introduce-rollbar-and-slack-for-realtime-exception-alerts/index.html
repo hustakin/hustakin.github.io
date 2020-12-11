@@ -756,6 +756,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -976,21 +988,21 @@
 <!-- more --></p>
 <h3 id="connect-rollbar-with-github">Connect Rollbar with Github</h3>
 <p>Log in Rollbar with the "Log in with GitHub" button, and enables the GitHub integration settings for all your projects. Get started by going to your account settings. Navigate to the "Connected Accounts" and Connect with GitHub.
-<img alt="Connect Rollbar with Github" src="/imgs/connect-github.png" /></p>
+<img alt="Connect Rollbar with Github" src="/imgs/rollbar-slack-alert/connect-github.png" /></p>
 <h3 id="create-a-project">Create a project</h3>
 <p>Click the "create new project" on the top dropdown list in Rollbar.
-<img alt="Create a project" src="/imgs/create-proj.png" /></p>
+<img alt="Create a project" src="/imgs/rollbar-slack-alert/create-proj.png" /></p>
 <p>Create the project from a Github repo directly or specify the new project information to create.
-<img alt="Create a project" src="/imgs/create-project.png" /></p>
+<img alt="Create a project" src="/imgs/rollbar-slack-alert/create-project.png" /></p>
 <h3 id="integrate-a-notifier">Integrate a notifier</h3>
 <p>Select the platform your project is based on. Here I use Java and continue.
-<img alt="Integrate a notifier" src="/imgs/integrate-a-notifier.png" /></p>
+<img alt="Integrate a notifier" src="/imgs/rollbar-slack-alert/integrate-a-notifier.png" /></p>
 <h3 id="wait-the-data">Wait the data</h3>
 <p>Now we can see the tutorial for your platform and the status for it is waiting.
-<img alt="Wait the data" src="/imgs/waiting-for-data.png" /></p>
+<img alt="Wait the data" src="/imgs/rollbar-slack-alert/waiting-for-data.png" /></p>
 <h3 id="integrate-source-control">Integrate source control</h3>
 <p>Click the 3rd step to connect source control and select Github, then input the information for your project.
-<img alt="Integrate source control" src="/imgs/integrate-source-control.png" /></p>
+<img alt="Integrate source control" src="/imgs/rollbar-slack-alert/integrate-source-control.png" /></p>
 <h3 id="project-integration">Project integration</h3>
 <p>Follow the tutorial on the 1st step page. Add the Rollbar related maven dependencies into your project. Here I add logback dependency into it as well because I'll use logback to send exceptions to Rollbar.
 <div class="highlight"><pre><span></span><code><span class="c">&lt;!-- Rollbar --&gt;</span>
@@ -1046,7 +1058,7 @@
 <span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></p>
 <p>The access token can be copied from the the settings of the Rollbar project.
-<img alt="Get token" src="/imgs/get-token.png" /></p>
+<img alt="Get token" src="/imgs/rollbar-slack-alert/get-token.png" /></p>
 <h3 id="test-integration-with-rollbar">Test integration with Rollbar</h3>
 <p>Write a unit test and run to see the integration status.
 <div class="highlight"><pre><span></span><code><span class="n">org</span><span class="p">.</span><span class="na">slf4j</span><span class="p">.</span><span class="na">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Test</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
@@ -1058,30 +1070,30 @@
 </code></pre></div></p>
 <h3 id="check-dashboard-status">Check dashboard status</h3>
 <p>Wait on the Integrate a Notifier step page or click the Dashboard link on the top bar. You will see the new error coming after the unit test is executed. Until now we've integrated exceptions alert into the Rollbar, the next step will be integrated Rollbar with Slack.
-<img alt="Dashboard status" src="/imgs/dashboard-status.png" /></p>
+<img alt="Dashboard status" src="/imgs/rollbar-slack-alert/dashboard-status.png" /></p>
 <h3 id="integrate-rollbar-notification-with-slack">Integrate Rollbar notification with Slack</h3>
 <p>Go to the Settings of the Rollbar project and click the Notifications menuitem. Find the Slack app in the available channels
-<img alt="Integration notification" src="/imgs/integration-notification.png" /></p>
+<img alt="Integration notification" src="/imgs/rollbar-slack-alert/integration-notification.png" /></p>
 <h3 id="add-rollbar-app-in-slack">Add Rollbar app in Slack</h3>
 <p>Go to your Slack workspace and add Rollbar app.
-<img alt="Add Rollbar app in Slack" src="/imgs/add-rollbar-in-slack.png" />
-<img alt="Add Rollbar app in Slack" src="/imgs/slack-rollbar-settings.png" /></p>
+<img alt="Add Rollbar app in Slack" src="/imgs/rollbar-slack-alert/add-rollbar-in-slack.png" />
+<img alt="Add Rollbar app in Slack" src="/imgs/rollbar-slack-alert/slack-rollbar-settings.png" /></p>
 <h3 id="enable-slack-integration">Enable Slack integration</h3>
 <p>Click the Slack app in the available channels and select your access token and enable the Slack integration.
-<img alt="Enable Slack integration" src="/imgs/enable-slack-notification.png" /></p>
+<img alt="Enable Slack integration" src="/imgs/rollbar-slack-alert/enable-slack-notification.png" /></p>
 <h3 id="slack-channel-selection">Slack channel selection</h3>
 <p>Select the channel you will notify exceptions in your Slack workspace. The dropdown here will list all the channels in your Slack workspace.
-<img alt="Slack channel selection" src="/imgs/select-channel.png" /></p>
+<img alt="Slack channel selection" src="/imgs/rollbar-slack-alert/select-channel.png" /></p>
 <h3 id="configure-slack-app-rules">Configure Slack app rules</h3>
 <p>You can configure the rules of the Slack notifications as your need. For example, I add the every occurrence rule here in order to notify every error to the Slack.
-<img alt="Configure Slack app rules" src="/imgs/configure-slack-rule.png" />
-<img alt="Create a rule" src="/imgs/create-rule.png" /></p>
+<img alt="Configure Slack app rules" src="/imgs/rollbar-slack-alert/configure-slack-rule.png" />
+<img alt="Create a rule" src="/imgs/rollbar-slack-alert/create-rule.png" /></p>
 <h3 id="test-integration-with-slack">Test integration with Slack</h3>
 <p>Run the unit test again to see the integration status with Slack. Go into the channel you configured in Rollbar and you will see the coming error notification.
-<img alt="Test integration with Slack" src="/imgs/test-slack-integration.png" /></p>
+<img alt="Test integration with Slack" src="/imgs/rollbar-slack-alert/test-slack-integration.png" /></p>
 <h3 id="slack-channel-settings">Slack channel settings</h3>
 <p>Remember to join the channel in order to get notified. Then configure the notification preferences to include mobile. You can install the Slack app in your mobile and login your workspace. Run the unit test again and you will see notifications on your mobile as soon as exceptions happen.
-<img alt="Slack channel settings" src="/imgs/mobile-notification.jpg" /></p>
+<img alt="Slack channel settings" src="/imgs/rollbar-slack-alert/mobile-notification.jpg" /></p>
                 
                   
                 

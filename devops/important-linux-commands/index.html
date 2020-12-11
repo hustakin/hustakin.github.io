@@ -852,6 +852,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1249,6 +1261,10 @@
 <tr>
 <td>MacOS kill process using specific port</td>
 <td>1. <code>lsof -i tcp:8443</code> <br/>2. <code>kill 86166</code></td>
+</tr>
+<tr>
+<td>Clean Linux swap and move into memory then restart and modify threshold</td>
+<td>1. <code>sudo swapoff -a &amp;&amp; sudo swapon -a</code> <br/>2. <code>sudo sysctl vm.swappiness=10</code> <br/>3. <code>sudo vi /etc/sysctl.conf</code> -&gt; <code>vm.swappiness=10</code></td>
 </tr>
 </tbody>
 </table>

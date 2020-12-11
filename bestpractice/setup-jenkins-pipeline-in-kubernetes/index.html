@@ -892,6 +892,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1245,7 +1257,7 @@
                 
                 <p>Jenkins Pipeline (or simply "Pipeline" with a capital "P") is a suite of plugins which supports implementing and integrating continuous delivery pipelines into Jenkins.</p>
 <p>Blue Ocean rethinks the user experience of Jenkins. Designed from the ground up for Jenkins Pipeline, but still compatible with freestyle jobs, Blue Ocean reduces clutter and increases clarity for every member of the team.</p>
-<p><img alt="Jenkins pipeline" src="/imgs/jenkins-pipeline.png" />
+<p><img alt="Jenkins pipeline" src="/imgs/jenkins-pipeline-k8s/jenkins-pipeline.png" />
 <!-- more --></p>
 <h2 id="install-jenkins-in-k8s">Install Jenkins in K8s</h2>
 <h3 id="create-namespace">Create namespace</h3>
@@ -1481,26 +1493,26 @@ chmod +x ./kubectl
 <h2 id="jenkins-configurations">Jenkins Configurations</h2>
 <h3 id="configure-kubernetes">Configure Kubernetes</h3>
 <p>Click Manage Jenkins-&gt;Configure System-&gt;Add a new cloud-&gt;Kubernetes. Test the connection and input namespace and Jenkins inner url by format (<serviceName>.<namespace>.svc.cluster.local:8080)
-<img alt="Jenkins k8s" src="/imgs/jenkins-k8s.png" /></p>
+<img alt="Jenkins k8s" src="/imgs/jenkins-pipeline-k8s/jenkins-k8s.png" /></p>
 <h3 id="configure-jenkins-slave-k8s-template">Configure Jenkins Slave k8s template</h3>
 <p>Add pod template, and remember to clean the "Command to run" and "Arguments to pass to the command" (This's really important!).</p>
 <p>The image hustakin/jenkins-slave:latest has the kubectl version of v1.14.2
-<img alt="Jenkins k8s pod" src="/imgs/jenkins-k8s-pod.png" /></p>
+<img alt="Jenkins k8s pod" src="/imgs/jenkins-pipeline-k8s/jenkins-k8s-pod.png" /></p>
 <h3 id="configure-jenkins-slave-k8s-volumes">Configure Jenkins Slave k8s volumes</h3>
 <p>Add volumes in the pod template including docker, .kube config files as well as the maven cache. (Each node of the cluster will cache the maven into /home/ec2-user/.m2)
-<img alt="Jenkins k8s volume" src="/imgs/jenkins-k8s-volume.png" /></p>
+<img alt="Jenkins k8s volume" src="/imgs/jenkins-pipeline-k8s/jenkins-k8s-volume.png" /></p>
 <h3 id="configure-service-account">Configure service account</h3>
 <p>The service account is created in previous RBAC yaml step.
-<img alt="Jenkins service account" src="/imgs/jenkins-service-account.png" /></p>
+<img alt="Jenkins service account" src="/imgs/jenkins-pipeline-k8s/jenkins-service-account.png" /></p>
 <h3 id="configure-global-tool">Configure global tool</h3>
 <p>Click Manage Jenkins-&gt;Global Tool Configuration. Configure maven installations.
-<img alt="Jenkins maven" src="/imgs/jenkins-maven.png" /></p>
+<img alt="Jenkins maven" src="/imgs/jenkins-pipeline-k8s/jenkins-maven.png" /></p>
 <h3 id="configure-nodejs-installations">Configure NodeJS installations</h3>
 <p>Click Manage Jenkins-&gt;Global Tool Configuration. Configure NodeJS installations.
-<img alt="Jenkins nodejs" src="/imgs/jenkins-nodejs.png" /></p>
+<img alt="Jenkins nodejs" src="/imgs/jenkins-pipeline-k8s/jenkins-nodejs.png" /></p>
 <h3 id="configure-dockerhub-credentials">Configure DockerHub credentials</h3>
 <p>Click Jenkins-&gt;Credentials-&gt;(global)-&gt;Add credentials. Specify your DockerHub username and password. Remember the ID here will be used in your Jenkinsfile to specify "credentialsId".
-<img alt="Jenkins dockerhub" src="/imgs/jenkins-dockerhub.png" /></p>
+<img alt="Jenkins dockerhub" src="/imgs/jenkins-pipeline-k8s/jenkins-dockerhub.png" /></p>
 <h2 id="configure-pipelines">Configure Pipelines</h2>
 <p>Write Dockerfile and Jenkinsfile and k8s.yaml in your project root folder and push it to GitHub. Create the repository in Dockerhub for your project in order to save docker built images.</p>
 <h3 id="jenkinsfile-content-for-springboot">Jenkinsfile content for SpringBoot</h3>
@@ -1706,16 +1718,16 @@ chmod +x ./kubectl
 </code></pre></div></p>
 <h3 id="create-github-pipeline">Create Github Pipeline</h3>
 <p>Click Jenkins-&gt;Open Blue Ocean-&gt;New Pipeline, and create pipeline for your project.
-<img alt="Github pipeline" src="/imgs/jenkins-new-pipeline.png" /></p>
+<img alt="Github pipeline" src="/imgs/jenkins-pipeline-k8s/jenkins-new-pipeline.png" /></p>
 <h3 id="create-github-pipeline_1">Create Github Pipeline</h3>
 <p>The jenkins pipeline should work now. Enter your jenkins job and master branch, you could see the stage view here.
-<img alt="Github pipeline branch" src="/imgs/jenkins-pipeline-branch.png" /></p>
+<img alt="Github pipeline branch" src="/imgs/jenkins-pipeline-k8s/jenkins-pipeline-branch.png" /></p>
 <h3 id="trigger-pipeline">Trigger pipeline</h3>
 <p>Push your code changes to Github. Click Jenkins-&gt;Open Blue Ocean. You can trigger the build for all pipelines you created by clicking the Run button.
-<img alt="Blue Ocean pipeline" src="/imgs/blue-ocean-pipeline.png" /></p>
+<img alt="Blue Ocean pipeline" src="/imgs/jenkins-pipeline-k8s/blue-ocean-pipeline.png" /></p>
 <h3 id="blue-ocean-build">Blue Ocean build</h3>
 <p>Click Jenkins-&gt;Open Blue Ocean, and click the pipeline you just created, you will see the Jenkinsfile stages and related logs here.
-<img alt="Blue Ocean build" src="/imgs/blue-ocean-deploy.png" /></p>
+<img alt="Blue Ocean build" src="/imgs/jenkins-pipeline-k8s/blue-ocean-deploy.png" /></p>
                 
                   
                 

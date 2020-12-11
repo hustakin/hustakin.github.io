@@ -727,6 +727,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -922,31 +934,31 @@
 <h3 id="rest-properties-file">Rest properties file</h3>
 <p>The REST process has its own security configuration that needs to be setup in addition to the web interface user. These are different configurations and are setup in different spots. The REST configuration does use that same users you have configured in the web interface it just doesn't use the access rules that you would have set up.</p>
 <p>To know about the permissions you need to view a file in the directory [Geoserver_data}/security called rest.properties.
-<img alt="Restful file" src="/imgs/rest-properties-file.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/rest-properties-file.png" /></p>
 <h3 id="rest-properties">Rest properties</h3>
 <p>From the properties file content, we can see all the rest api will need admin user authentication.
-<img alt="Restful properties" src="/imgs/rest-properties.png" /></p>
+<img alt="Restful properties" src="/imgs/geoserver-rest/rest-properties.png" /></p>
 <h3 id="users-groups-and-roles">Users, groups and roles</h3>
 <p>From the GeoServer web ui, we can define users, groups and roles.
-<img alt="Users and roles" src="/imgs/geoserver-users.png" /></p>
+<img alt="Users and roles" src="/imgs/geoserver-rest/geoserver-users.png" /></p>
 <h3 id="rest-test">Rest test</h3>
 <p>If we try to test any GeoServer rest api without any configuration, we will meet a 401 error because of no authentication.
-<img alt="Restful test 401" src="/imgs/rest-401.png" /></p>
+<img alt="Restful test 401" src="/imgs/geoserver-rest/rest-401.png" /></p>
 <h3 id="authentication-filters">Authentication filters</h3>
 <p>Click the Authentication link located under the Security section of the navigation sidebar. Scroll down to the Authentication Filters panel and click the Add new link.
-<img alt="Restful file" src="/imgs/authentication-filters.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/authentication-filters.png" /></p>
 <h3 id="add-authentication-filter">Add authentication filter</h3>
 <p>Click the HTTP Header link and set "Name" to anything you'd like, Set Request header attribute to to a random token other than "user" or "admin". It's a obscure header attribute name which is a shared secret between the proxy and GeoServer. Set Role source to "User group service" and name of the user group service to "default".
-<img alt="Restful file" src="/imgs/new-auth-filter.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/new-auth-filter.png" /></p>
 <h3 id="authentication-filter-chains">Authentication filter chains</h3>
 <p>Go back to the Authentication link and scroll down to the Filter Chains panel. Notice the rest filter chain here and click into it.
-<img alt="Restful file" src="/imgs/ready-configure-filter-chains.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/ready-configure-filter-chains.png" /></p>
 <h3 id="configure-rest-filter-chain">Configure rest filter chain</h3>
 <p>Scroll down to the Chain filters panel. Drag the newly added authentication filter to the selected part and position it before all other filters.
-<img alt="Restful file" src="/imgs/configure-filter-chain.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/configure-filter-chain.png" /></p>
 <h3 id="rest-test-successful">Rest test successful</h3>
 <p>Try the rest api again with specified header which is the Request header attribute we just set and with the value of "admin".
-<img alt="Restful file" src="/imgs/rest-auth.png" /></p>
+<img alt="Restful file" src="/imgs/geoserver-rest/rest-auth.png" /></p>
 <h2 id="restful-apis">Restful APIs</h2>
 <p>The full restful api list can be found <a href="https://docs.geoserver.org/latest/en/user/rest/index.html">here</a></p>
 <table>
@@ -961,42 +973,42 @@
 <tr>
 <td>List workspaces</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces</code></td>
-<td><img alt="Response" src="/imgs/response-workspaces.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-workspaces.png" /></td>
 </tr>
 <tr>
 <td>List layers in a workspace</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers</code></td>
-<td><img alt="Response" src="/imgs/response-layers.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></td>
 </tr>
 <tr>
 <td>List coverage stores which describe the raster data source</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores</code></td>
-<td><img alt="Response" src="/imgs/response-list-raster-datastores.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-list-raster-datastores.png" /></td>
 </tr>
 <tr>
 <td>List styles in a workspace</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles</code></td>
-<td><img alt="Response" src="/imgs/response-list-styles.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-list-styles.png" /></td>
 </tr>
 <tr>
 <td>List styles under a layer</td>
 <td><code>http://localhost:9999/geoserver/rest/layers/&lt;layerName&gt;/styles</code></td>
-<td><img alt="Response" src="/imgs/response-list-styles-layer.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-list-styles-layer.png" /></td>
 </tr>
 <tr>
 <td>Retrieve a layer</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers/&lt;layerName&gt;</code></td>
-<td><img alt="Response" src="/imgs/response-layers.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></td>
 </tr>
 <tr>
 <td>Get a coverage store</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;</code></td>
-<td><img alt="Response" src="/imgs/response-raster-store.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-raster-store.png" /></td>
 </tr>
 <tr>
 <td>Get a sld style in a workspace</td>
 <td><code>http://localhost:9999/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles/&lt;styleName&gt;.sld</code></td>
-<td><img alt="Response" src="/imgs/response-get-style.png" /></td>
+<td><img alt="Response" src="/imgs/geoserver-rest/response-get-style.png" /></td>
 </tr>
 </tbody>
 </table>

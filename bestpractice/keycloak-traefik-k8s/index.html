@@ -699,6 +699,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+      Manage your website in Google Search Console
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -858,7 +870,7 @@
                   <h1>Play around with Keycloak in k8s</h1>
                 
                 <p>A DevOps team may be accessing multiple applications and tools in a single product environment in support of their DevOps processes such as CI/CD server, Centralized log, Kubernetes dashboard, Monitoring software, Artifact repositories, Admin tools, etc. All of these tools will require authentication mechanisms for security purposes, and for a user to maintain and remember their authentication credentials on so many softwares can quickly become cumbersome. And in the event of lost credentials, it can be a tedious process for both user and admins to recover the required credentials.</p>
-<p><img alt="Keycloak" src="/imgs/keycloak-map.png" />
+<p><img alt="Keycloak" src="/imgs/keycloak-traefik-k8s/keycloak-map.png" />
 <!-- more --></p>
 <p>Instead of having individual authentication on various tools, a more effective strategy is to use single sign-on for all tools, i.e. a centralized authentication mechanism that can allow or reject access to a set of tools based on a single set of credentials per user. Additionally some tools may not have authentication built into them at all, and may be reliant on an external authentication server in any case. An external authentication server with single sign-on capability can therefore prove to be the way to go in such a situation.</p>
 <h2 id="single-sign-on">Single Sign-On</h2>
@@ -869,7 +881,7 @@
 <p>Keycloak supports OpenID Connect and SAML protocols. OpenID Connect (OIDC) is an extension of the OAuth 2 authentication protocol. While OAuth 2.0 is a framework for building authorization protocols, and OIDC is the full implementation of a authentication and authorization protocol. SAML 2.0 is similar to OIDC but a lot older and consequently more mature. It has its roots in SOAP and works by exchanging XML documents between the authentication server and the application, so it tends to be a bit more verbose than OIDC. In most cases OIDC is recommended by Keycloak.</p>
 <h2 id="keycloak-gatekeeper">Keycloak Gatekeeper</h2>
 <p>Keycloak Gatekeeper is an adapter which integrates with the Keycloak authentication service. We deploy it on a per-application instance basis. So usually this will be a sidecar container deployed with the application container on the kubernetes pod. We configure the kubernetes service of the application so that it points to the gatekeeper rather than the application itself, so that the gatekeeper can act as a proxy for incoming requests. The gatekeeper then verifies from the Keycloak server if an active authenticated session exists or not. If not, it redirects the client to the Keycloak login page. If the session exists, it allows the incoming request to pass through to the application container.
-<img alt="Keycloak gatekeeper" src="/imgs/keycloak-gatekeeper.png" /></p>
+<img alt="Keycloak gatekeeper" src="/imgs/keycloak-traefik-k8s/keycloak-gatekeeper.png" /></p>
 <p>Using the Keycloak Gatekeeper allows us to have zero authentication configuration within the application itself. The session verification, redirection to Keycloak in case of an invalid session, and pass through to the application in case of a valid session, are all handled by the gatekeeper.</p>
 <h2 id="stakater-proxy-injector">Stakater Proxy Injector</h2>
 <p>Deploying a sidecar container for Keycloak Gatekeeper with all our applications can be a hassle. So we want to automatically inject a keycloak gatekeeper container in a pod, for any deployment that requires to connect to keycloak, instead of manually adding a sidecar container with each deployment. This Proxy Injector controller will continuously watch deployments in specific or all namespaces, and automatically add a sidecar container for keycloak gatekeeper. Configuration for the keycloak gatekeeper is done through annotations of the respective deployment or with ConfigMap of the ProxyInjector.</p>
@@ -881,7 +893,7 @@ helm install --name keycloak codecentric/keycloak
 <span class="c1"># helm list</span>
 <span class="c1"># helm delete &lt;name&gt; (delete the chart)</span>
 </code></pre></div>
-<img alt="Chart install result" src="/imgs/helm-result.png" /></p>
+<img alt="Chart install result" src="/imgs/keycloak-traefik-k8s/helm-result.png" /></p>
 <p>Remember the username and password from the result.</p>
 <h3 id="traefik-ingress">Traefik ingress</h3>
 <p>Create the keycloak ingress yaml to expose the keycloak web, and specify the sub-domain for it
@@ -901,22 +913,22 @@ helm install --name keycloak codecentric/keycloak
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 Open the exposed url
-<img alt="Keycloak launch" src="/imgs/keycloak-launch.png" /></p>
+<img alt="Keycloak launch" src="/imgs/keycloak-traefik-k8s/keycloak-launch.png" /></p>
 <p>Enter the administration console and use the previous username and password to login.</p>
 <p>Create a user and specify the username and reset the password to set the user password to the new one you specified.
-<img alt="Keycloak create user" src="/imgs/keycloak-create-user.png" /></p>
+<img alt="Keycloak create user" src="/imgs/keycloak-traefik-k8s/keycloak-create-user.png" /></p>
 <p>Create a client which is the application you want to inject authentication in front of.
-<img alt="Keycloak create client" src="/imgs/keycloak-create-client.png" /></p>
+<img alt="Keycloak create client" src="/imgs/keycloak-traefik-k8s/keycloak-create-client.png" /></p>
 <p>Modify the access type to the confidential and save.
-<img alt="Keycloak modify access type" src="/imgs/keycloak-modify-access-type.png" /></p>
+<img alt="Keycloak modify access type" src="/imgs/keycloak-traefik-k8s/keycloak-modify-access-type.png" /></p>
 <p>Create a client scope.
-<img alt="Keycloak create client scope" src="/imgs/keycloak-create-client-scopes.png" /></p>
+<img alt="Keycloak create client scope" src="/imgs/keycloak-traefik-k8s/keycloak-create-client-scopes.png" /></p>
 <p>Click the Mappers and create a mapper with the Audience type.
-<img alt="Keycloak create mapper" src="/imgs/keycloak-create-mapper.png" /></p>
+<img alt="Keycloak create mapper" src="/imgs/keycloak-traefik-k8s/keycloak-create-mapper.png" /></p>
 <p>Enter the new client and click the Client Scopes, move the available new scope to selected.
-<img alt="Keycloak apply client scope" src="/imgs/keycloak-apply-client-scope.png" /></p>
+<img alt="Keycloak apply client scope" src="/imgs/keycloak-traefik-k8s/keycloak-apply-client-scope.png" /></p>
 <p>You can add a realm other than Master Realm at any time.
-<img alt="Keycloak add realm" src="/imgs/keycloak-create-realm.png" /></p>
+<img alt="Keycloak add realm" src="/imgs/keycloak-traefik-k8s/keycloak-create-realm.png" /></p>
                 
                   
                 
