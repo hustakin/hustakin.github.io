@@ -987,154 +987,137 @@
 <img alt="Restful file" src="/imgs/geoserver-rest/rest-auth.png" /></p>
 <h2 id="restful-apis">Restful APIs</h2>
 <p>The full restful api list can be found <a href="https://docs.geoserver.org/latest/en/user/rest/index.html">here</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Scenarios</th>
-<th>Commands</th>
-<th>Response</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>List workspaces</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-workspaces.png" /></td>
-</tr>
-<tr>
-<td>List layers in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></td>
-</tr>
-<tr>
-<td>List coverage stores which describe the raster data source</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-list-raster-datastores.png" /></td>
-</tr>
-<tr>
-<td>List styles in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-list-styles.png" /></td>
-</tr>
-<tr>
-<td>List styles under a layer</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/layers/&lt;layerName&gt;/styles</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-list-styles-layer.png" /></td>
-</tr>
-<tr>
-<td>List styles</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/styles</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-list-all-styles.png" /></td>
-</tr>
-<tr>
-<td>Get a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-get-workspace.png" /></td>
-</tr>
-<tr>
-<td>Get a layer in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers/&lt;layerName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></td>
-</tr>
-<tr>
-<td>Get a coverage store in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-raster-store.png" /></td>
-</tr>
-<tr>
-<td>Get a sld style in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles/&lt;styleName&gt;.sld</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-get-style.png" /></td>
-</tr>
-<tr>
-<td>Get the info of a layer in a workspace</td>
-<td><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;&gt;/coverages/&lt;layerName&gt;.json</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-get-layer-info.png" /></td>
-</tr>
-<tr>
-<td>Create a workspace</td>
-<td><code>POST http://&lt;url&gt;/geoserver/rest/workspaces</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-create-workspace.png" /></td>
-</tr>
-<tr>
-<td>Create a coverage store in a workspace</td>
-<td><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores?configure=all</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-create-raster-store.png" /></td>
-</tr>
-<tr>
-<td>Create a layer in a workspace</td>
-<td><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages?configure=all&amp;recalculate=nativebbox,latlonbbox</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-create-layer.png" /></td>
-</tr>
-<tr>
-<td>Create a layer with default style in a workspace</td>
-<td><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages?configure=all&amp;recalculate=nativebbox,latlonbbox</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-create-layer-with-style.png" /></td>
-</tr>
-<tr>
-<td>Create a sld style</td>
-<td><code>POST http://&lt;url&gt;/geoserver/rest/styles?name=&lt;styleName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-create-style.png" /></td>
-</tr>
-<tr>
-<td>Specify the default style for a layer</td>
-<td><code>PUT http://&lt;url&gt;/geoserver/rest/layers/&lt;workspaceName&gt;:&lt;layerName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-specify-default-style.png" /></td>
-</tr>
-<tr>
-<td>Modify a sld style content</td>
-<td><code>PUT http://&lt;url&gt;/geoserver/rest/styles/&lt;styleName&gt;.xml?name=&lt;styleName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-modify-style.png" /></td>
-</tr>
-<tr>
-<td>Delete a workspace</td>
-<td><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;?recurse=true</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-delete-workspace.png" /></td>
-</tr>
-<tr>
-<td>Delete a coverage store in a workspace</td>
-<td><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;.geotiff</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-delete-store.png" /></td>
-</tr>
-<tr>
-<td>Delete a layer</td>
-<td><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages/&lt;layerName&gt;?recurse=true</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-delete-layer.png" /></td>
-</tr>
-<tr>
-<td>Delete a style</td>
-<td><code>DELETE http://&lt;url&gt;/geoserver/rest/styles/&lt;styleName&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-delete-style.png" /></td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>
+<p>List workspaces</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-workspaces.png" /></p>
+</li>
+<li>
+<p>List layers in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></p>
+</li>
+<li>
+<p>List coverage stores which describe the raster data source</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-list-raster-datastores.png" /></p>
+</li>
+<li>
+<p>List styles in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-list-styles.png" /></p>
+</li>
+<li>
+<p>List styles under a layer</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/layers/&lt;layerName&gt;/styles</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-list-styles-layer.png" /></p>
+</li>
+<li>
+<p>List styles</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/styles</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-list-all-styles.png" /></p>
+</li>
+<li>
+<p>Get a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-get-workspace.png" /></p>
+</li>
+<li>
+<p>Get a layer in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/layers/&lt;layerName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-layers.png" /></p>
+</li>
+<li>
+<p>Get a coverage store in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-raster-store.png" /></p>
+</li>
+<li>
+<p>Get a sld style in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/styles/&lt;styleName&gt;.sld</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-get-style.png" /></p>
+</li>
+<li>
+<p>Get the info of a layer in a workspace</p>
+<p><code>GET http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;&gt;/coverages/&lt;layerName&gt;.json</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-get-layer-info.png" /></p>
+</li>
+<li>
+<p>Create a workspace</p>
+<p><code>POST http://&lt;url&gt;/geoserver/rest/workspaces</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-create-workspace.png" /></p>
+</li>
+<li>
+<p>Create a coverage store in a workspace</p>
+<p><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores?configure=all</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-create-raster-store.png" /></p>
+</li>
+<li>
+<p>Create a layer in a workspace</p>
+<p><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages?configure=all&amp;recalculate=nativebbox,latlonbbox</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-create-layer.png" /></p>
+</li>
+<li>
+<p>Create a layer with default style in a workspace</p>
+<p><code>POST http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages?configure=all&amp;recalculate=nativebbox,latlonbbox</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-create-layer-with-style.png" /></p>
+</li>
+<li>
+<p>Create a sld style</p>
+<p><code>POST http://&lt;url&gt;/geoserver/rest/styles?name=&lt;styleName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-create-style.png" /></p>
+</li>
+<li>
+<p>Specify the default style for a layer</p>
+<p><code>PUT http://&lt;url&gt;/geoserver/rest/layers/&lt;workspaceName&gt;:&lt;layerName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-specify-default-style.png" /></p>
+</li>
+<li>
+<p>Modify a sld style content</p>
+<p><code>PUT http://&lt;url&gt;/geoserver/rest/styles/&lt;styleName&gt;.xml?name=&lt;styleName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-modify-style.png" /></p>
+</li>
+<li>
+<p>Delete a workspace</p>
+<p><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;?recurse=true</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-delete-workspace.png" /></p>
+</li>
+<li>
+<p>Delete a coverage store in a workspace</p>
+<p><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;.geotiff</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-delete-store.png" /></p>
+</li>
+<li>
+<p>Delete a layer</p>
+<p><code>DELETE http://&lt;url&gt;/geoserver/rest/workspaces/&lt;workspaceName&gt;/coveragestores/&lt;storeName&gt;/coverages/&lt;layerName&gt;?recurse=true</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-delete-layer.png" /></p>
+</li>
+<li>
+<p>Delete a style</p>
+<p><code>DELETE http://&lt;url&gt;/geoserver/rest/styles/&lt;styleName&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-delete-style.png" /></p>
+</li>
+</ul>
 <h2 id="other-service-apis">Other Service APIs</h2>
-<table>
-<thead>
-<tr>
-<th>Scenarios</th>
-<th>Commands</th>
-<th>Response</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WMS GetFeatureInfo</td>
-<td><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?REQUEST=GetFeatureInfo&amp;SERVICE=WMS&amp;SRS=&lt;SRS&gt;&amp;STYLES=&amp;TRANSPARENT=&amp;VERSION=1.0.0&amp;FORMAT=image/png&amp;BBOX=&lt;BBOX&gt;&amp;HEIGHT=&lt;HEIGHT&gt;&amp;WIDTH=&lt;WIDTH&gt;&amp;LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;QUERY_LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;INFO_FORMAT=application/json&amp;X=&lt;X&gt;&amp;Y=&lt;Y&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-wms-get-feature.png" /></td>
-</tr>
-<tr>
-<td>WMS GetLegendGraphic</td>
-<td><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?SERVICE=WMS&amp;VERSION=1.0.0&amp;REQUEST=GetLegendGraphic&amp;FORMAT=image/png&amp;WIDTH=20&amp;HEIGHT=20&amp;layer=&lt;workspaceName&gt;:&lt;layerName&gt;[&amp;style=&lt;styleName&gt; or &amp;sld_body=&lt;sldContent&gt;]</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-wms-get-legend.png" /></td>
-</tr>
-<tr>
-<td>WMS GetMap</td>
-<td><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;FORMAT=image/png&amp;TRANSPARENT=true&amp;LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;STYLES=&lt;styleName&gt;&amp;FORMAT_OPTIONS=layout:style-editor-legend;fontAntiAliasing:true&amp;LEGEND_OPTIONS=forceLabels:on;fontAntiAliasing:true&amp;EXCEPTIONS=application/vnd.ogc.se_inimage&amp;CRS=&lt;CRS&gt;&amp;WIDTH=688&amp;HEIGHT=768&amp;BBOX=&lt;BBOX&gt;</code></td>
-<td><img alt="Response" src="/imgs/geoserver-rest/response-wms-getmap.png" /></td>
-</tr>
-</tbody>
-</table>
+<p>After you have served your raster layer on the GeoServer, you are able to get some information by WMS/WMTS protocol and so on.</p>
+<ul>
+<li>
+<p>WMS GetFeatureInfo</p>
+<p><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?REQUEST=GetFeatureInfo&amp;SERVICE=WMS&amp;SRS=&lt;SRS&gt;&amp;STYLES=&amp;TRANSPARENT=&amp;VERSION=1.0.0&amp;FORMAT=image/png&amp;BBOX=&lt;BBOX&gt;&amp;HEIGHT=&lt;HEIGHT&gt;&amp;WIDTH=&lt;WIDTH&gt;&amp;LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;QUERY_LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;INFO_FORMAT=application/json&amp;X=&lt;X&gt;&amp;Y=&lt;Y&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-wms-get-feature.png" /></p>
+</li>
+<li>
+<p>WMS GetLegendGraphic</p>
+<p><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?SERVICE=WMS&amp;VERSION=1.0.0&amp;REQUEST=GetLegendGraphic&amp;FORMAT=image/png&amp;WIDTH=20&amp;HEIGHT=20&amp;layer=&lt;workspaceName&gt;:&lt;layerName&gt;[&amp;style=&lt;styleName&gt; or &amp;sld_body=&lt;sldContent&gt;]</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-wms-get-legend.png" /></p>
+</li>
+<li>
+<p>WMS GetMap</p>
+<p><code>GET http://&lt;url&gt;/geoserver/gwc/service/wms?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;FORMAT=image/png&amp;TRANSPARENT=true&amp;LAYERS=&lt;workspaceName&gt;:&lt;layerName&gt;&amp;STYLES=&lt;styleName&gt;&amp;FORMAT_OPTIONS=layout:style-editor-legend;fontAntiAliasing:true&amp;LEGEND_OPTIONS=forceLabels:on;fontAntiAliasing:true&amp;EXCEPTIONS=application/vnd.ogc.se_inimage&amp;CRS=&lt;CRS&gt;&amp;WIDTH=688&amp;HEIGHT=768&amp;BBOX=&lt;BBOX&gt;</code></p>
+<p><img alt="Response" src="/imgs/geoserver-rest/response-wms-getmap.png" /></p>
+</li>
+</ul>
                 
                   
                 
