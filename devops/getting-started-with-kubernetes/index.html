@@ -7,13 +7,14 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
+      
         <link rel="canonical" href="https://hustakin.github.io/devops/getting-started-with-kubernetes/">
       
       
         <meta name="author" content="Frankie Fan">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
     
     
       
@@ -21,10 +22,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
         
           
           
@@ -77,9 +78,11 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
+    <a href="https://hustakin.github.io" title="Frankie Fan&#39;s Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -111,7 +114,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
@@ -149,9 +152,11 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
+    <a href="https://hustakin.github.io" title="Frankie Fan&#39;s Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -168,7 +173,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       Home
     </a>
   </li>
@@ -183,8 +188,7 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
-    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     <label class="md-nav__link" for="nav-2">
       DevOps
       <span class="md-nav__icon md-icon"></span>
@@ -203,7 +207,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../important-linux-commands/" title="Important linux commands" class="md-nav__link">
+    <a href="../important-linux-commands/" class="md-nav__link">
       Important linux commands
     </a>
   </li>
@@ -215,7 +219,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+    <a href="../important-docker-commands/" class="md-nav__link">
       Important Docker commands
     </a>
   </li>
@@ -238,7 +242,7 @@
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Getting started with Kubernetes" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Getting started with Kubernetes
     </a>
     
@@ -548,7 +552,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+    <a href="../amazon-ec2-101/" class="md-nav__link">
       Amazon EC2 101
     </a>
   </li>
@@ -560,7 +564,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-nav__link">
+    <a href="../getting-started-with-vagrant/" class="md-nav__link">
       Getting started with Vagrant
     </a>
   </li>
@@ -572,7 +576,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../things-todo-after-installing-ubuntu/" title="Things to do after installing Ubuntu 20.04.1 LTS" class="md-nav__link">
+    <a href="../things-todo-after-installing-ubuntu/" class="md-nav__link">
       Things to do after installing Ubuntu 20.04.1 LTS
     </a>
   </li>
@@ -584,7 +588,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link">
+    <a href="../../bestpractice/setup-vncserver-for-ubuntu/" class="md-nav__link">
       Using VNC to Operate a Desktop on Ubuntu 18.04
     </a>
   </li>
@@ -602,8 +606,7 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
     <label class="md-nav__link" for="nav-3">
       CI/CD
       <span class="md-nav__icon md-icon"></span>
@@ -622,7 +625,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/use-github-actions-to-build-multi-envs-ci/" title="Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular" class="md-nav__link">
+    <a href="../../bestpractice/use-github-actions-to-build-multi-envs-ci/" class="md-nav__link">
       Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular
     </a>
   </li>
@@ -634,7 +637,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+    <a href="../../bestpractice/setup-jenkins-pipeline-in-kubernetes/" class="md-nav__link">
       Setup Jenkins Pipeline and Blue Ocean in Kubernetes
     </a>
   </li>
@@ -646,7 +649,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+    <a href="../../bestpractice/continuous-integration-with-jenkins-and-docker/" class="md-nav__link">
       Continuous Integration with Jenkins and Docker
     </a>
   </li>
@@ -664,14 +667,50 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
     <label class="md-nav__link" for="nav-4">
+      AWS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="AWS" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        AWS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aws/create-cicd-pipeline-test-prod-env-for-web-with-aws-amplify/" class="md-nav__link">
+      Create the CI/CD pipeline and test&prod environments for web app with AWS Amplify
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
       Kubernetes
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
         Kubernetes
       </label>
@@ -684,7 +723,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+    <a href="../../bestpractice/keycloak-traefik-k8s/" class="md-nav__link">
       Play around with Keycloak in k8s
     </a>
   </li>
@@ -696,7 +735,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link">
+    <a href="../../bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/" class="md-nav__link">
       Build Ceph and Kubernetes based distributed file storage system
     </a>
   </li>
@@ -714,14 +753,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
       Flutter
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Flutter" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         Flutter
       </label>
@@ -734,7 +772,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-nav__link">
+    <a href="../../bestpractice/auto-generate-flutter-imgs/" class="md-nav__link">
       Generate required flutter app screenshots for different devices
     </a>
   </li>
@@ -746,7 +784,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/flutter-app-distribution-for-testing/" title="How to make flutter app distribution for testing in Firebase" class="md-nav__link">
+    <a href="../../bestpractice/flutter-app-distribution-for-testing/" class="md-nav__link">
       How to make flutter app distribution  for testing in Firebase
     </a>
   </li>
@@ -758,7 +796,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/create--app-icon-launch-screen-for-flutter/" title="How to create an app icon and launch screen for flutter" class="md-nav__link">
+    <a href="../../bestpractice/create--app-icon-launch-screen-for-flutter/" class="md-nav__link">
       How to create an app icon and launch screen for flutter
     </a>
   </li>
@@ -776,14 +814,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
       Monitoring
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Monitoring" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         <span class="md-nav__icon md-icon"></span>
         Monitoring
       </label>
@@ -796,7 +833,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
+    <a href="../../bestpractice/integrate-google-analytics-with-web-app/" class="md-nav__link">
       Integrate Google Analytics with a web application
     </a>
   </li>
@@ -808,7 +845,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+    <a href="../../bestpractice/introduce-rollbar-and-slack-for-realtime-exception-alerts/" class="md-nav__link">
       Introduce Rollbar and Slack for realtime exception alerts
     </a>
   </li>
@@ -826,14 +863,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
       GeoServer
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="GeoServer" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-8">
         <span class="md-nav__icon md-icon"></span>
         GeoServer
       </label>
@@ -846,7 +882,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+    <a href="../../bestpractice/developing-based-on-geoserver-restful-api/" class="md-nav__link">
       Developing based on GeoServer restful api
     </a>
   </li>
@@ -858,7 +894,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+    <a href="../../bestpractice/serve-raster-tiles-in-geoserver/" class="md-nav__link">
       Serve raster tiles in GeoServer
     </a>
   </li>
@@ -876,14 +912,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
-    
-    <label class="md-nav__link" for="nav-8">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
       Tools 101
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Tools 101" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
+      <label class="md-nav__title" for="nav-9">
         <span class="md-nav__icon md-icon"></span>
         Tools 101
       </label>
@@ -896,7 +931,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+    <a href="../../tools/hexo-get-started/" class="md-nav__link">
       Hexo get started
     </a>
   </li>
@@ -908,7 +943,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+    <a href="../../tools/getting-started-with-mitmproxy/" class="md-nav__link">
       Getting started on mitmproxy
     </a>
   </li>
@@ -920,7 +955,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../bestpractice/adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+    <a href="../../bestpractice/adding-beautiful-badges-into-the-markdown/" class="md-nav__link">
       Adding beautiful badges into the markdown
     </a>
   </li>
@@ -932,7 +967,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+    <a href="../../tools/google-search-console/" class="md-nav__link">
       Manage your website in Google Search Console
     </a>
   </li>
@@ -944,7 +979,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/setup-cloud9-dev-env/" title="Setup the development environment on AWS Cloud9 for coding and testing" class="md-nav__link">
+    <a href="../../tools/setup-cloud9-dev-env/" class="md-nav__link">
       Setup the development environment on AWS Cloud9 for coding and testing
     </a>
   </li>
@@ -962,14 +997,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
-    
-    <label class="md-nav__link" for="nav-9">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
       Life Experience
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Life Experience" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Life Experience
       </label>
@@ -982,7 +1016,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+    <a href="../../life/how-to-rent-a-house-in-australia/" class="md-nav__link">
       How to rent a house in Australia
     </a>
   </li>
@@ -994,7 +1028,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" class="md-nav__link">
       International money transfer from CommonWealth bank to China
     </a>
   </li>
@@ -1006,7 +1040,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" class="md-nav__link">
       A detailed list for updating address when moving
     </a>
   </li>
@@ -1337,15 +1371,15 @@
                 
                 <p>Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
 <p>It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices from the community.</p>
-<p><img alt="Kubernetes" src="/imgs/kubernetes.png" />
-<!-- more --></p>
+<p><img alt="Kubernetes" src="/imgs/kubernetes.png" /></p>
+<!-- more -->
+
 <h2 id="install-on-linux-cluster">Install on linux cluster</h2>
 <h3 id="compile-kubernetes">Compile kubernetes</h3>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/kubernetes/kubernetes.git
 <span class="nb">cd</span> kubernetes
 make release
 </code></pre></div>
-
 <h3 id="install-master-node">Install master node</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Add repos</span>
 cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
@@ -1383,7 +1417,6 @@ mkdir -p <span class="nv">$HOME</span>/.kube
 sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
 sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
 </code></pre></div>
-
 <h3 id="install-slave-node">Install slave node</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Run on master node to get the join commands</span>
 sudo kubeadm token create --print-join-command
@@ -1391,20 +1424,17 @@ sudo kubeadm token create --print-join-command
 <span class="c1">#Copy the join commands and run on slave node</span>
 kubeadm join &lt;master-ip&gt;:6443 --token 2kjo2d.8qno0vzvbgabp1e8 --discovery-token-ca-cert-hash sha256:2f1ebea7d7369a2d18b58f2926573e193e13ef7525649df1740ddb87963e1315
 </code></pre></div>
-
 <h3 id="install-metrics-server">Install metrics server</h3>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 kubectl create -f kubernetes-metrics-server/
 kubectl top nodes
 kubectl top pods
 </code></pre></div>
-
 <h3 id="install-prometheus">Install prometheus</h3>
 <div class="highlight"><pre><span></span><code>kubectl apply --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml
 <span class="c1">#Maybe you should download the manifests-all.yaml and customize it yourself. For example, you would add Grafana configuration in it.</span>
 <span class="c1">#Create Traefik ingress yaml and apply</span>
 </code></pre></div>
-
 <h3 id="install-helm">Install helm</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Download helm tar.gz file from https://github.com/helm/helm/releases</span>
 tar -zxvf helm-v2.14.1-linux-amd64.tar.gz
@@ -1415,7 +1445,6 @@ kubectl get pod -n kube-system -l <span class="nv">app</span><span class="o">=</
 kubectl create -f rbac.yml
 kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&#39;{&quot;spec&quot;:{&quot;template&quot;:{&quot;spec&quot;:{&quot;serviceAccount&quot;:&quot;tiller&quot;}}}}&#39;</span>
 </code></pre></div>
-
 <h2 id="traefik">Traefik</h2>
 <h3 id="create-traefik-toml">Create Traefik toml</h3>
 <div class="highlight"><pre><span></span><code><span class="n">defaultEntryPoints</span> <span class="o">=</span> <span class="k">[&quot;http&quot;,&quot;https&quot;]</span>
@@ -1437,7 +1466,6 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
     <span class="n">entryPoint</span> <span class="o">=</span> <span class="s">&quot;traefik&quot;</span>
     <span class="n">buckets</span> <span class="o">=</span> <span class="k">[0.1, 0.3, 1.2, 5.0]</span>
 </code></pre></div>
-
 <h3 id="create-traefik-yaml">Create Traefik yaml</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
@@ -1513,7 +1541,6 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
       <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
   <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodePort</span>
 </code></pre></div>
-
 <h3 id="create-traefik-rbac">Create Traefik rbac</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
@@ -1558,7 +1585,6 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
     <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-controller</span>
     <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 </code></pre></div>
-
 <h3 id="create-traefik-web-ui-ingress">Create Traefik web-ui ingress</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
@@ -1576,7 +1602,6 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p <span class="s1">&
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik-ingress-service</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
 </code></pre></div>
-
 <h3 id="create-traefik-https-cert">Create Traefik HTTPS cert</h3>
 <div class="highlight"><pre><span></span><code>sudo -s
 <span class="nb">cd</span> /etc/letsencrypt/live/<span class="o">[</span>domain<span class="o">]</span>
@@ -1587,7 +1612,6 @@ cp cert.pem privkey.pem /etc/kubernetes/ssl/
 kubectl create configmap traefik-conf --from-file<span class="o">=</span>traefik.toml -n kube-system
 kubectl get cm -n kube-system
 </code></pre></div>
-
 <h3 id="renew-traefik-https-cert">Renew Traefik HTTPS cert</h3>
 <div class="highlight"><pre><span></span><code>kubectl delete secret traefik-cert -n kube-system
 kubectl delete configmap traefik-conf -n kube-system
@@ -1595,7 +1619,6 @@ kubectl delete -f traefik.yml
 <span class="c1">#Re-run the above &quot;Create Traefik HTTPS cert&quot; steps</span>
 kubectl create -f traefik.yml
 </code></pre></div>
-
 <h3 id="update-traefiktoml">Update Traefik.toml</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Firstly modify the traefik.toml</span>
 kubectl delete configmap traefik-conf -n kube-system
@@ -1603,7 +1626,6 @@ kubectl create configmap traefik-conf --from-file<span class="o">=</span>traefik
 kubectl delete -f traefik.yml
 kubectl create -f traefik.yml
 </code></pre></div>
-
 <h2 id="kubernetes-dashboard-for-local">Kubernetes Dashboard for local</h2>
 <h3 id="create-service-account">Create service account</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#admin-user.yaml</span>
@@ -1613,7 +1635,6 @@ kubectl create -f traefik.yml
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin-user</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 </code></pre></div>
-
 <h3 id="create-role-binding">Create role binding</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#admin-user-role-binding.yaml</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1beta1</span>
@@ -1629,7 +1650,6 @@ kubectl create -f traefik.yml
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin-user</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 </code></pre></div>
-
 <h3 id="apply-yaml">Apply yaml</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Apply service account</span>
 kubectl create -f admin-user.yaml
@@ -1637,11 +1657,9 @@ kubectl create -f admin-user.yaml
 <span class="c1">#Apply role binding</span>
 kubectl create -f admin-user-role-binding.yaml
 </code></pre></div>
-
 <h3 id="retrieve-login-token">Retrieve login token</h3>
 <div class="highlight"><pre><span></span><code>kubectl -n kube-system describe secret <span class="k">$(</span>kubectl -n kube-system get secret <span class="p">|</span> grep admin-user <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
 </code></pre></div>
-
 <h3 id="install-dashboard">Install dashboard</h3>
 <div class="highlight"><pre><span></span><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
 
@@ -1649,7 +1667,6 @@ kubectl create -f admin-user-role-binding.yaml
 kubectl proxy
 kubectl proxy --address<span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span> --accept-hosts<span class="o">=</span><span class="s1">&#39;^*$&#39;</span>
 </code></pre></div>
-
 <h2 id="kubernetes-dashboard-for-public">Kubernetes Dashboard for public</h2>
 <h3 id="create-certificates">Create certificates</h3>
 <div class="highlight"><pre><span></span><code>mkdir <span class="nv">$HOME</span>/certs
@@ -1660,14 +1677,12 @@ openssl req -sha256 -new -key dashboard.key -out dashboard.csr -subj <span class
 openssl x509 -req -sha256 -days <span class="m">365</span> -in dashboard.csr -signkey dashboard.key -out dashboard.crt
 kubectl -n kube-system create secret generic kubernetes-dashboard-certs --from-file<span class="o">=</span><span class="nv">$HOME</span>/certs
 </code></pre></div>
-
 <h3 id="install-dashboard_1">Install dashboard</h3>
 <div class="highlight"><pre><span></span><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
 <span class="c1">#Wait and check if the replica set is fulfilled</span>
 kubectl -n kube-system get rs
 </code></pre></div>
-
 <h3 id="create-psp">Create PSP</h3>
 <div class="highlight"><pre><span></span><code>kubectl -n kube-system create -f - <span class="s">&lt;&lt;EOF</span>
 <span class="s">apiVersion: extensions/v1beta1</span>
@@ -1688,16 +1703,13 @@ kubectl -n kube-system get rs
 <span class="s">  - &#39;*&#39;</span>
 <span class="s">EOF</span>
 </code></pre></div>
-
 <h3 id="create-role">Create role</h3>
 <div class="highlight"><pre><span></span><code>kubectl -n kube-system create role psp:dashboard --verb<span class="o">=</span>use --resource<span class="o">=</span>podsecuritypolicy --resource-name<span class="o">=</span>dashboard
 </code></pre></div>
-
 <h3 id="bind-role-and-account">Bind role and account</h3>
 <div class="highlight"><pre><span></span><code>kubectl -n kube-system create rolebinding kubernetes-dashboard-policy --role<span class="o">=</span>psp:dashboard --serviceaccount<span class="o">=</span>kube-system:kubernetes-dashboard
 kubectl --as<span class="o">=</span>system:serviceaccount:kube-system:kubernetes-dashboard -n kube-system auth can-i use podsecuritypolicy/dashboard
 </code></pre></div>
-
 <h3 id="expose-service-on-nodeport">Expose service on NodePort</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Edit the kubernetes-dashboard service and change the following options:</span>
 <span class="c1">#   spec.type from ClusterIP to NodePort</span>
@@ -1705,12 +1717,10 @@ kubectl --as<span class="o">=</span>system:serviceaccount:kube-system:kubernetes
 kubectl -n kube-system edit service kubernetes-dashboard
 kubectl -n kube-system get services
 </code></pre></div>
-
 <h3 id="navigate-the-dashboard-publicly">Navigate the dashboard publicly</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#Configure the dns in the domain provider console</span>
 https://<span class="o">[</span>domain<span class="o">]</span>:30104/
 </code></pre></div>
-
 <h3 id="expose-traefik-ingress">Expose Traefik ingress</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
@@ -1727,12 +1737,10 @@ https://<span class="o">[</span>domain<span class="o">]</span>:30104/
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">443</span>
 </code></pre></div>
-
 <h2 id="scenarios">Scenarios</h2>
 <h3 id="run-a-busybox-container">Run a busybox container</h3>
 <div class="highlight"><pre><span></span><code>kubectl run -i --tty --image busybox <span class="nb">test</span> --restart<span class="o">=</span>Never --rm /bin/sh
 </code></pre></div>
-
 <h3 id="user-docker-hub-secret-in-pods">User docker hub secret in pods</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">#docker login and get the file: ~/.docker/config.json</span>
 docker login
@@ -1757,7 +1765,6 @@ spec:
       imagePullSecrets:
         - name: docker-hub
 </code></pre></div>
-
 <h3 id="default-storage-class">Default storage class</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">StorageClass</span>
@@ -1771,7 +1778,6 @@ spec:
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
 <span class="nt">volumeBindingMode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Immediate</span>
 </code></pre></div>
-
 <h3 id="create-mongodb-with-two-db-auth-settings">Create MongoDB with two DB auth settings</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
@@ -1894,7 +1900,6 @@ spec:
     <span class="nt">requests</span><span class="p">:</span>
       <span class="nt">storage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
 </code></pre></div>
-
 <h2 id="useful-commands">Useful commands</h2>
 <table>
 <thead>
@@ -1966,7 +1971,7 @@ spec:
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../important-docker-commands/" title="Important Docker commands" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../important-docker-commands/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1981,7 +1986,7 @@ spec:
           </a>
         
         
-          <a href="../amazon-ec2-101/" title="Amazon EC2 101" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../amazon-ec2-101/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
@@ -2058,8 +2063,8 @@ spec:
       
     </div>
     
-      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
-      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({

@@ -7,13 +7,14 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
+      
         <link rel="canonical" href="https://hustakin.github.io/bestpractice/build-ceph-and-k8s-based-distributed-file-storage-system/">
       
       
         <meta name="author" content="Frankie Fan">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
     
     
       
@@ -21,10 +22,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
         
           
           
@@ -77,9 +78,11 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
+    <a href="https://hustakin.github.io" title="Frankie Fan&#39;s Memos" class="md-header-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -111,7 +114,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
@@ -149,9 +152,11 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://hustakin.github.io" title="Frankie Fan's Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
+    <a href="https://hustakin.github.io" title="Frankie Fan&#39;s Memos" class="md-nav__button md-logo" aria-label="Frankie Fan's Memos">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -168,7 +173,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       Home
     </a>
   </li>
@@ -181,8 +186,7 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
-    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
     <label class="md-nav__link" for="nav-2">
       DevOps
       <span class="md-nav__icon md-icon"></span>
@@ -201,7 +205,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/important-linux-commands/" title="Important linux commands" class="md-nav__link">
+    <a href="../../devops/important-linux-commands/" class="md-nav__link">
       Important linux commands
     </a>
   </li>
@@ -213,7 +217,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/important-docker-commands/" title="Important Docker commands" class="md-nav__link">
+    <a href="../../devops/important-docker-commands/" class="md-nav__link">
       Important Docker commands
     </a>
   </li>
@@ -225,7 +229,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/getting-started-with-kubernetes/" title="Getting started with Kubernetes" class="md-nav__link">
+    <a href="../../devops/getting-started-with-kubernetes/" class="md-nav__link">
       Getting started with Kubernetes
     </a>
   </li>
@@ -237,7 +241,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/amazon-ec2-101/" title="Amazon EC2 101" class="md-nav__link">
+    <a href="../../devops/amazon-ec2-101/" class="md-nav__link">
       Amazon EC2 101
     </a>
   </li>
@@ -249,7 +253,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/getting-started-with-vagrant/" title="Getting started with Vagrant" class="md-nav__link">
+    <a href="../../devops/getting-started-with-vagrant/" class="md-nav__link">
       Getting started with Vagrant
     </a>
   </li>
@@ -261,7 +265,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../devops/things-todo-after-installing-ubuntu/" title="Things to do after installing Ubuntu 20.04.1 LTS" class="md-nav__link">
+    <a href="../../devops/things-todo-after-installing-ubuntu/" class="md-nav__link">
       Things to do after installing Ubuntu 20.04.1 LTS
     </a>
   </li>
@@ -273,7 +277,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../setup-vncserver-for-ubuntu/" title="Using VNC to Operate a Desktop on Ubuntu 18.04" class="md-nav__link">
+    <a href="../setup-vncserver-for-ubuntu/" class="md-nav__link">
       Using VNC to Operate a Desktop on Ubuntu 18.04
     </a>
   </li>
@@ -291,8 +295,7 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
     <label class="md-nav__link" for="nav-3">
       CI/CD
       <span class="md-nav__icon md-icon"></span>
@@ -311,7 +314,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../use-github-actions-to-build-multi-envs-ci/" title="Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular" class="md-nav__link">
+    <a href="../use-github-actions-to-build-multi-envs-ci/" class="md-nav__link">
       Setup CI in Github Actions for multiple environments regarding SpringBoot or Angular
     </a>
   </li>
@@ -323,7 +326,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../setup-jenkins-pipeline-in-kubernetes/" title="Setup Jenkins Pipeline and Blue Ocean in Kubernetes" class="md-nav__link">
+    <a href="../setup-jenkins-pipeline-in-kubernetes/" class="md-nav__link">
       Setup Jenkins Pipeline and Blue Ocean in Kubernetes
     </a>
   </li>
@@ -335,8 +338,45 @@
 
 
   <li class="md-nav__item">
-    <a href="../continuous-integration-with-jenkins-and-docker/" title="Continuous Integration with Jenkins and Docker" class="md-nav__link">
+    <a href="../continuous-integration-with-jenkins-and-docker/" class="md-nav__link">
       Continuous Integration with Jenkins and Docker
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      AWS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="AWS" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        AWS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aws/create-cicd-pipeline-test-prod-env-for-web-with-aws-amplify/" class="md-nav__link">
+      Create the CI/CD pipeline and test&prod environments for web app with AWS Amplify
     </a>
   </li>
 
@@ -355,14 +395,13 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
-    
-    <label class="md-nav__link" for="nav-4">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    <label class="md-nav__link" for="nav-5">
       Kubernetes
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
         Kubernetes
       </label>
@@ -375,7 +414,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-nav__link">
+    <a href="../keycloak-traefik-k8s/" class="md-nav__link">
       Play around with Keycloak in k8s
     </a>
   </li>
@@ -398,7 +437,7 @@
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Build Ceph and Kubernetes based distributed file storage system" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Build Ceph and Kubernetes based distributed file storage system
     </a>
     
@@ -557,14 +596,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
       Flutter
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Flutter" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         Flutter
       </label>
@@ -577,7 +615,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-nav__link">
+    <a href="../auto-generate-flutter-imgs/" class="md-nav__link">
       Generate required flutter app screenshots for different devices
     </a>
   </li>
@@ -589,7 +627,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../flutter-app-distribution-for-testing/" title="How to make flutter app distribution for testing in Firebase" class="md-nav__link">
+    <a href="../flutter-app-distribution-for-testing/" class="md-nav__link">
       How to make flutter app distribution  for testing in Firebase
     </a>
   </li>
@@ -601,7 +639,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../create--app-icon-launch-screen-for-flutter/" title="How to create an app icon and launch screen for flutter" class="md-nav__link">
+    <a href="../create--app-icon-launch-screen-for-flutter/" class="md-nav__link">
       How to create an app icon and launch screen for flutter
     </a>
   </li>
@@ -619,14 +657,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
       Monitoring
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Monitoring" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         <span class="md-nav__icon md-icon"></span>
         Monitoring
       </label>
@@ -639,7 +676,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../integrate-google-analytics-with-web-app/" title="Integrate Google Analytics with a web application" class="md-nav__link">
+    <a href="../integrate-google-analytics-with-web-app/" class="md-nav__link">
       Integrate Google Analytics with a web application
     </a>
   </li>
@@ -651,7 +688,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" title="Introduce Rollbar and Slack for realtime exception alerts" class="md-nav__link">
+    <a href="../introduce-rollbar-and-slack-for-realtime-exception-alerts/" class="md-nav__link">
       Introduce Rollbar and Slack for realtime exception alerts
     </a>
   </li>
@@ -669,14 +706,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
       GeoServer
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="GeoServer" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-8">
         <span class="md-nav__icon md-icon"></span>
         GeoServer
       </label>
@@ -689,7 +725,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../developing-based-on-geoserver-restful-api/" title="Developing based on GeoServer restful api" class="md-nav__link">
+    <a href="../developing-based-on-geoserver-restful-api/" class="md-nav__link">
       Developing based on GeoServer restful api
     </a>
   </li>
@@ -701,7 +737,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../serve-raster-tiles-in-geoserver/" title="Serve raster tiles in GeoServer" class="md-nav__link">
+    <a href="../serve-raster-tiles-in-geoserver/" class="md-nav__link">
       Serve raster tiles in GeoServer
     </a>
   </li>
@@ -719,14 +755,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
-    
-    <label class="md-nav__link" for="nav-8">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
       Tools 101
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Tools 101" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
+      <label class="md-nav__title" for="nav-9">
         <span class="md-nav__icon md-icon"></span>
         Tools 101
       </label>
@@ -739,7 +774,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/hexo-get-started/" title="Hexo get started" class="md-nav__link">
+    <a href="../../tools/hexo-get-started/" class="md-nav__link">
       Hexo get started
     </a>
   </li>
@@ -751,7 +786,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/getting-started-with-mitmproxy/" title="Getting started on mitmproxy" class="md-nav__link">
+    <a href="../../tools/getting-started-with-mitmproxy/" class="md-nav__link">
       Getting started on mitmproxy
     </a>
   </li>
@@ -763,7 +798,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../adding-beautiful-badges-into-the-markdown/" title="Adding beautiful badges into the markdown" class="md-nav__link">
+    <a href="../adding-beautiful-badges-into-the-markdown/" class="md-nav__link">
       Adding beautiful badges into the markdown
     </a>
   </li>
@@ -775,7 +810,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/google-search-console/" title="Manage your website in Google Search Console" class="md-nav__link">
+    <a href="../../tools/google-search-console/" class="md-nav__link">
       Manage your website in Google Search Console
     </a>
   </li>
@@ -787,7 +822,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/setup-cloud9-dev-env/" title="Setup the development environment on AWS Cloud9 for coding and testing" class="md-nav__link">
+    <a href="../../tools/setup-cloud9-dev-env/" class="md-nav__link">
       Setup the development environment on AWS Cloud9 for coding and testing
     </a>
   </li>
@@ -805,14 +840,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
-    
-    <label class="md-nav__link" for="nav-9">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
       Life Experience
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Life Experience" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Life Experience
       </label>
@@ -825,7 +859,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/how-to-rent-a-house-in-australia/" title="How to rent a house in Australia" class="md-nav__link">
+    <a href="../../life/how-to-rent-a-house-in-australia/" class="md-nav__link">
       How to rent a house in Australia
     </a>
   </li>
@@ -837,7 +871,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" title="International money transfer from CommonWealth bank to China" class="md-nav__link">
+    <a href="../../life/international-money-transfer-from-commanwealth-bank-to-china/" class="md-nav__link">
       International money transfer from CommonWealth bank to China
     </a>
   </li>
@@ -849,7 +883,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../life/a-detail-list-for-updating-address-when-moving/" title="A detailed list for updating address when moving" class="md-nav__link">
+    <a href="../../life/a-detail-list-for-updating-address-when-moving/" class="md-nav__link">
       A detailed list for updating address when moving
     </a>
   </li>
@@ -1022,8 +1056,9 @@
                   <h1>Build Ceph and Kubernetes based distributed file storage system</h1>
                 
                 <p>In this article, we are going to build a Ceph and Kubernetes based distributed file storage system and integrate into our java platform.
-<img alt="&lt;image&gt;" src="/imgs/k8s-ceph.webp" />
-<!-- more --></p>
+<img alt="&lt;image&gt;" src="/imgs/k8s-ceph.webp" /></p>
+<!-- more -->
+
 <h2 id="install">Install</h2>
 <h3 id="download-rook">Download rook</h3>
 <p>Download the rook ceph GitHub code.
@@ -1046,16 +1081,15 @@ sudo mkfs.ext4 /dev/vdc
 sudo mount /dev/vdb /mnt/ceph-storage -t auto
 df -h
 </code></pre></div></p>
-<div class="codehilite"><pre><span></span><code><span class="err">Filesystem      Size  Used Avail Use% Mounted on</span>
-<span class="err">/dev/vda1        30G   19G   11G  65% /</span>
-<span class="err">devtmpfs        2.9G     0  2.9G   0% /dev</span>
-<span class="err">tmpfs           2.9G   12K  2.9G   1% /dev/shm</span>
-<span class="err">tmpfs           2.9G  298M  2.6G  11% /run</span>
-<span class="err">tmpfs           2.9G     0  2.9G   0% /sys/fs/cgroup</span>
-<span class="err">tmpfs           581M     0  581M   0% /run/user/1000</span>
-<span class="err">/dev/vdb         20G   45M   19G   1% /mnt/ceph-storage</span>
+<div class="codehilite"><pre><span></span><code><span class="n">Filesystem</span>      <span class="k">Size</span>  <span class="n">Used</span> <span class="n">Avail</span> <span class="n">Use</span><span class="o">%</span> <span class="n">Mounted</span> <span class="k">on</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">vda1</span>        <span class="mi">30</span><span class="k">G</span>   <span class="mi">19</span><span class="k">G</span>   <span class="mi">11</span><span class="k">G</span>  <span class="mi">65</span><span class="o">%</span> <span class="o">/</span>
+<span class="n">devtmpfs</span>        <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>     <span class="mi">0</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">12</span><span class="n">K</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>  <span class="mi">298</span><span class="n">M</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">6</span><span class="k">G</span>  <span class="mi">11</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span>
+<span class="n">tmpfs</span>           <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>     <span class="mi">0</span>  <span class="mi">2</span><span class="p">.</span><span class="mi">9</span><span class="k">G</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgroup</span>
+<span class="n">tmpfs</span>           <span class="mi">581</span><span class="n">M</span>     <span class="mi">0</span>  <span class="mi">581</span><span class="n">M</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="k">user</span><span class="o">/</span><span class="mi">1000</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">vdb</span>         <span class="mi">20</span><span class="k">G</span>   <span class="mi">45</span><span class="n">M</span>   <span class="mi">19</span><span class="k">G</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">ceph</span><span class="o">-</span><span class="k">storage</span>
 </code></pre></div>
-
 
 <h3 id="create-ceph-cluster">Create Ceph cluster</h3>
 <p>Create cluster by the cluster.yaml. Notice the selected nodes have the disks attached. Each nodes/name field should match their <code>kubernetes.io/hostname</code> label. Notice the dashboard should be disabled first.
@@ -1103,50 +1137,49 @@ kubectl delete -f operator.yaml
 kubectl logs -f rook-ceph-operator-6b79d99f5c-9564s -n rook-ceph
 kubectl get pod -n rook-ceph
 </code></pre></div></p>
-<div class="codehilite"><pre><span></span><code><span class="err">NAME                                                        READY   STATUS      RESTARTS   AGE</span>
-<span class="err">csi-cephfsplugin-265lj                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-2b47v                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-2dw6z                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-2xgns                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-54hd5                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-9rgr8                                      3/3     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-provisioner-5d999b68d6-8vc2k               4/4     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-provisioner-5d999b68d6-xjg4z               4/4     Running     0          37m</span>
-<span class="err">csi-cephfsplugin-sp289                                      3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-7gk9s                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-9sbwh                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-jwvxx                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-n9tcd                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-provisioner-69b7d7887-4l9l9                   5/5     Running     0          37m</span>
-<span class="err">csi-rbdplugin-provisioner-69b7d7887-g48rb                   5/5     Running     0          37m</span>
-<span class="err">csi-rbdplugin-q9q5b                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-snhqj                                         3/3     Running     0          37m</span>
-<span class="err">csi-rbdplugin-v6jb8                                         3/3     Running     0          37m</span>
-<span class="err">rook-ceph-crashcollector-db.novalocal-fd7dcc457-qd7tx       1/1     Running     0          11m</span>
-<span class="err">rook-ceph-crashcollector-deamon.novalocal-7789457f5-v6vnc   1/1     Running     0          11m</span>
-<span class="err">rook-ceph-crashcollector-slave.novalocal-5d698c7d7b-hgbnw   1/1     Running     0          9m59s</span>
-<span class="err">rook-ceph-crashcollector-static.novalocal-58f769ccc-lsf5b   1/1     Running     0          9m54s</span>
-<span class="err">rook-ceph-crashcollector-test.novalocal-6fdc8dbc4f-ksk75    1/1     Running     0          10m</span>
-<span class="err">rook-ceph-mgr-a-7898b59757-84tbd                            1/1     Running     0          10m</span>
-<span class="err">rook-ceph-mon-a-7676f96769-5mhc6                            1/1     Running     0          12m</span>
-<span class="err">rook-ceph-mon-b-79c9c9b59d-g82sc                            1/1     Running     0          11m</span>
-<span class="err">rook-ceph-mon-c-7b679d7497-x2hjg                            1/1     Running     0          11m</span>
-<span class="err">rook-ceph-operator-6b79d99f5c-9564s                         1/1     Running     0          14m</span>
-<span class="err">rook-ceph-osd-0-5b59576bb4-rgsx8                            1/1     Running     0          9m57s</span>
-<span class="err">rook-ceph-osd-1-74ff9d79c6-hpkc2                            1/1     Running     0          9m55s</span>
-<span class="err">rook-ceph-osd-2-57748ff6bf-vf8jl                            1/1     Running     0          9m59s</span>
-<span class="err">rook-ceph-osd-prepare-db.novalocal-jf84v                    0/1     Completed   0          10m</span>
-<span class="err">rook-ceph-osd-prepare-slave.novalocal-j457l                 0/1     Completed   0          10m</span>
-<span class="err">rook-ceph-osd-prepare-static.novalocal-jt4vj                0/1     Completed   0          10m</span>
-<span class="err">rook-discover-hwffd                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-jh8j5                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-mcdjn                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-mmzcb                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-mppgh                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-tz5gm                                         1/1     Running     0          13m</span>
-<span class="err">rook-discover-vj7tg                                         1/1     Running     0          13m</span>
+<div class="codehilite"><pre><span></span><code><span class="n">NAME</span>                                                        <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">265</span><span class="n">lj</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">b47v</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">dw6z</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">2</span><span class="n">xgns</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">54</span><span class="n">hd5</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="mi">9</span><span class="n">rgr8</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">5</span><span class="n">d999b68d6</span><span class="o">-</span><span class="mi">8</span><span class="n">vc2k</span>               <span class="mi">4</span><span class="o">/</span><span class="mi">4</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">5</span><span class="n">d999b68d6</span><span class="o">-</span><span class="n">xjg4z</span>               <span class="mi">4</span><span class="o">/</span><span class="mi">4</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">cephfsplugin</span><span class="o">-</span><span class="n">sp289</span>                                      <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="mi">7</span><span class="n">gk9s</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="mi">9</span><span class="n">sbwh</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">jwvxx</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">n9tcd</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">69</span><span class="n">b7d7887</span><span class="o">-</span><span class="mi">4</span><span class="n">l9l9</span>                   <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">provisioner</span><span class="o">-</span><span class="mi">69</span><span class="n">b7d7887</span><span class="o">-</span><span class="n">g48rb</span>                   <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">q9q5b</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">snhqj</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">csi</span><span class="o">-</span><span class="n">rbdplugin</span><span class="o">-</span><span class="n">v6jb8</span>                                         <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">37</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">db</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">fd7dcc457</span><span class="o">-</span><span class="n">qd7tx</span>       <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">deamon</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">7789457</span><span class="n">f5</span><span class="o">-</span><span class="n">v6vnc</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">slave</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">5</span><span class="n">d698c7d7b</span><span class="o">-</span><span class="n">hgbnw</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m59s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="k">static</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">58</span><span class="n">f769ccc</span><span class="o">-</span><span class="n">lsf5b</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m54s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">crashcollector</span><span class="o">-</span><span class="n">test</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="mi">6</span><span class="n">fdc8dbc4f</span><span class="o">-</span><span class="n">ksk75</span>    <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mgr</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">7898</span><span class="n">b59757</span><span class="o">-</span><span class="mi">84</span><span class="n">tbd</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">7676</span><span class="n">f96769</span><span class="o">-</span><span class="mi">5</span><span class="n">mhc6</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">12</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="mi">79</span><span class="n">c9c9b59d</span><span class="o">-</span><span class="n">g82sc</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mon</span><span class="o">-</span><span class="k">c</span><span class="o">-</span><span class="mi">7</span><span class="n">b679d7497</span><span class="o">-</span><span class="n">x2hjg</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">11</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="k">operator</span><span class="o">-</span><span class="mi">6</span><span class="n">b79d99f5c</span><span class="o">-</span><span class="mi">9564</span><span class="n">s</span>                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">14</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="n">b59576bb4</span><span class="o">-</span><span class="n">rgsx8</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m57s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">74</span><span class="n">ff9d79c6</span><span class="o">-</span><span class="n">hpkc2</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m55s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">57748</span><span class="n">ff6bf</span><span class="o">-</span><span class="n">vf8jl</span>                            <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">9</span><span class="n">m59s</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="n">db</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">jf84v</span>                    <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="n">slave</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">j457l</span>                 <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">osd</span><span class="o">-</span><span class="k">prepare</span><span class="o">-</span><span class="k">static</span><span class="p">.</span><span class="n">novalocal</span><span class="o">-</span><span class="n">jt4vj</span>                <span class="mi">0</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Completed</span>   <span class="mi">0</span>          <span class="mi">10</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">hwffd</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">jh8j5</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mcdjn</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mmzcb</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">mppgh</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">tz5gm</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
+<span class="n">rook</span><span class="o">-</span><span class="n">discover</span><span class="o">-</span><span class="n">vj7tg</span>                                         <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>     <span class="mi">0</span>          <span class="mi">13</span><span class="n">m</span>
 </code></pre></div>
-
 
 <h3 id="create-toolbox-and-test">Create toolbox and test</h3>
 <p>Create toolbox pods by toolbox.yaml, and we can attach the pod then test the ceph status.
@@ -1157,23 +1190,22 @@ ceph osd status
 ceph df
 rados df
 </code></pre></div></p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="err">@</span><span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="mi">787</span><span class="n">dc6b944</span><span class="o">-</span><span class="n">spsjh</span> <span class="o">/</span><span class="p">]</span><span class="c1"># ceph status</span>
-  <span class="n">cluster</span><span class="p">:</span>
-    <span class="n">id</span><span class="p">:</span>     <span class="mi">2095</span><span class="n">eaca</span><span class="o">-</span><span class="mi">93</span><span class="n">b3</span><span class="o">-</span><span class="mi">4365</span><span class="o">-</span><span class="n">a5c8</span><span class="o">-</span><span class="mi">9</span><span class="n">b05269821a9</span>
-    <span class="n">health</span><span class="p">:</span> <span class="n">HEALTH_OK</span>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">root@rook-ceph-tools-787dc6b944-spsjh /</span><span class="o">]</span><span class="err">#</span><span class="w"> </span><span class="n">ceph</span><span class="w"> </span><span class="n">status</span><span class="w"></span>
+<span class="w">  </span><span class="nl">cluster</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">id</span><span class="p">:</span><span class="w">     </span><span class="mi">2095</span><span class="n">eaca</span><span class="o">-</span><span class="mi">93</span><span class="n">b3</span><span class="o">-</span><span class="mi">4365</span><span class="o">-</span><span class="n">a5c8</span><span class="o">-</span><span class="mi">9</span><span class="n">b05269821a9</span><span class="w"></span>
+<span class="w">    </span><span class="nl">health</span><span class="p">:</span><span class="w"> </span><span class="n">HEALTH_OK</span><span class="w"></span>
 
-  <span class="n">services</span><span class="p">:</span>
-    <span class="n">mon</span><span class="p">:</span> <span class="mi">3</span> <span class="n">daemons</span><span class="p">,</span> <span class="n">quorum</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="p">(</span><span class="n">age</span> <span class="mi">26</span><span class="n">m</span><span class="p">)</span>
-    <span class="n">mgr</span><span class="p">:</span> <span class="n">a</span><span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">since</span> <span class="mi">26</span><span class="n">m</span><span class="p">)</span>
-    <span class="n">osd</span><span class="p">:</span> <span class="mi">3</span> <span class="n">osds</span><span class="p">:</span> <span class="mi">3</span> <span class="n">up</span> <span class="p">(</span><span class="n">since</span> <span class="mi">25</span><span class="n">m</span><span class="p">),</span> <span class="mi">3</span> <span class="ow">in</span> <span class="p">(</span><span class="n">since</span> <span class="mi">25</span><span class="n">m</span><span class="p">)</span>
+<span class="w">  </span><span class="nl">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">mon</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">daemons</span><span class="p">,</span><span class="w"> </span><span class="n">quorum</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="mi">26</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nl">mgr</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="n">since</span><span class="w"> </span><span class="mi">26</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nl">osd</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nl">osds</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="n">since</span><span class="w"> </span><span class="mi">25</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="n">since</span><span class="w"> </span><span class="mi">25</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
 
-  <span class="n">data</span><span class="p">:</span>
-    <span class="n">pools</span><span class="p">:</span>   <span class="mi">0</span> <span class="n">pools</span><span class="p">,</span> <span class="mi">0</span> <span class="n">pgs</span>
-    <span class="n">objects</span><span class="p">:</span> <span class="mi">0</span> <span class="n">objects</span><span class="p">,</span> <span class="mi">0</span> <span class="n">B</span>
-    <span class="n">usage</span><span class="p">:</span>   <span class="mf">6.4</span> <span class="n">GiB</span> <span class="n">used</span><span class="p">,</span> <span class="mi">52</span> <span class="n">GiB</span> <span class="o">/</span> <span class="mi">59</span> <span class="n">GiB</span> <span class="n">avail</span>
-    <span class="n">pgs</span><span class="p">:</span>
+<span class="w">  </span><span class="k">data</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="nl">pools</span><span class="p">:</span><span class="w">   </span><span class="mi">0</span><span class="w"> </span><span class="n">pools</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">pgs</span><span class="w"></span>
+<span class="w">    </span><span class="nl">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">objects</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
+<span class="w">    </span><span class="k">usage</span><span class="err">:</span><span class="w">   </span><span class="mf">6.4</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="n">used</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">59</span><span class="w"> </span><span class="n">GiB</span><span class="w"> </span><span class="n">avail</span><span class="w"></span>
+<span class="w">    </span><span class="nl">pgs</span><span class="p">:</span><span class="w"></span>
 </code></pre></div>
-
 
 <h3 id="enable-dashboard">Enable dashboard</h3>
 <p>Modify the cluster.yaml to enable dashboard and apply to create the dashboard service.
@@ -1181,9 +1213,8 @@ rados df
 kubectl apply -f cluster.yaml
 kubectl get svc -n rook-ceph <span class="p">|</span>grep mgr-dashboard
 </code></pre></div></p>
-<div class="codehilite"><pre><span></span><code><span class="err">rook-ceph-mgr-dashboard    ClusterIP   10.36.19.173     &lt;none&gt;        7000/TCP            66s</span>
+<div class="codehilite"><pre><span></span><code><span class="n">rook</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="n">mgr</span><span class="o">-</span><span class="n">dashboard</span>    <span class="n">ClusterIP</span>   <span class="mi">10</span><span class="p">.</span><span class="mi">36</span><span class="p">.</span><span class="mi">19</span><span class="p">.</span><span class="mi">173</span>     <span class="o">&lt;</span><span class="k">none</span><span class="o">&gt;</span>        <span class="mi">7000</span><span class="o">/</span><span class="n">TCP</span>            <span class="mi">66</span><span class="n">s</span>
 </code></pre></div>
-
 
 <h3 id="create-dashboard-ingress">Create dashboard ingress</h3>
 <p>Now the dashboard service is ClusterIP mode which means we can only visit it in the cluster. Create dashboard Traefik yaml file dashboard-ingress.yaml to visit publicly.
@@ -1247,46 +1278,45 @@ ceph dashboard set-rgw-api-access-key 32APIT3RA29JCO6OCR8P
 ceph dashboard set-rgw-api-secret-key 2ioxTu6iBFkYP8UKiycS90A2DFwRBklSI8Bp3iPQ
 </code></pre></div></p>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;user_id&quot;: &quot;myuser&quot;,</span>
-<span class="err">    &quot;display_name&quot;: &quot;test-user&quot;,</span>
-<span class="err">    &quot;email&quot;: &quot;&quot;,</span>
-<span class="err">    &quot;suspended&quot;: 0,</span>
-<span class="err">    &quot;max_buckets&quot;: 1000,</span>
-<span class="err">    &quot;subusers&quot;: [],</span>
-<span class="err">    &quot;keys&quot;: [</span>
-<span class="err">        {</span>
-<span class="err">            &quot;user&quot;: &quot;myuser&quot;,</span>
-<span class="err">            &quot;access_key&quot;: &quot;32APIT3RA29JCO6OCR8P&quot;,</span>
-<span class="err">            &quot;secret_key&quot;: &quot;2ioxTu6iBFkYP8UKiycS90A2DFwRBklSI8Bp3iPQ&quot;</span>
-<span class="err">        }</span>
-<span class="err">    ],</span>
-<span class="err">    &quot;swift_keys&quot;: [],</span>
-<span class="err">    &quot;caps&quot;: [],</span>
-<span class="err">    &quot;op_mask&quot;: &quot;read, write, delete&quot;,</span>
-<span class="err">    &quot;system&quot;: &quot;true&quot;,</span>
-<span class="err">    &quot;default_placement&quot;: &quot;&quot;,</span>
-<span class="err">    &quot;default_storage_class&quot;: &quot;&quot;,</span>
-<span class="err">    &quot;placement_tags&quot;: [],</span>
-<span class="err">    &quot;bucket_quota&quot;: {</span>
-<span class="err">        &quot;enabled&quot;: false,</span>
-<span class="err">        &quot;check_on_raw&quot;: false,</span>
-<span class="err">        &quot;max_size&quot;: -1,</span>
-<span class="err">        &quot;max_size_kb&quot;: 0,</span>
-<span class="err">        &quot;max_objects&quot;: -1</span>
-<span class="err">    },</span>
-<span class="err">    &quot;user_quota&quot;: {</span>
-<span class="err">        &quot;enabled&quot;: false,</span>
-<span class="err">        &quot;check_on_raw&quot;: false,</span>
-<span class="err">        &quot;max_size&quot;: -1,</span>
-<span class="err">        &quot;max_size_kb&quot;: 0,</span>
-<span class="err">        &quot;max_objects&quot;: -1</span>
-<span class="err">    },</span>
-<span class="err">    &quot;temp_url_keys&quot;: [],</span>
-<span class="err">    &quot;type&quot;: &quot;rgw&quot;,</span>
-<span class="err">    &quot;mfa_ids&quot;: []</span>
+    <span class="ss">&quot;user_id&quot;</span><span class="p">:</span> <span class="ss">&quot;myuser&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;display_name&quot;</span><span class="p">:</span> <span class="ss">&quot;test-user&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;email&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;suspended&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="ss">&quot;max_buckets&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="ss">&quot;subusers&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;user&quot;</span><span class="p">:</span> <span class="ss">&quot;myuser&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;access_key&quot;</span><span class="p">:</span> <span class="ss">&quot;32APIT3RA29JCO6OCR8P&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;secret_key&quot;</span><span class="p">:</span> <span class="ss">&quot;2ioxTu6iBFkYP8UKiycS90A2DFwRBklSI8Bp3iPQ&quot;</span>
+        <span class="err">}</span>
+    <span class="p">],</span>
+    <span class="ss">&quot;swift_keys&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;caps&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;op_mask&quot;</span><span class="p">:</span> <span class="ss">&quot;read, write, delete&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;system&quot;</span><span class="p">:</span> <span class="ss">&quot;true&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;default_placement&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;default_storage_class&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;placement_tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;bucket_quota&quot;</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">&quot;enabled&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;check_on_raw&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;max_size&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="ss">&quot;max_size_kb&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">&quot;max_objects&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="ss">&quot;user_quota&quot;</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">&quot;enabled&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;check_on_raw&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+        <span class="ss">&quot;max_size&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="ss">&quot;max_size_kb&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">&quot;max_objects&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="ss">&quot;temp_url_keys&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;rgw&quot;</span><span class="p">,</span>
+    <span class="ss">&quot;mfa_ids&quot;</span><span class="p">:</span> <span class="p">[]</span>
 <span class="err">}</span>
 </code></pre></div>
-
 
 <h3 id="test-s3-service-in-cluster">Test S3 service in cluster</h3>
 <p>Connect the toolbox and test the object storage inside the cluster.
@@ -1304,7 +1334,6 @@ s3cmd ls
 <span class="na">host_bucket</span> <span class="o">=</span> <span class="s">10.100.191.33/%(bucket)</span>
 <span class="na">use_https</span> <span class="o">=</span> <span class="s">False</span>
 </code></pre></div>
-
 
 <h3 id="create-s3-external-service">Create S3 external service</h3>
 <p>Create the external service for the object store by using NodePort in the rgw-external.yaml. Cannot use Traefik here because it automatically redirect http to https which is not allowed in s3cmd.
@@ -1346,19 +1375,18 @@ s3cmd ls
 <span class="na">use_https</span> <span class="o">=</span> <span class="s">False</span>
 </code></pre></div>
 
-
 <h3 id="test-s3-service-in-java">Test S3 service in Java</h3>
 <p>Test the object storage with java code. Remember to replace the credentials and endpoint. The code works for both Amazon S3 and Ceph S3 except the conn part.
 <div class="highlight"><pre><span></span><code><span class="c1">//The conn here is for Ceph S3</span>
-<span class="n">AWSCredentials</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="p">(</span><span class="s">&quot;***&quot;</span><span class="p">,</span> <span class="s">&quot;***&quot;</span><span class="p">);</span>
-<span class="n">ClientConfiguration</span> <span class="n">clientConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClientConfiguration</span><span class="p">();</span>
-<span class="n">clientConfig</span><span class="p">.</span><span class="na">setProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">.</span><span class="na">HTTP</span><span class="p">);</span>
-<span class="n">AmazonS3</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">AmazonS3Client</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
-        <span class="p">.</span><span class="na">withCredentials</span><span class="p">(</span><span class="k">new</span> <span class="n">AWSStaticCredentialsProvider</span><span class="p">(</span><span class="n">credentials</span><span class="p">))</span>
-        <span class="p">.</span><span class="na">withClientConfiguration</span><span class="p">(</span><span class="n">clientConfig</span><span class="p">)</span> <span class="c1">//Important for Ceph</span>
-        <span class="p">.</span><span class="na">withEndpointConfiguration</span><span class="p">(</span><span class="k">new</span> <span class="n">AwsClientBuilder</span><span class="p">.</span><span class="na">EndpointConfiguration</span><span class="p">(</span><span class="s">&quot;*:*&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">))</span> <span class="c1">//Important for Ceph</span>
-        <span class="p">.</span><span class="na">enablePathStyleAccess</span><span class="p">()</span> <span class="c1">//Important for Ceph</span>
-        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="n">AWSCredentials</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="o">(</span><span class="s">&quot;***&quot;</span><span class="o">,</span> <span class="s">&quot;***&quot;</span><span class="o">);</span>
+<span class="n">ClientConfiguration</span> <span class="n">clientConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClientConfiguration</span><span class="o">();</span>
+<span class="n">clientConfig</span><span class="o">.</span><span class="na">setProtocol</span><span class="o">(</span><span class="n">Protocol</span><span class="o">.</span><span class="na">HTTP</span><span class="o">);</span>
+<span class="n">AmazonS3</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">AmazonS3Client</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">withCredentials</span><span class="o">(</span><span class="k">new</span> <span class="n">AWSStaticCredentialsProvider</span><span class="o">(</span><span class="n">credentials</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">withClientConfiguration</span><span class="o">(</span><span class="n">clientConfig</span><span class="o">)</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">withEndpointConfiguration</span><span class="o">(</span><span class="k">new</span> <span class="n">AwsClientBuilder</span><span class="o">.</span><span class="na">EndpointConfiguration</span><span class="o">(</span><span class="s">&quot;*:*&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">))</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">enablePathStyleAccess</span><span class="o">()</span> <span class="c1">//Important for Ceph</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 
 <span class="c1">//The conn here is for Amazon S3</span>
 <span class="c1">//AWSCredentials credentials = new BasicAWSCredentials(&quot;***&quot;, &quot;***&quot;);</span>
@@ -1367,39 +1395,39 @@ s3cmd ls
 <span class="c1">//        .withCredentials(new AWSStaticCredentialsProvider(credentials))</span>
 <span class="c1">//        .build();</span>
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;C:\\Users\\fanf\\Pictures\\test.jpg&quot;</span><span class="p">);</span>
-<span class="n">FileInputStream</span> <span class="n">bais</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
-<span class="n">ObjectMetadata</span> <span class="n">metadata</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="p">();</span>
-<span class="n">metadata</span><span class="p">.</span><span class="na">setContentLength</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="na">length</span><span class="p">());</span>
-<span class="n">metadata</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&quot;image/jpg&quot;</span><span class="p">);</span>
-<span class="n">conn</span><span class="p">.</span><span class="na">putObject</span><span class="p">(</span><span class="s">&quot;test-bucket&quot;</span><span class="p">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="p">,</span> <span class="n">bais</span><span class="p">,</span> <span class="n">metadata</span><span class="p">);</span>
-<span class="n">conn</span><span class="p">.</span><span class="na">setObjectAcl</span><span class="p">(</span><span class="s">&quot;test-bucket&quot;</span><span class="p">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="p">,</span> <span class="n">CannedAccessControlList</span><span class="p">.</span><span class="na">PublicRead</span><span class="p">);</span>
+<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;C:\\Users\\fanf\\Pictures\\test.jpg&quot;</span><span class="o">);</span>
+<span class="n">FileInputStream</span> <span class="n">bais</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+<span class="n">ObjectMetadata</span> <span class="n">metadata</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="o">();</span>
+<span class="n">metadata</span><span class="o">.</span><span class="na">setContentLength</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+<span class="n">metadata</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&quot;image/jpg&quot;</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">putObject</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="o">,</span> <span class="n">bais</span><span class="o">,</span> <span class="n">metadata</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setObjectAcl</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;test.jpg&quot;</span><span class="o">,</span> <span class="n">CannedAccessControlList</span><span class="o">.</span><span class="na">PublicRead</span><span class="o">);</span>
 
 <span class="n">ListObjectsRequest</span> <span class="n">listObjectsRequest</span> <span class="o">=</span>
-        <span class="k">new</span> <span class="n">ListObjectsRequest</span><span class="p">().</span><span class="na">withBucketName</span><span class="p">(</span><span class="s">&quot;test-bucket&quot;</span><span class="p">).</span><span class="na">withDelimiter</span><span class="p">(</span><span class="s">&quot;test-bucket/&quot;</span><span class="p">);</span>
-<span class="n">ObjectListing</span> <span class="n">objects2</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="na">listObjects</span><span class="p">(</span><span class="n">listObjectsRequest</span><span class="p">);</span>
-<span class="n">Helper</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">objects2</span><span class="p">);</span>
+        <span class="k">new</span> <span class="n">ListObjectsRequest</span><span class="o">().</span><span class="na">withBucketName</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">).</span><span class="na">withDelimiter</span><span class="o">(</span><span class="s">&quot;test-bucket/&quot;</span><span class="o">);</span>
+<span class="n">ObjectListing</span> <span class="n">objects2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listObjects</span><span class="o">(</span><span class="n">listObjectsRequest</span><span class="o">);</span>
+<span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objects2</span><span class="o">);</span>
 
-<span class="n">conn</span><span class="p">.</span><span class="na">setBucketPolicy</span><span class="p">(</span><span class="s">&quot;test-bucket&quot;</span><span class="p">,</span> <span class="s">&quot;public-read-write&quot;</span><span class="p">);</span>
-<span class="n">Bucket</span> <span class="n">bucket2</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="na">createBucket</span><span class="p">(</span><span class="s">&quot;new-bucket&quot;</span><span class="p">);</span>
-<span class="n">ByteArrayInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
-<span class="n">conn</span><span class="p">.</span><span class="na">putObject</span><span class="p">(</span><span class="n">bucket2</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="p">());</span>
-<span class="n">conn</span><span class="p">.</span><span class="na">setObjectAcl</span><span class="p">(</span><span class="n">bucket2</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="p">,</span> <span class="n">CannedAccessControlList</span><span class="p">.</span><span class="na">PublicRead</span><span class="p">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setBucketPolicy</span><span class="o">(</span><span class="s">&quot;test-bucket&quot;</span><span class="o">,</span> <span class="s">&quot;public-read-write&quot;</span><span class="o">);</span>
+<span class="n">Bucket</span> <span class="n">bucket2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createBucket</span><span class="o">(</span><span class="s">&quot;new-bucket&quot;</span><span class="o">);</span>
+<span class="n">ByteArrayInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="s">&quot;Hello World!&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">putObject</span><span class="o">(</span><span class="n">bucket2</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="o">,</span> <span class="n">input</span><span class="o">,</span> <span class="k">new</span> <span class="n">ObjectMetadata</span><span class="o">());</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setObjectAcl</span><span class="o">(</span><span class="n">bucket2</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">&quot;hello.txt&quot;</span><span class="o">,</span> <span class="n">CannedAccessControlList</span><span class="o">.</span><span class="na">PublicRead</span><span class="o">);</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Bucket</span><span class="o">&gt;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="na">listBuckets</span><span class="p">();</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">Bucket</span> <span class="n">bucket</span> <span class="p">:</span> <span class="n">buckets</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Helper</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">bucket</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
-            <span class="n">StringUtils</span><span class="p">.</span><span class="na">fromDate</span><span class="p">(</span><span class="n">bucket</span><span class="p">.</span><span class="na">getCreationDate</span><span class="p">()));</span>
-    <span class="n">ObjectListing</span> <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="na">listObjects</span><span class="p">(</span><span class="n">bucket</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
-    <span class="k">do</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">S3ObjectSummary</span> <span class="n">objectSummary</span> <span class="p">:</span> <span class="n">objects</span><span class="p">.</span><span class="na">getObjectSummaries</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">Helper</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">objectSummary</span><span class="p">.</span><span class="na">getKey</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
-                    <span class="n">objectSummary</span><span class="p">.</span><span class="na">getSize</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
-                    <span class="n">StringUtils</span><span class="p">.</span><span class="na">fromDate</span><span class="p">(</span><span class="n">objectSummary</span><span class="p">.</span><span class="na">getLastModified</span><span class="p">()));</span>
-        <span class="p">}</span>
-        <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="na">listNextBatchOfObjects</span><span class="p">(</span><span class="n">objects</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">objects</span><span class="p">.</span><span class="na">isTruncated</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Bucket</span><span class="o">&gt;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listBuckets</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Bucket</span> <span class="n">bucket</span> <span class="o">:</span> <span class="n">buckets</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+            <span class="n">StringUtils</span><span class="o">.</span><span class="na">fromDate</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">()));</span>
+    <span class="n">ObjectListing</span> <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listObjects</span><span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="k">do</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">S3ObjectSummary</span> <span class="n">objectSummary</span> <span class="o">:</span> <span class="n">objects</span><span class="o">.</span><span class="na">getObjectSummaries</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Helper</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objectSummary</span><span class="o">.</span><span class="na">getKey</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+                    <span class="n">objectSummary</span><span class="o">.</span><span class="na">getSize</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;\t&quot;</span> <span class="o">+</span>
+                    <span class="n">StringUtils</span><span class="o">.</span><span class="na">fromDate</span><span class="o">(</span><span class="n">objectSummary</span><span class="o">.</span><span class="na">getLastModified</span><span class="o">()));</span>
+        <span class="o">}</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">listNextBatchOfObjects</span><span class="o">(</span><span class="n">objects</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">isTruncated</span><span class="o">());</span>
+<span class="o">}</span>
 </code></pre></div></p>
                 
                   
@@ -1421,7 +1449,7 @@ s3cmd ls
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../keycloak-traefik-k8s/" title="Play around with Keycloak in k8s" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../keycloak-traefik-k8s/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1436,7 +1464,7 @@ s3cmd ls
           </a>
         
         
-          <a href="../auto-generate-flutter-imgs/" title="Generate required flutter app screenshots for different devices" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../auto-generate-flutter-imgs/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
@@ -1513,8 +1541,8 @@ s3cmd ls
       
     </div>
     
-      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
-      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
